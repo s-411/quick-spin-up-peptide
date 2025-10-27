@@ -42,27 +42,17 @@ export function HeroCentered({
 
       {/* Content */}
       <div className="relative z-10 w-[95%] md:w-[90%] lg:w-[80%] mx-auto text-center space-y-8">
-        <h1 className="text-5xl md:text-7xl font-heading leading-tight">
-          {headline}
-        </h1>
+        <h1 className="text-5xl md:text-7xl font-heading leading-tight">{headline}</h1>
 
-        <p className="text-lg md:text-xl text-muted-foreground max-w-2xl mx-auto">
-          {subheadline}
-        </p>
+        <p className="text-lg md:text-xl text-muted-foreground max-w-2xl mx-auto">{subheadline}</p>
 
         <div className="flex flex-col sm:flex-row gap-4 justify-center items-center pt-4">
-          <MagneticButton
-            variant="primary"
-            onClick={onPrimaryClick}
-          >
+          <MagneticButton variant="primary" onClick={onPrimaryClick}>
             {primaryCTA}
             <ArrowRight className="w-4 h-4" />
           </MagneticButton>
 
-          <MagneticButton
-            variant="secondary"
-            onClick={onSecondaryClick}
-          >
+          <MagneticButton variant="secondary" onClick={onSecondaryClick}>
             <Play className="w-4 h-4" />
             {secondaryCTA}
           </MagneticButton>

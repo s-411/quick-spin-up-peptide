@@ -35,11 +35,16 @@ export function HeroGradient({
   return (
     <section className="relative min-h-[90vh] flex items-center justify-center overflow-hidden">
       {/* Animated Gradient Background */}
-      <div className={`absolute inset-0 bg-gradient-to-br ${gradientFrom} ${gradientTo} opacity-10`} />
+      <div
+        className={`absolute inset-0 bg-gradient-to-br ${gradientFrom} ${gradientTo} opacity-10`}
+      />
 
       {/* Gradient Orbs */}
       <div className="absolute top-1/4 -left-20 w-96 h-96 bg-gradient-to-br from-primary/30 to-transparent rounded-full blur-3xl animate-pulse-custom" />
-      <div className="absolute bottom-1/4 -right-20 w-96 h-96 bg-gradient-to-bl from-secondary/30 to-transparent rounded-full blur-3xl animate-pulse-custom" style={{ animationDelay: '1s' }} />
+      <div
+        className="absolute bottom-1/4 -right-20 w-96 h-96 bg-gradient-to-bl from-secondary/30 to-transparent rounded-full blur-3xl animate-pulse-custom"
+        style={{ animationDelay: '1s' }}
+      />
 
       {/* Content */}
       <div className="relative z-10 max-w-5xl mx-auto text-center px-4 space-y-8">
@@ -58,18 +63,12 @@ export function HeroGradient({
         </p>
 
         <div className="flex flex-col sm:flex-row gap-4 justify-center items-center pt-6">
-          <MagneticButton
-            variant="primary"
-            onClick={onPrimaryClick}
-          >
+          <MagneticButton variant="primary" onClick={onPrimaryClick}>
             {primaryCTA}
             <ArrowRight className="w-4 h-4" />
           </MagneticButton>
 
-          <MagneticButton
-            variant="secondary"
-            onClick={onSecondaryClick}
-          >
+          <MagneticButton variant="secondary" onClick={onSecondaryClick}>
             {secondaryCTA}
           </MagneticButton>
         </div>
@@ -77,7 +76,7 @@ export function HeroGradient({
         {/* Social Proof */}
         <div className="pt-12 flex flex-col items-center gap-4">
           <div className="flex -space-x-2">
-            {[1, 2, 3, 4, 5].map((i) => (
+            {[1, 2, 3, 4, 5].map(i => (
               <div
                 key={i}
                 className="w-10 h-10 rounded-full bg-gradient-to-br from-primary to-secondary border-2 border-background flex items-center justify-center text-white text-xs font-bold"
@@ -87,7 +86,8 @@ export function HeroGradient({
             ))}
           </div>
           <p className="text-sm text-muted-foreground">
-            Trusted by <span className="font-semibold text-foreground">10,000+</span> developers worldwide
+            Trusted by <span className="font-semibold text-foreground">10,000+</span> developers
+            worldwide
           </p>
         </div>
       </div>

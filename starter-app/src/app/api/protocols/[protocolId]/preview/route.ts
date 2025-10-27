@@ -43,10 +43,12 @@ export async function GET(request: NextRequest, { params }: RouteParams) {
     // Fetch protocol with medication to verify ownership
     const { data: protocol, error: fetchError } = await supabase
       .from('protocols')
-      .select(`
+      .select(
+        `
         *,
         medication:medications!inner(user_id)
-      `)
+      `
+      )
       .eq('id', protocolId)
       .is('deleted_at', null)
       .single()
@@ -68,7 +70,9 @@ export async function GET(request: NextRequest, { params }: RouteParams) {
       date: date.toISOString().split('T')[0],
       timestamp: date.toISOString(),
       dayOfWeek: date.getDay(),
-      weekNumber: Math.floor((date.getTime() - new Date(protocol.start_date).getTime()) / (7 * 24 * 60 * 60 * 1000)),
+      weekNumber: Math.floor(
+        (date.getTime() - new Date(protocol.start_date).getTime()) / (7 * 24 * 60 * 60 * 1000)
+      ),
     }))
 
     return NextResponse.json({

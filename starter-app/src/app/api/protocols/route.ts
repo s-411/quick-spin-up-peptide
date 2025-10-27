@@ -27,8 +27,16 @@ const createProtocolSchema = z.object({
     errorMap: () => ({ message: 'Invalid dose units' }),
   }),
   startDate: z.string().regex(/^\d{4}-\d{2}-\d{2}$/, 'Invalid date format (YYYY-MM-DD)'),
-  endDate: z.string().regex(/^\d{4}-\d{2}-\d{2}$/).optional().nullable(),
-  timeOfDay: z.string().regex(/^\d{2}:\d{2}(:\d{2})?$/).optional().nullable(),
+  endDate: z
+    .string()
+    .regex(/^\d{4}-\d{2}-\d{2}$/)
+    .optional()
+    .nullable(),
+  timeOfDay: z
+    .string()
+    .regex(/^\d{2}:\d{2}(:\d{2})?$/)
+    .optional()
+    .nullable(),
   siteRotation: z.array(z.string()).optional(),
   notes: z.string().max(1000).optional().nullable(),
 })
@@ -64,10 +72,12 @@ export async function GET(request: NextRequest) {
     // Build query - join with medications to verify ownership
     let query = supabase
       .from('protocols')
-      .select(`
+      .select(
+        `
         *,
         medication:medications(*)
-      `)
+      `
+      )
       .is('deleted_at', null)
       .order('created_at', { ascending: false })
 
@@ -183,10 +193,12 @@ export async function POST(request: NextRequest) {
         version: 1,
         notes: validatedData.notes || null,
       })
-      .select(`
+      .select(
+        `
         *,
         medication:medications(*)
-      `)
+      `
+      )
       .single()
 
     if (createError || !protocol) {

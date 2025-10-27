@@ -53,15 +53,9 @@ export function BlogList({
         {/* Header */}
         {(title || description) && (
           <div className="text-center mb-12">
-            {title && (
-              <h2 className="text-3xl md:text-4xl font-heading mb-4">
-                {title}
-              </h2>
-            )}
+            {title && <h2 className="text-3xl md:text-4xl font-heading mb-4">{title}</h2>}
             {description && (
-              <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-                {description}
-              </p>
+              <p className="text-lg text-muted-foreground max-w-2xl mx-auto">{description}</p>
             )}
           </div>
         )}
@@ -72,7 +66,7 @@ export function BlogList({
             <EnhancedCard
               key={index}
               className="!p-0 overflow-hidden group cursor-pointer"
-              onClick={() => window.location.href = post.href}
+              onClick={() => (window.location.href = post.href)}
             >
               <div className="flex flex-col md:flex-row">
                 {/* Thumbnail */}
@@ -101,9 +95,7 @@ export function BlogList({
 
                   {/* Excerpt */}
                   {showExcerpt && (
-                    <p className="text-muted-foreground mb-4 line-clamp-2 flex-1">
-                      {post.excerpt}
-                    </p>
+                    <p className="text-muted-foreground mb-4 line-clamp-2 flex-1">{post.excerpt}</p>
                   )}
 
                   {/* Meta & CTA */}

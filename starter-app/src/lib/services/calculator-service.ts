@@ -5,12 +5,7 @@
  * Supports mg/mL ↔ IU ↔ units conversions
  */
 
-import type {
-  DoseUnits,
-  ConcentrationUnits,
-  DoseCalculation,
-  VialCalculatorInput,
-} from '@/types'
+import type { DoseUnits, ConcentrationUnits, DoseCalculation, VialCalculatorInput } from '@/types'
 
 /**
  * Conversion factors for common peptides/hormones
@@ -52,10 +47,7 @@ export function calculateDoseVolume(
 /**
  * Calculate how many full doses remain in a vial
  */
-export function calculateRemainingDoses(
-  remainingVolume: number,
-  doseVolume: number
-): number {
+export function calculateRemainingDoses(remainingVolume: number, doseVolume: number): number {
   if (doseVolume <= 0) return 0
   return Math.floor(remainingVolume / doseVolume)
 }
@@ -98,7 +90,8 @@ function normalizeDoseToMg(value: number, units: DoseUnits, peptideType = 'defau
 
     case 'IU':
       // Convert IU to mg using conversion factor
-      const conversionFactor = IU_CONVERSION_FACTORS[peptideType.toLowerCase()] || IU_CONVERSION_FACTORS.default
+      const conversionFactor =
+        IU_CONVERSION_FACTORS[peptideType.toLowerCase()] || IU_CONVERSION_FACTORS.default
       return value / conversionFactor
 
     case 'units':
@@ -134,7 +127,8 @@ function normalizeConcentrationToMgPerMl(
 
     case 'IU/mL':
       // Convert IU/mL to mg/mL using conversion factor
-      const conversionFactor = IU_CONVERSION_FACTORS[peptideType.toLowerCase()] || IU_CONVERSION_FACTORS.default
+      const conversionFactor =
+        IU_CONVERSION_FACTORS[peptideType.toLowerCase()] || IU_CONVERSION_FACTORS.default
       return value / conversionFactor
 
     case 'units/mL':

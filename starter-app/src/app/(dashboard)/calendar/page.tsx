@@ -3,8 +3,22 @@
 import { useState, useEffect } from 'react'
 import { Button } from '@/components/ui/button'
 import { Card, CardContent } from '@/components/ui/card'
-import { ChevronLeft, ChevronRight, Loader2, Activity, Calendar as CalendarIcon } from 'lucide-react'
-import { format, startOfMonth, endOfMonth, eachDayOfInterval, isSameMonth, isToday, isSameDay } from 'date-fns'
+import {
+  ChevronLeft,
+  ChevronRight,
+  Loader2,
+  Activity,
+  Calendar as CalendarIcon,
+} from 'lucide-react'
+import {
+  format,
+  startOfMonth,
+  endOfMonth,
+  eachDayOfInterval,
+  isSameMonth,
+  isToday,
+  isSameDay,
+} from 'date-fns'
 
 interface CalendarInjection {
   id: string
@@ -150,17 +164,9 @@ export default function CalendarPage() {
                             key={day.toISOString()}
                             onClick={() => setSelectedDate(day)}
                             className={`aspect-square rounded-lg border p-2 text-left transition-all hover:border-primary/30 ${
-                              isDayToday
-                                ? 'border-primary/50 bg-primary/5'
-                                : 'border-border'
-                            } ${
-                              isSelected
-                                ? 'ring-2 ring-primary'
-                                : ''
-                            } ${
-                              !isSameMonth(day, currentDate)
-                                ? 'opacity-30'
-                                : ''
+                              isDayToday ? 'border-primary/50 bg-primary/5' : 'border-border'
+                            } ${isSelected ? 'ring-2 ring-primary' : ''} ${
+                              !isSameMonth(day, currentDate) ? 'opacity-30' : ''
                             }`}
                           >
                             <div className="flex flex-col h-full">
@@ -213,9 +219,7 @@ export default function CalendarPage() {
                     {selectedDateInjections.length === 0 ? (
                       <div className="text-center py-8">
                         <Activity className="h-8 w-8 text-muted-foreground/50 mx-auto mb-2" />
-                        <p className="text-sm text-muted-foreground">
-                          No injections on this date
-                        </p>
+                        <p className="text-sm text-muted-foreground">No injections on this date</p>
                       </div>
                     ) : (
                       <div className="space-y-3">

@@ -86,15 +86,9 @@ export function StatsGrid({
         {/* Header */}
         {(title || description) && (
           <div className="text-center mb-16">
-            {title && (
-              <h2 className="text-3xl md:text-4xl font-heading mb-4">
-                {title}
-              </h2>
-            )}
+            {title && <h2 className="text-3xl md:text-4xl font-heading mb-4">{title}</h2>}
             {description && (
-              <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-                {description}
-              </p>
+              <p className="text-lg text-muted-foreground max-w-2xl mx-auto">{description}</p>
             )}
           </div>
         )}
@@ -136,9 +130,7 @@ function StatCard({ stat }: { stat: Stat }) {
       </div>
 
       {/* Label */}
-      <div className="text-sm md:text-base text-muted-foreground font-medium">
-        {stat.label}
-      </div>
+      <div className="text-sm md:text-base text-muted-foreground font-medium">{stat.label}</div>
     </div>
   )
 }

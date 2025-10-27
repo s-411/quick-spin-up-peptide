@@ -20,22 +20,25 @@ const createInjectionSchema = z.object({
     errorMap: () => ({ message: 'Invalid dose units' }),
   }),
   volumeMl: z.number().positive().optional().nullable(),
-  site: z.enum([
-    'left_glute',
-    'right_glute',
-    'left_delt',
-    'right_delt',
-    'left_thigh',
-    'right_thigh',
-    'abdomen_upper_left',
-    'abdomen_upper_right',
-    'abdomen_lower_left',
-    'abdomen_lower_right',
-    'left_ventrogluteal',
-    'right_ventrogluteal',
-  ], {
-    errorMap: () => ({ message: 'Invalid injection site' }),
-  }),
+  site: z.enum(
+    [
+      'left_glute',
+      'right_glute',
+      'left_delt',
+      'right_delt',
+      'left_thigh',
+      'right_thigh',
+      'abdomen_upper_left',
+      'abdomen_upper_right',
+      'abdomen_lower_left',
+      'abdomen_lower_right',
+      'left_ventrogluteal',
+      'right_ventrogluteal',
+    ],
+    {
+      errorMap: () => ({ message: 'Invalid injection site' }),
+    }
+  ),
   notes: z.string().max(1000).optional().nullable(),
   sideEffects: z.string().max(1000).optional().nullable(),
 })
@@ -77,14 +80,17 @@ export async function GET(request: NextRequest) {
     // Build base query with joins
     let query = supabase
       .from('injections')
-      .select(`
+      .select(
+        `
         *,
         protocol:protocols!inner(
           *,
           medication:medications!inner(*)
         ),
         vial:vials(*)
-      `, { count: 'exact' })
+      `,
+        { count: 'exact' }
+      )
       .is('deleted_at', null)
       .order('date_time', { ascending: false })
       .range(offset, offset + limit - 1)
@@ -110,9 +116,8 @@ export async function GET(request: NextRequest) {
     }
 
     // Filter out injections that don't belong to the user
-    const userInjections = injections?.filter(
-      (inj: any) => inj.protocol?.medication?.user_id === user.id
-    ) || []
+    const userInjections =
+      injections?.filter((inj: any) => inj.protocol?.medication?.user_id === user.id) || []
 
     // Apply medication filter if specified (after fetching to avoid complex joins)
     let filteredInjections = userInjections
@@ -162,10 +167,12 @@ export async function POST(request: NextRequest) {
     // Verify protocol belongs to user
     const { data: protocol, error: protocolError } = await supabase
       .from('protocols')
-      .select(`
+      .select(
+        `
         *,
         medication:medications!inner(user_id)
-      `)
+      `
+      )
       .eq('id', validatedData.protocolId)
       .is('deleted_at', null)
       .single()
@@ -190,7 +197,10 @@ export async function POST(request: NextRequest) {
         .single()
 
       if (vialError || !vialData) {
-        return NextResponse.json({ error: 'Vial not found or does not match medication' }, { status: 404 })
+        return NextResponse.json(
+          { error: 'Vial not found or does not match medication' },
+          { status: 404 }
+        )
       }
 
       vial = vialData
@@ -210,7 +220,9 @@ export async function POST(request: NextRequest) {
     // Verify vial has enough volume
     if (vial && volumeMl && vial.remaining_volume < volumeMl) {
       return NextResponse.json(
-        { error: `Insufficient volume in vial. Remaining: ${vial.remaining_volume} mL, Required: ${volumeMl} mL` },
+        {
+          error: `Insufficient volume in vial. Remaining: ${vial.remaining_volume} mL, Required: ${volumeMl} mL`,
+        },
         { status: 400 }
       )
     }
@@ -229,14 +241,16 @@ export async function POST(request: NextRequest) {
         notes: validatedData.notes || null,
         side_effects: validatedData.sideEffects || null,
       })
-      .select(`
+      .select(
+        `
         *,
         protocol:protocols(
           *,
           medication:medications(*)
         ),
         vial:vials(*)
-      `)
+      `
+      )
       .single()
 
     if (createError || !injection) {

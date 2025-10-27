@@ -34,7 +34,7 @@ const MobileBottomNav = React.forwardRef<HTMLDivElement, MobileBottomNavProps>(
         className={`fixed bottom-0 left-0 right-0 z-50 bg-card border-t border-border ${className || ''}`}
       >
         <nav className="flex items-center justify-around px-2 py-2 max-w-screen-md mx-auto">
-          {navItems.map((item) => {
+          {navItems.map(item => {
             const Icon = item.icon
             const isActive = activeItem === item.id
 

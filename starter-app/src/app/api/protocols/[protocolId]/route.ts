@@ -28,9 +28,20 @@ const updateProtocolSchema = z.object({
   offWeeks: z.number().nonnegative().optional().nullable(),
   doseValue: z.number().positive().optional(),
   doseUnits: z.enum(['mg', 'IU', 'mcg', 'units', 'mL']).optional(),
-  startDate: z.string().regex(/^\d{4}-\d{2}-\d{2}$/).optional(),
-  endDate: z.string().regex(/^\d{4}-\d{2}-\d{2}$/).optional().nullable(),
-  timeOfDay: z.string().regex(/^\d{2}:\d{2}(:\d{2})?$/).optional().nullable(),
+  startDate: z
+    .string()
+    .regex(/^\d{4}-\d{2}-\d{2}$/)
+    .optional(),
+  endDate: z
+    .string()
+    .regex(/^\d{4}-\d{2}-\d{2}$/)
+    .optional()
+    .nullable(),
+  timeOfDay: z
+    .string()
+    .regex(/^\d{2}:\d{2}(:\d{2})?$/)
+    .optional()
+    .nullable(),
   siteRotation: z.array(z.string()).optional().nullable(),
   isActive: z.boolean().optional(),
   notes: z.string().max(1000).optional().nullable(),
@@ -57,10 +68,12 @@ export async function GET(request: NextRequest, { params }: RouteParams) {
     // Fetch protocol with medication to verify ownership
     const { data: protocol, error: fetchError } = await supabase
       .from('protocols')
-      .select(`
+      .select(
+        `
         *,
         medication:medications(*)
-      `)
+      `
+      )
       .eq('id', protocolId)
       .is('deleted_at', null)
       .single()
@@ -105,10 +118,12 @@ export async function PATCH(request: NextRequest, { params }: RouteParams) {
     // Verify protocol ownership
     const { data: existingProtocol, error: fetchError } = await supabase
       .from('protocols')
-      .select(`
+      .select(
+        `
         *,
         medication:medications!inner(user_id)
-      `)
+      `
+      )
       .eq('id', protocolId)
       .is('deleted_at', null)
       .single()
@@ -166,10 +181,12 @@ export async function PATCH(request: NextRequest, { params }: RouteParams) {
       .update(updates)
       .eq('id', protocolId)
       .is('deleted_at', null)
-      .select(`
+      .select(
+        `
         *,
         medication:medications(*)
-      `)
+      `
+      )
       .single()
 
     if (updateError || !protocol) {
@@ -241,10 +258,12 @@ export async function DELETE(request: NextRequest, { params }: RouteParams) {
     // Verify protocol ownership
     const { data: existingProtocol, error: fetchError } = await supabase
       .from('protocols')
-      .select(`
+      .select(
+        `
         *,
         medication:medications!inner(user_id)
-      `)
+      `
+      )
       .eq('id', protocolId)
       .is('deleted_at', null)
       .single()

@@ -47,7 +47,8 @@ export async function GET(request: NextRequest) {
     // Fetch injections for the month
     const { data: injections, error: injectionsError } = await supabase
       .from('injections')
-      .select(`
+      .select(
+        `
         id,
         date_time,
         dose_value,
@@ -58,7 +59,8 @@ export async function GET(request: NextRequest) {
           name,
           medication:medications!inner(id, name, type, user_id)
         )
-      `)
+      `
+      )
       .gte('date_time', `${startDateStr}T00:00:00Z`)
       .lte('date_time', `${endDateStr}T23:59:59Z`)
       .is('deleted_at', null)
@@ -69,16 +71,16 @@ export async function GET(request: NextRequest) {
     }
 
     // Filter to user's injections only
-    const userInjections = injections?.filter(
-      (inj: any) => inj.protocol?.medication?.user_id === user.id
-    ) || []
+    const userInjections =
+      injections?.filter((inj: any) => inj.protocol?.medication?.user_id === user.id) || []
 
     // Fetch reminders for the month if requested
     let reminders: any[] = []
     if (includeReminders) {
       const { data: remindersData, error: remindersError } = await supabase
         .from('reminders')
-        .select(`
+        .select(
+          `
           id,
           next_due_date,
           next_due_time,
@@ -88,7 +90,8 @@ export async function GET(request: NextRequest) {
             name,
             medication:medications!inner(id, name, type, user_id)
           )
-        `)
+        `
+        )
         .gte('next_due_date', startDateStr)
         .lte('next_due_date', endDateStr)
         .in('status', ['pending', 'sent'])
@@ -162,7 +165,8 @@ export async function GET(request: NextRequest) {
       summary: {
         totalInjections: userInjections.length,
         totalReminders: reminders.length,
-        daysWithActivity: calendarArray.filter((day: any) => day.hasInjection || day.hasReminder).length,
+        daysWithActivity: calendarArray.filter((day: any) => day.hasInjection || day.hasReminder)
+          .length,
       },
     })
   } catch (error) {

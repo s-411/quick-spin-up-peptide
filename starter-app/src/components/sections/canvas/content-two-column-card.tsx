@@ -33,12 +33,11 @@ export interface ContentTwoColumnCardProps {
 export function ContentTwoColumnCard({
   tagline = 'Brief and catchy tagline',
   topBodyCopy = 'Your content goes here. Edit or remove this text inline or in the module Content settings. You can also style every aspect of this content in the module Design settings and even apply custom CSS to this text in the module Advanced settings.',
-  leftBodyCopy = 'In write mathematicians frequency, at unmolested made like the muff it or on slight and reposed doctor\'s magnitude, bulk; Little in and or was herself for while could avarice expect, frequency; Really actual looked. All the both wasn\'t missions to the creative home by the in be in a to the then for in look design would government he flatter more time thoughts each of for she slight coordinates review, me in pass will.\n\nWould often if in it the should remember eyes of sublime lady the and soon to the postage think turn past in yes, back all decision-making he any a versus in effectiveness back multi you\'d in of purpose a one me on up and one.\n\nWasn\'t be time to this notch more people privilege time, I of cities my background his bad the create its project will this accuse to the logging emphasis completely be our the out felt wanted up groundtem, because win in records for schemes of lots shown taking coffee shortcuts.',
+  leftBodyCopy = "In write mathematicians frequency, at unmolested made like the muff it or on slight and reposed doctor's magnitude, bulk; Little in and or was herself for while could avarice expect, frequency; Really actual looked. All the both wasn't missions to the creative home by the in be in a to the then for in look design would government he flatter more time thoughts each of for she slight coordinates review, me in pass will.\n\nWould often if in it the should remember eyes of sublime lady the and soon to the postage think turn past in yes, back all decision-making he any a versus in effectiveness back multi you'd in of purpose a one me on up and one.\n\nWasn't be time to this notch more people privilege time, I of cities my background his bad the create its project will this accuse to the logging emphasis completely be our the out felt wanted up groundtem, because win in records for schemes of lots shown taking coffee shortcuts.",
   rightBodyCopy = 'Your content goes here. Edit or remove this text inline or in the module Content settings. You can also style every aspect of this content in the module Design settings and even apply custom CSS to this text in the module Advanced settings.\n\nComment and chime in sometimes one. Everyone shortcuts. The a with too. Of as quitting months that in found odd more by learn that have far made and choose a synthesizers.',
   learnMoreText = 'Learn more',
   onLearnMoreClick,
 }: ContentTwoColumnCardProps) {
-
   return (
     <section className="py-12 md:py-20 px-4">
       <div className="max-w-7xl mx-auto space-y-8">
@@ -72,7 +71,7 @@ export function ContentTwoColumnCard({
               {learnMoreText && (
                 <a
                   href="#"
-                  onClick={(e) => {
+                  onClick={e => {
                     e.preventDefault()
                     onLearnMoreClick?.()
                   }}

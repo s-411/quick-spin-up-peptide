@@ -37,15 +37,9 @@ export function StatsHighlight({
         {/* Header */}
         {(title || description) && (
           <div className="text-center mb-12">
-            {title && (
-              <h2 className="text-3xl md:text-4xl font-heading mb-4">
-                {title}
-              </h2>
-            )}
+            {title && <h2 className="text-3xl md:text-4xl font-heading mb-4">{title}</h2>}
             {description && (
-              <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-                {description}
-              </p>
+              <p className="text-lg text-muted-foreground max-w-2xl mx-auto">{description}</p>
             )}
           </div>
         )}
@@ -58,18 +52,13 @@ export function StatsHighlight({
             const isNegative = stat.growth && stat.growth < 0
 
             return (
-              <div
-                key={index}
-                className="p-6 rounded-card bg-card border border-border"
-              >
+              <div key={index} className="p-6 rounded-card bg-card border border-border">
                 {/* Label & Value Row */}
                 <div className="flex items-start justify-between mb-4">
                   <div>
                     <h3 className="text-lg font-semibold mb-1">{stat.label}</h3>
                     {stat.comparison && (
-                      <p className="text-sm text-muted-foreground">
-                        {stat.comparison}
-                      </p>
+                      <p className="text-sm text-muted-foreground">{stat.comparison}</p>
                     )}
                   </div>
 
@@ -88,8 +77,8 @@ export function StatsHighlight({
                           isPositive
                             ? 'text-green-600 dark:text-green-400'
                             : isNegative
-                            ? 'text-red-600 dark:text-red-400'
-                            : 'text-muted-foreground'
+                              ? 'text-red-600 dark:text-red-400'
+                              : 'text-muted-foreground'
                         }`}
                       >
                         {isPositive && <TrendingUp className="w-4 h-4" />}

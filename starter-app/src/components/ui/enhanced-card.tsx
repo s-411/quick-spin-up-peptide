@@ -63,7 +63,8 @@ const EnhancedCard = React.forwardRef<HTMLDivElement, EnhancedCardProps>(
       if (!cardRef.current) return
 
       if (tilt) {
-        cardRef.current.style.transform = 'perspective(1000px) rotateX(0deg) rotateY(0deg) scale3d(1, 1, 1)'
+        cardRef.current.style.transform =
+          'perspective(1000px) rotateX(0deg) rotateY(0deg) scale3d(1, 1, 1)'
       }
 
       if (onMouseLeave) onMouseLeave(e)
@@ -71,7 +72,7 @@ const EnhancedCard = React.forwardRef<HTMLDivElement, EnhancedCardProps>(
 
     return (
       <div
-        ref={(node) => {
+        ref={node => {
           cardRef.current = node
           if (typeof ref === 'function') {
             ref(node)

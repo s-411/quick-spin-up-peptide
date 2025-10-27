@@ -72,11 +72,7 @@ export function SkeletonText({ lines = 3 }: { lines?: number }) {
   return (
     <div className="space-y-2">
       {Array.from({ length: lines }).map((_, i) => (
-        <Skeleton
-          key={i}
-          height={16}
-          width={i === lines - 1 ? '70%' : '100%'}
-        />
+        <Skeleton key={i} height={16} width={i === lines - 1 ? '70%' : '100%'} />
       ))}
     </div>
   )
@@ -93,7 +89,11 @@ export function SkeletonTable({ rows = 5, columns = 4 }: { rows?: number; column
       </div>
       {/* Rows */}
       {Array.from({ length: rows }).map((_, rowIdx) => (
-        <div key={`row-${rowIdx}`} className="grid gap-4" style={{ gridTemplateColumns: `repeat(${columns}, 1fr)` }}>
+        <div
+          key={`row-${rowIdx}`}
+          className="grid gap-4"
+          style={{ gridTemplateColumns: `repeat(${columns}, 1fr)` }}
+        >
           {Array.from({ length: columns }).map((_, colIdx) => (
             <Skeleton key={`cell-${rowIdx}-${colIdx}`} height={16} />
           ))}

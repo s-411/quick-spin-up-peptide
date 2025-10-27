@@ -46,15 +46,9 @@ export function TeamLeadership({
         {/* Header */}
         {(title || description) && (
           <div className="text-center mb-16">
-            {title && (
-              <h2 className="text-3xl md:text-4xl font-heading mb-4">
-                {title}
-              </h2>
-            )}
+            {title && <h2 className="text-3xl md:text-4xl font-heading mb-4">{title}</h2>}
             {description && (
-              <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-                {description}
-              </p>
+              <p className="text-lg text-muted-foreground max-w-2xl mx-auto">{description}</p>
             )}
           </div>
         )}
@@ -62,13 +56,14 @@ export function TeamLeadership({
         {/* Leaders */}
         <div className="space-y-12">
           {leaders.map((leader, index) => (
-            <EnhancedCard
-              key={index}
-              className="!p-0 overflow-hidden"
-            >
-              <div className={`grid ${layout === 'horizontal' ? 'md:grid-cols-[300px_1fr]' : 'grid-cols-1'} gap-0`}>
+            <EnhancedCard key={index} className="!p-0 overflow-hidden">
+              <div
+                className={`grid ${layout === 'horizontal' ? 'md:grid-cols-[300px_1fr]' : 'grid-cols-1'} gap-0`}
+              >
                 {/* Photo */}
-                <div className={`relative ${layout === 'horizontal' ? 'aspect-[3/4]' : 'aspect-[16/9] md:aspect-[3/1]'} overflow-hidden`}>
+                <div
+                  className={`relative ${layout === 'horizontal' ? 'aspect-[3/4]' : 'aspect-[16/9] md:aspect-[3/1]'} overflow-hidden`}
+                >
                   <img
                     src={leader.photo}
                     alt={leader.name}
@@ -83,9 +78,7 @@ export function TeamLeadership({
                   <p className="text-xl text-primary font-semibold mb-6">{leader.title}</p>
 
                   {/* Bio */}
-                  <p className="text-muted-foreground mb-6 leading-relaxed">
-                    {leader.bio}
-                  </p>
+                  <p className="text-muted-foreground mb-6 leading-relaxed">{leader.bio}</p>
 
                   {/* Achievements */}
                   {leader.achievements && leader.achievements.length > 0 && (

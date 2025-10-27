@@ -25,11 +25,7 @@ export interface NewsletterCardProps {
 export function NewsletterCard({
   title = 'Stay in the Loop',
   description = 'Join thousands of subscribers and get the latest news',
-  benefits = [
-    'Weekly updates',
-    'Exclusive content',
-    'No spam, ever',
-  ],
+  benefits = ['Weekly updates', 'Exclusive content', 'No spam, ever'],
   placeholder = 'your@email.com',
   buttonText = 'Subscribe',
   privacyNote = 'We respect your privacy. Unsubscribe at any time.',
@@ -70,23 +66,15 @@ export function NewsletterCard({
               <div className="w-16 h-16 rounded-full bg-primary/10 flex items-center justify-center mx-auto">
                 <Check className="w-8 h-8 text-primary" />
               </div>
-              <h3 className="text-2xl font-heading">
-                You're all set!
-              </h3>
-              <p className="text-muted-foreground">
-                Check your inbox for a confirmation email.
-              </p>
+              <h3 className="text-2xl font-heading">You're all set!</h3>
+              <p className="text-muted-foreground">Check your inbox for a confirmation email.</p>
             </div>
           ) : (
             <div className="space-y-6">
               {/* Header */}
               <div className="text-center space-y-4">
-                <h2 className="text-3xl md:text-4xl font-heading">
-                  {title}
-                </h2>
-                <p className="text-lg text-muted-foreground">
-                  {description}
-                </p>
+                <h2 className="text-3xl md:text-4xl font-heading">{title}</h2>
+                <p className="text-lg text-muted-foreground">{description}</p>
               </div>
 
               {/* Benefits */}
@@ -103,9 +91,7 @@ export function NewsletterCard({
 
               {/* Form removed - to be reimplemented later */}
               {privacyNote && (
-                <p className="text-xs text-center text-muted-foreground">
-                  {privacyNote}
-                </p>
+                <p className="text-xs text-center text-muted-foreground">{privacyNote}</p>
               )}
             </div>
           )}

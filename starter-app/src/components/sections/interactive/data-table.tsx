@@ -1,7 +1,14 @@
 'use client'
 
 import * as React from 'react'
-import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table'
+import {
+  Table,
+  TableBody,
+  TableCell,
+  TableHead,
+  TableHeader,
+  TableRow,
+} from '@/components/ui/table'
 import { Checkbox } from '@/components/ui/checkbox'
 import { Button } from '@/components/ui/button'
 import { ArrowUpDown, ChevronLeft, ChevronRight } from 'lucide-react'
@@ -75,9 +82,7 @@ export function DataTable<T extends Record<string, any>>({
       const bVal = b[sortColumn]
 
       if (typeof aVal === 'string' && typeof bVal === 'string') {
-        return sortDirection === 'asc'
-          ? aVal.localeCompare(bVal)
-          : bVal.localeCompare(aVal)
+        return sortDirection === 'asc' ? aVal.localeCompare(bVal) : bVal.localeCompare(aVal)
       }
 
       if (typeof aVal === 'number' && typeof bVal === 'number') {
@@ -160,7 +165,7 @@ export function DataTable<T extends Record<string, any>>({
                   />
                 </TableHead>
               )}
-              {columns.map((column) => (
+              {columns.map(column => (
                 <TableHead key={column.accessorKey}>
                   {column.sortable ? (
                     <button
@@ -189,20 +194,17 @@ export function DataTable<T extends Record<string, any>>({
               </TableRow>
             ) : (
               paginatedData.map((row, idx) => (
-                <TableRow
-                  key={idx}
-                  data-state={selectedRows.has(idx) ? 'selected' : undefined}
-                >
+                <TableRow key={idx} data-state={selectedRows.has(idx) ? 'selected' : undefined}>
                   {selectable && (
                     <TableCell>
                       <Checkbox
                         checked={selectedRows.has(idx)}
-                        onCheckedChange={(checked) => handleSelectRow(idx, checked as boolean)}
+                        onCheckedChange={checked => handleSelectRow(idx, checked as boolean)}
                         aria-label={`Select row ${idx + 1}`}
                       />
                     </TableCell>
                   )}
-                  {columns.map((column) => (
+                  {columns.map(column => (
                     <TableCell key={column.accessorKey}>
                       {column.cell ? column.cell(row) : row[column.accessorKey]}
                     </TableCell>

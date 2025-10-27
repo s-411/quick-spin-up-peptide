@@ -48,9 +48,7 @@ export function VialForm({
   const [selectedMedicationId, setSelectedMedicationId] = useState(
     initialData?.medicationId || medicationId || ''
   )
-  const [concentrationValue, setConcentrationValue] = useState(
-    initialData?.concentrationValue || 5
-  )
+  const [concentrationValue, setConcentrationValue] = useState(initialData?.concentrationValue || 5)
   const [concentrationUnits, setConcentrationUnits] = useState<ConcentrationUnits>(
     initialData?.concentrationUnits || 'mg/mL'
   )

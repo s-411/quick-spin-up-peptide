@@ -108,9 +108,7 @@ export function InjectionSiteSelector({
                       size="sm"
                       onClick={() => handleSelect(site.value)}
                       className={`justify-start relative ${
-                        isRecent && !isSelected
-                          ? 'border-yellow-500/30 bg-yellow-500/5'
-                          : ''
+                        isRecent && !isSelected ? 'border-yellow-500/30 bg-yellow-500/5' : ''
                       }`}
                     >
                       <span className="flex-1 text-left">{site.label}</span>

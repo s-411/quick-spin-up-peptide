@@ -85,11 +85,7 @@ const ToastTitle = React.forwardRef<
   React.ElementRef<typeof ToastPrimitives.Title>,
   React.ComponentPropsWithoutRef<typeof ToastPrimitives.Title>
 >(({ className, ...props }, ref) => (
-  <ToastPrimitives.Title
-    ref={ref}
-    className="text-sm font-semibold"
-    {...props}
-  />
+  <ToastPrimitives.Title ref={ref} className="text-sm font-semibold" {...props} />
 ))
 ToastTitle.displayName = ToastPrimitives.Title.displayName
 
@@ -97,11 +93,7 @@ const ToastDescription = React.forwardRef<
   React.ElementRef<typeof ToastPrimitives.Description>,
   React.ComponentPropsWithoutRef<typeof ToastPrimitives.Description>
 >(({ className, ...props }, ref) => (
-  <ToastPrimitives.Description
-    ref={ref}
-    className="text-sm opacity-90"
-    {...props}
-  />
+  <ToastPrimitives.Description ref={ref} className="text-sm opacity-90" {...props} />
 ))
 ToastDescription.displayName = ToastPrimitives.Description.displayName
 
@@ -115,7 +107,7 @@ const toastIcons = {
   error: <XCircle className="h-5 w-5 text-red-500" />,
   warning: <AlertCircle className="h-5 w-5 text-yellow-500" />,
   info: <Info className="h-5 w-5 text-blue-500" />,
-  default: null
+  default: null,
 }
 
 export {
@@ -128,5 +120,5 @@ export {
   ToastDescription,
   ToastClose,
   ToastAction,
-  toastIcons
+  toastIcons,
 }

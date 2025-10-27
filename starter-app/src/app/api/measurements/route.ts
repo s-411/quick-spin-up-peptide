@@ -18,7 +18,11 @@ const createMeasurementSchema = z.object({
   secondaryValue: z.number().finite().optional().nullable(),
   notes: z.string().max(1000).optional().nullable(),
   labName: z.string().max(255).optional().nullable(),
-  testDate: z.string().regex(/^\d{4}-\d{2}-\d{2}$/).optional().nullable(),
+  testDate: z
+    .string()
+    .regex(/^\d{4}-\d{2}-\d{2}$/)
+    .optional()
+    .nullable(),
 })
 
 export async function GET(request: NextRequest) {

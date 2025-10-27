@@ -38,10 +38,7 @@ export function calculateNextInjectionDate(
 /**
  * Generate a preview of scheduled injection dates
  */
-export function generateSchedulePreview(
-  protocol: Protocol,
-  daysAhead = 30
-): Date[] {
+export function generateSchedulePreview(protocol: Protocol, daysAhead = 30): Date[] {
   const dates: Date[] = []
   let currentDate = new Date(protocol.startDate)
   const endDate = addDays(new Date(), daysAhead)
@@ -104,7 +101,9 @@ export function isProtocolInActiveCycle(protocol: Protocol, checkDate = new Date
   }
 
   const startDate = new Date(protocol.startDate)
-  const daysSinceStart = Math.floor((checkDate.getTime() - startDate.getTime()) / (1000 * 60 * 60 * 24))
+  const daysSinceStart = Math.floor(
+    (checkDate.getTime() - startDate.getTime()) / (1000 * 60 * 60 * 24)
+  )
   const totalCycleDays = (protocol.cycleLengthWeeks + protocol.offWeeks) * 7
   const dayInCycle = daysSinceStart % totalCycleDays
   const activeCycleDays = protocol.cycleLengthWeeks * 7

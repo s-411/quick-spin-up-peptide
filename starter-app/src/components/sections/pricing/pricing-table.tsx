@@ -60,12 +60,8 @@ export function PricingTable({
       <div className="max-w-7xl mx-auto">
         {/* Header */}
         <div className="text-center max-w-3xl mx-auto mb-16">
-          <h2 className="text-4xl md:text-5xl font-heading mb-4">
-            {title}
-          </h2>
-          <p className="text-lg text-muted-foreground">
-            {description}
-          </p>
+          <h2 className="text-4xl md:text-5xl font-heading mb-4">{title}</h2>
+          <p className="text-lg text-muted-foreground">{description}</p>
         </div>
 
         {/* Pricing Table */}
@@ -146,15 +142,9 @@ export function PricingTable({
                   className="border-b border-border hover:bg-accent/50 transition-colors"
                 >
                   <td className="p-4 font-medium">{feature.name}</td>
-                  <td className="p-4 text-center">
-                    {renderValue(feature.starter)}
-                  </td>
-                  <td className="p-4 text-center bg-primary/5">
-                    {renderValue(feature.pro)}
-                  </td>
-                  <td className="p-4 text-center">
-                    {renderValue(feature.enterprise)}
-                  </td>
+                  <td className="p-4 text-center">{renderValue(feature.starter)}</td>
+                  <td className="p-4 text-center bg-primary/5">{renderValue(feature.pro)}</td>
+                  <td className="p-4 text-center">{renderValue(feature.enterprise)}</td>
                 </tr>
               ))}
             </tbody>

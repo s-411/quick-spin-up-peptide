@@ -53,15 +53,9 @@ export function TeamCards({
         {/* Header */}
         {(title || description) && (
           <div className="text-center mb-12">
-            {title && (
-              <h2 className="text-3xl md:text-4xl font-heading mb-4">
-                {title}
-              </h2>
-            )}
+            {title && <h2 className="text-3xl md:text-4xl font-heading mb-4">{title}</h2>}
             {description && (
-              <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-                {description}
-              </p>
+              <p className="text-lg text-muted-foreground max-w-2xl mx-auto">{description}</p>
             )}
           </div>
         )}
@@ -92,7 +86,7 @@ export function TeamCards({
                           href={member.linkedin}
                           target="_blank"
                           rel="noopener noreferrer"
-                          onClick={(e) => e.stopPropagation()}
+                          onClick={e => e.stopPropagation()}
                           className="w-8 h-8 rounded-full bg-background/80 backdrop-blur flex items-center justify-center hover:bg-primary hover:text-primary-foreground transition-colors"
                           aria-label="LinkedIn"
                         >
@@ -104,7 +98,7 @@ export function TeamCards({
                           href={member.twitter}
                           target="_blank"
                           rel="noopener noreferrer"
-                          onClick={(e) => e.stopPropagation()}
+                          onClick={e => e.stopPropagation()}
                           className="w-8 h-8 rounded-full bg-background/80 backdrop-blur flex items-center justify-center hover:bg-primary hover:text-primary-foreground transition-colors"
                           aria-label="Twitter"
                         >
@@ -116,7 +110,7 @@ export function TeamCards({
                           href={member.github}
                           target="_blank"
                           rel="noopener noreferrer"
-                          onClick={(e) => e.stopPropagation()}
+                          onClick={e => e.stopPropagation()}
                           className="w-8 h-8 rounded-full bg-background/80 backdrop-blur flex items-center justify-center hover:bg-primary hover:text-primary-foreground transition-colors"
                           aria-label="GitHub"
                         >
@@ -126,7 +120,7 @@ export function TeamCards({
                       {member.email && (
                         <a
                           href={`mailto:${member.email}`}
-                          onClick={(e) => e.stopPropagation()}
+                          onClick={e => e.stopPropagation()}
                           className="w-8 h-8 rounded-full bg-background/80 backdrop-blur flex items-center justify-center hover:bg-primary hover:text-primary-foreground transition-colors"
                           aria-label="Email"
                         >

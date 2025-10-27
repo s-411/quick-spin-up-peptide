@@ -47,8 +47,18 @@ export function HeroSplit({
         <EnhancedCard className="w-full h-full min-h-[400px] flex items-center justify-center bg-gradient-to-br from-primary/20 to-secondary/20">
           <div className="text-center p-8">
             <div className="w-20 h-20 mx-auto mb-4 rounded-full bg-primary/20 flex items-center justify-center">
-              <svg className="w-10 h-10 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
+              <svg
+                className="w-10 h-10 text-primary"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={2}
+                  d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"
+                />
               </svg>
             </div>
             <p className="text-muted-foreground">Image Placeholder</p>
@@ -60,12 +70,7 @@ export function HeroSplit({
     if (typeof image === 'string') {
       return (
         <div className="relative w-full h-full min-h-[400px] rounded-card overflow-hidden">
-          <Image
-            src={image}
-            alt={headline}
-            fill
-            className="object-cover"
-          />
+          <Image src={image} alt={headline} fill className="object-cover" />
         </div>
       )
     }
@@ -79,13 +84,9 @@ export function HeroSplit({
         <div className="grid lg:grid-cols-2 gap-12 items-center">
           {/* Content */}
           <div className={`space-y-6 ${contentOrder}`}>
-            <h1 className="text-4xl md:text-6xl font-heading leading-tight">
-              {headline}
-            </h1>
+            <h1 className="text-4xl md:text-6xl font-heading leading-tight">{headline}</h1>
 
-            <p className="text-lg text-muted-foreground">
-              {subheadline}
-            </p>
+            <p className="text-lg text-muted-foreground">{subheadline}</p>
 
             {/* Features List */}
             <ul className="space-y-3">
@@ -100,10 +101,7 @@ export function HeroSplit({
             </ul>
 
             <div className="pt-4">
-              <MagneticButton
-                variant="primary"
-                onClick={onPrimaryClick}
-              >
+              <MagneticButton variant="primary" onClick={onPrimaryClick}>
                 {primaryCTA}
                 <ArrowRight className="w-4 h-4" />
               </MagneticButton>
@@ -111,9 +109,7 @@ export function HeroSplit({
           </div>
 
           {/* Image */}
-          <div className={imageOrder}>
-            {renderImage()}
-          </div>
+          <div className={imageOrder}>{renderImage()}</div>
         </div>
       </div>
     </section>

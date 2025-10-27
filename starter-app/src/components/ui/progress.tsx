@@ -33,7 +33,7 @@ const Progress = React.forwardRef<HTMLDivElement, ProgressProps>(
   ) => {
     const clampedValue = Math.min(Math.max(value, 0), 100)
 
-    const colorMap: Record<Required<ProgressProps>["color"], string> = {
+    const colorMap: Record<Required<ProgressProps>['color'], string> = {
       primary: 'hsl(var(--primary))',
       success: 'hsl(var(--chart-2))',
       warning: 'hsl(var(--chart-4))',

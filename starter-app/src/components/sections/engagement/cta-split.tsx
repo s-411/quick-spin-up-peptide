@@ -41,16 +41,10 @@ export function CtaSplit({
   const content = (
     <div className="space-y-6">
       {/* Headline */}
-      <h2 className="text-4xl md:text-5xl font-heading">
-        {headline}
-      </h2>
+      <h2 className="text-4xl md:text-5xl font-heading">{headline}</h2>
 
       {/* Description */}
-      {description && (
-        <p className="text-lg text-muted-foreground">
-          {description}
-        </p>
-      )}
+      {description && <p className="text-lg text-muted-foreground">{description}</p>}
 
       {/* Features List */}
       {features && features.length > 0 && (
@@ -66,10 +60,7 @@ export function CtaSplit({
 
       {/* CTAs */}
       <div className="flex flex-col sm:flex-row gap-4 pt-4">
-        <button
-          onClick={onPrimaryClick}
-          className="btn-mm"
-        >
+        <button onClick={onPrimaryClick} className="btn-mm">
           {primaryCta}
         </button>
         {secondaryCta && (
@@ -85,16 +76,10 @@ export function CtaSplit({
   )
 
   const visual = imageComponent ? (
-    <div className="flex items-center justify-center">
-      {imageComponent}
-    </div>
+    <div className="flex items-center justify-center">{imageComponent}</div>
   ) : image ? (
     <div className="relative h-[400px] md:h-[500px] rounded-card overflow-hidden">
-      <img
-        src={image}
-        alt={headline}
-        className="w-full h-full object-cover"
-      />
+      <img src={image} alt={headline} className="w-full h-full object-cover" />
     </div>
   ) : (
     <div className="relative h-[400px] md:h-[500px] rounded-card bg-muted flex items-center justify-center">
@@ -105,9 +90,11 @@ export function CtaSplit({
   return (
     <section className="py-20 px-4">
       <div className="max-w-7xl mx-auto">
-        <div className={`grid md:grid-cols-2 gap-12 items-center ${
-          imagePosition === 'left' ? 'md:flex-row-reverse' : ''
-        }`}>
+        <div
+          className={`grid md:grid-cols-2 gap-12 items-center ${
+            imagePosition === 'left' ? 'md:flex-row-reverse' : ''
+          }`}
+        >
           {imagePosition === 'left' ? (
             <>
               <div className="md:order-2">{content}</div>

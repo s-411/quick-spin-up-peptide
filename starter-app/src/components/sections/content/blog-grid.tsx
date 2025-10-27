@@ -63,15 +63,9 @@ export function BlogGrid({
         {/* Header */}
         {(title || description) && (
           <div className="text-center mb-12">
-            {title && (
-              <h2 className="text-3xl md:text-4xl font-heading mb-4">
-                {title}
-              </h2>
-            )}
+            {title && <h2 className="text-3xl md:text-4xl font-heading mb-4">{title}</h2>}
             {description && (
-              <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-                {description}
-              </p>
+              <p className="text-lg text-muted-foreground max-w-2xl mx-auto">{description}</p>
             )}
           </div>
         )}
@@ -82,7 +76,7 @@ export function BlogGrid({
             <EnhancedCard
               key={index}
               className="!p-0 overflow-hidden group cursor-pointer"
-              onClick={() => window.location.href = post.href}
+              onClick={() => (window.location.href = post.href)}
             >
               {/* Thumbnail */}
               <div className="relative aspect-[16/9] overflow-hidden">
@@ -109,9 +103,7 @@ export function BlogGrid({
                 </h3>
 
                 {/* Excerpt */}
-                <p className="text-muted-foreground mb-4 line-clamp-2">
-                  {post.excerpt}
-                </p>
+                <p className="text-muted-foreground mb-4 line-clamp-2">{post.excerpt}</p>
 
                 {/* Meta */}
                 <div className="flex items-center gap-4 text-sm text-muted-foreground">

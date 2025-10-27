@@ -59,7 +59,7 @@ export function FilterPanel({
 }: FilterPanelProps) {
   const [filters, setFilters] = React.useState<Record<string, any>>({})
   const [expandedGroups, setExpandedGroups] = React.useState<Set<string>>(
-    new Set(groups.filter((g) => g.defaultExpanded !== false).map((g) => g.id))
+    new Set(groups.filter(g => g.defaultExpanded !== false).map(g => g.id))
   )
 
   React.useEffect(() => {
@@ -69,7 +69,7 @@ export function FilterPanel({
   }, [filters, onChange])
 
   const toggleGroup = (groupId: string) => {
-    setExpandedGroups((prev) => {
+    setExpandedGroups(prev => {
       const next = new Set(prev)
       if (next.has(groupId)) {
         next.delete(groupId)
@@ -81,11 +81,9 @@ export function FilterPanel({
   }
 
   const handleCheckboxChange = (groupId: string, value: string, checked: boolean) => {
-    setFilters((prev) => {
+    setFilters(prev => {
       const groupValues = (prev[groupId] as string[]) || []
-      const updated = checked
-        ? [...groupValues, value]
-        : groupValues.filter((v) => v !== value)
+      const updated = checked ? [...groupValues, value] : groupValues.filter(v => v !== value)
 
       return {
         ...prev,
@@ -95,14 +93,14 @@ export function FilterPanel({
   }
 
   const handleRangeChange = (groupId: string, value: number[]) => {
-    setFilters((prev) => ({
+    setFilters(prev => ({
       ...prev,
       [groupId]: value,
     }))
   }
 
   const handleSelectChange = (groupId: string, value: string) => {
-    setFilters((prev) => ({
+    setFilters(prev => ({
       ...prev,
       [groupId]: value || undefined,
     }))
@@ -113,7 +111,7 @@ export function FilterPanel({
   }
 
   const clearGroupFilter = (groupId: string) => {
-    setFilters((prev) => {
+    setFilters(prev => {
       const next = { ...prev }
       delete next[groupId]
       return next
@@ -121,7 +119,7 @@ export function FilterPanel({
   }
 
   const getActiveFilterCount = () => {
-    return Object.values(filters).filter((v) => {
+    return Object.values(filters).filter(v => {
       if (Array.isArray(v)) return v.length > 0
       return v !== undefined && v !== null
     }).length
@@ -153,7 +151,7 @@ export function FilterPanel({
 
       {/* Filter Groups */}
       <div className="divide-y divide-border">
-        {groups.map((group) => {
+        {groups.map(group => {
           const isExpanded = expandedGroups.has(group.id)
           const hasActiveFilter = filters[group.id] !== undefined
 
@@ -168,7 +166,7 @@ export function FilterPanel({
                   <span className="font-medium text-sm">{group.label}</span>
                   {hasActiveFilter && (
                     <button
-                      onClick={(e) => {
+                      onClick={e => {
                         e.stopPropagation()
                         clearGroupFilter(group.id)
                       }}
@@ -178,7 +176,11 @@ export function FilterPanel({
                     </button>
                   )}
                 </div>
-                {isExpanded ? <ChevronUp className="w-4 h-4" /> : <ChevronDown className="w-4 h-4" />}
+                {isExpanded ? (
+                  <ChevronUp className="w-4 h-4" />
+                ) : (
+                  <ChevronDown className="w-4 h-4" />
+                )}
               </button>
 
               {/* Group Content */}
@@ -187,7 +189,7 @@ export function FilterPanel({
                   {/* Checkbox Filters */}
                   {group.type === 'checkbox' && group.options && (
                     <div className="space-y-2">
-                      {group.options.map((option) => {
+                      {group.options.map(option => {
                         const checked = ((filters[group.id] as string[]) || []).includes(
                           option.value
                         )
@@ -195,7 +197,7 @@ export function FilterPanel({
                           <div key={option.value} className="flex items-center gap-2">
                             <Checkbox
                               checked={checked}
-                              onCheckedChange={(isChecked) =>
+                              onCheckedChange={isChecked =>
                                 handleCheckboxChange(group.id, option.value, isChecked as boolean)
                               }
                               id={`${group.id}-${option.value}`}
@@ -225,7 +227,7 @@ export function FilterPanel({
                         max={group.max}
                         step={1}
                         value={(filters[group.id] as number[]) || [group.min, group.max]}
-                        onValueChange={(value) => handleRangeChange(group.id, value)}
+                        onValueChange={value => handleRangeChange(group.id, value)}
                         className="w-full"
                       />
                       <div className="flex items-center justify-between text-sm text-muted-foreground">
@@ -243,11 +245,11 @@ export function FilterPanel({
                   {group.type === 'select' && group.options && (
                     <select
                       value={(filters[group.id] as string) || ''}
-                      onChange={(e) => handleSelectChange(group.id, e.target.value)}
+                      onChange={e => handleSelectChange(group.id, e.target.value)}
                       className="select-mm w-full"
                     >
                       <option value="">All</option>
-                      {group.options.map((option) => (
+                      {group.options.map(option => (
                         <option key={option.value} value={option.value}>
                           {option.label}
                           {option.count !== undefined && ` (${option.count})`}

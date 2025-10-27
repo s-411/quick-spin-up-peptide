@@ -51,9 +51,7 @@ export function MedicationCard({
                 {medication.type}
               </span>
             </div>
-            <p className="text-sm text-muted-foreground">
-              Units: {medication.units}
-            </p>
+            <p className="text-sm text-muted-foreground">Units: {medication.units}</p>
           </div>
 
           <button
@@ -70,23 +68,17 @@ export function MedicationCard({
         <div className="grid grid-cols-2 gap-4 mb-4">
           <div className="space-y-1">
             <p className="text-xs text-muted-foreground">Active Vials</p>
-            <p className="text-2xl font-bold">
-              {activeVials.length}
-            </p>
+            <p className="text-2xl font-bold">{activeVials.length}</p>
           </div>
           <div className="space-y-1">
             <p className="text-xs text-muted-foreground">Active Protocols</p>
-            <p className="text-2xl font-bold">
-              {activeProtocols.length}
-            </p>
+            <p className="text-2xl font-bold">{activeProtocols.length}</p>
           </div>
         </div>
 
         {/* Notes */}
         {medication.notes && (
-          <p className="text-sm text-muted-foreground mb-4 line-clamp-2">
-            {medication.notes}
-          </p>
+          <p className="text-sm text-muted-foreground mb-4 line-clamp-2">{medication.notes}</p>
         )}
 
         {/* Actions */}

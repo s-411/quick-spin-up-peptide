@@ -40,11 +40,11 @@ export function TestimonialCarousel({
   const [activeIndex, setActiveIndex] = React.useState(0)
 
   const goToNext = React.useCallback(() => {
-    setActiveIndex((prev) => (prev + 1) % testimonials.length)
+    setActiveIndex(prev => (prev + 1) % testimonials.length)
   }, [testimonials.length])
 
   const goToPrevious = () => {
-    setActiveIndex((prev) => (prev - 1 + testimonials.length) % testimonials.length)
+    setActiveIndex(prev => (prev - 1 + testimonials.length) % testimonials.length)
   }
 
   const goToIndex = (index: number) => {
@@ -66,12 +66,8 @@ export function TestimonialCarousel({
       <div className="max-w-5xl mx-auto">
         {/* Header */}
         <div className="text-center max-w-3xl mx-auto mb-16">
-          <h2 className="text-4xl md:text-5xl font-heading mb-4">
-            {title}
-          </h2>
-          <p className="text-lg text-muted-foreground">
-            {description}
-          </p>
+          <h2 className="text-4xl md:text-5xl font-heading mb-4">{title}</h2>
+          <p className="text-lg text-muted-foreground">{description}</p>
         </div>
 
         {/* Carousel */}
@@ -85,9 +81,7 @@ export function TestimonialCarousel({
                     <Star
                       key={i}
                       className={`w-5 h-5 ${
-                        i < activeTestimonial.rating!
-                          ? 'fill-primary text-primary'
-                          : 'text-muted'
+                        i < activeTestimonial.rating! ? 'fill-primary text-primary' : 'text-muted'
                       }`}
                     />
                   ))}
@@ -145,9 +139,7 @@ export function TestimonialCarousel({
               key={index}
               onClick={() => goToIndex(index)}
               className={`w-2 h-2 rounded-full transition-all ${
-                index === activeIndex
-                  ? 'bg-primary w-8'
-                  : 'bg-muted hover:bg-muted-foreground/50'
+                index === activeIndex ? 'bg-primary w-8' : 'bg-muted hover:bg-muted-foreground/50'
               }`}
               aria-label={`Go to testimonial ${index + 1}`}
             />

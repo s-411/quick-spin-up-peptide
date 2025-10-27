@@ -23,17 +23,10 @@ export default function Home() {
               OpenAI.
             </p>
             <div className="flex flex-col items-center justify-center gap-4 sm:flex-row">
-              <Link
-                href="/signup"
-                data-testid="cta-button"
-                className="btn-mm"
-              >
+              <Link href="/signup" data-testid="cta-button" className="btn-mm">
                 Get Started
               </Link>
-              <Link
-                href="/pricing"
-                className="btn-secondary"
-              >
+              <Link href="/pricing" className="btn-secondary">
                 View Pricing
               </Link>
             </div>
@@ -114,10 +107,7 @@ export default function Home() {
               Clone the template, add your environment variables, and start building in minutes.
             </p>
             <div className="flex flex-col items-center justify-center gap-4 sm:flex-row">
-              <Link
-                href="/signup"
-                className="btn-mm"
-              >
+              <Link href="/signup" className="btn-mm">
                 Start Building
               </Link>
               <a

@@ -3,10 +3,7 @@
 import * as React from 'react'
 import { Command as CommandPrimitive } from 'cmdk'
 import { Search, X } from 'lucide-react'
-import {
-  Dialog,
-  DialogContent,
-} from '@/components/ui/dialog'
+import { Dialog, DialogContent } from '@/components/ui/dialog'
 
 const Command = React.forwardRef<
   React.ElementRef<typeof CommandPrimitive>,
@@ -95,10 +92,7 @@ const CommandItem = React.forwardRef<
 ))
 CommandItem.displayName = CommandPrimitive.Item.displayName
 
-const CommandShortcut = ({
-  className,
-  ...props
-}: React.HTMLAttributes<HTMLSpanElement>) => {
+const CommandShortcut = ({ className, ...props }: React.HTMLAttributes<HTMLSpanElement>) => {
   return (
     <span
       className={`ml-auto text-xs tracking-widest text-muted-foreground ${className || ''}`}
@@ -120,7 +114,7 @@ export function CommandPalette({ children, onOpenChange }: CommandPaletteProps) 
     const down = (e: KeyboardEvent) => {
       if (e.key === 'k' && (e.metaKey || e.ctrlKey)) {
         e.preventDefault()
-        setOpen((open) => {
+        setOpen(open => {
           const newOpen = !open
           onOpenChange?.(newOpen)
           return newOpen

@@ -22,20 +22,22 @@ const updateInjectionSchema = z.object({
   doseValue: z.number().positive().optional(),
   doseUnits: z.enum(['mg', 'IU', 'mcg', 'units', 'mL']).optional(),
   volumeMl: z.number().positive().optional().nullable(),
-  site: z.enum([
-    'left_glute',
-    'right_glute',
-    'left_delt',
-    'right_delt',
-    'left_thigh',
-    'right_thigh',
-    'abdomen_upper_left',
-    'abdomen_upper_right',
-    'abdomen_lower_left',
-    'abdomen_lower_right',
-    'left_ventrogluteal',
-    'right_ventrogluteal',
-  ]).optional(),
+  site: z
+    .enum([
+      'left_glute',
+      'right_glute',
+      'left_delt',
+      'right_delt',
+      'left_thigh',
+      'right_thigh',
+      'abdomen_upper_left',
+      'abdomen_upper_right',
+      'abdomen_lower_left',
+      'abdomen_lower_right',
+      'left_ventrogluteal',
+      'right_ventrogluteal',
+    ])
+    .optional(),
   notes: z.string().max(1000).optional().nullable(),
   sideEffects: z.string().max(1000).optional().nullable(),
 })
@@ -61,14 +63,16 @@ export async function GET(request: NextRequest, { params }: RouteParams) {
     // Fetch injection with related data
     const { data: injection, error: fetchError } = await supabase
       .from('injections')
-      .select(`
+      .select(
+        `
         *,
         protocol:protocols!inner(
           *,
           medication:medications!inner(*)
         ),
         vial:vials(*)
-      `)
+      `
+      )
       .eq('id', injectionId)
       .is('deleted_at', null)
       .single()
@@ -113,13 +117,15 @@ export async function PATCH(request: NextRequest, { params }: RouteParams) {
     // Verify injection ownership
     const { data: existingInjection, error: fetchError } = await supabase
       .from('injections')
-      .select(`
+      .select(
+        `
         *,
         protocol:protocols!inner(
           *,
           medication:medications!inner(user_id)
         )
-      `)
+      `
+      )
       .eq('id', injectionId)
       .is('deleted_at', null)
       .single()
@@ -156,14 +162,16 @@ export async function PATCH(request: NextRequest, { params }: RouteParams) {
       .update(updates)
       .eq('id', injectionId)
       .is('deleted_at', null)
-      .select(`
+      .select(
+        `
         *,
         protocol:protocols(
           *,
           medication:medications(*)
         ),
         vial:vials(*)
-      `)
+      `
+      )
       .single()
 
     if (updateError || !injection) {
@@ -209,13 +217,15 @@ export async function DELETE(request: NextRequest, { params }: RouteParams) {
     // Verify injection ownership
     const { data: existingInjection, error: fetchError } = await supabase
       .from('injections')
-      .select(`
+      .select(
+        `
         *,
         protocol:protocols!inner(
           *,
           medication:medications!inner(user_id)
         )
-      `)
+      `
+      )
       .eq('id', injectionId)
       .is('deleted_at', null)
       .single()
@@ -229,10 +239,7 @@ export async function DELETE(request: NextRequest, { params }: RouteParams) {
     }
 
     // Delete injection (vial volume will be restored by database trigger)
-    const { error: deleteError } = await supabase
-      .from('injections')
-      .delete()
-      .eq('id', injectionId)
+    const { error: deleteError } = await supabase.from('injections').delete().eq('id', injectionId)
 
     if (deleteError) {
       console.error('Error deleting injection:', deleteError)

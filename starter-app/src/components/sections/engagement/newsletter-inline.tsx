@@ -68,12 +68,8 @@ export function NewsletterInline({
     <section className="py-20 px-4">
       <div className="max-w-2xl mx-auto text-center">
         {/* Header */}
-        <h2 className="text-3xl md:text-4xl font-heading mb-4">
-          {title}
-        </h2>
-        <p className="text-lg text-muted-foreground mb-8">
-          {description}
-        </p>
+        <h2 className="text-3xl md:text-4xl font-heading mb-4">{title}</h2>
+        <p className="text-lg text-muted-foreground mb-8">{description}</p>
 
         {/* Form removed - to be reimplemented later */}
       </div>

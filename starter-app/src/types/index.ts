@@ -371,7 +371,19 @@ export type MeasurementType =
   | 'creatinine'
   | 'egfr'
 
-export type MeasurementUnit = 'lbs' | 'kg' | 'in' | 'cm' | 'mmHg' | 'ng/dL' | '%' | 'mg/dL' | 'bpm' | 'pg/mL' | 'nmol/L' | 'mIU/mL'
+export type MeasurementUnit =
+  | 'lbs'
+  | 'kg'
+  | 'in'
+  | 'cm'
+  | 'mmHg'
+  | 'ng/dL'
+  | '%'
+  | 'mg/dL'
+  | 'bpm'
+  | 'pg/mL'
+  | 'nmol/L'
+  | 'mIU/mL'
 
 export interface Measurement {
   id: string

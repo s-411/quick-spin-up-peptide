@@ -60,7 +60,11 @@ export function FormWithUpload({
   })
   const [uploadedFiles, setUploadedFiles] = React.useState<UploadedFile[]>([])
   const [isDragging, setIsDragging] = React.useState(false)
-  const [errors, setErrors] = React.useState<{ title?: string; description?: string; files?: string }>({})
+  const [errors, setErrors] = React.useState<{
+    title?: string
+    description?: string
+    files?: string
+  }>({})
   const [isSubmitting, setIsSubmitting] = React.useState(false)
   const fileInputRef = React.useRef<HTMLInputElement>(null)
 
@@ -93,7 +97,7 @@ export function FormWithUpload({
 
     // Check file sizes and create previews
     const validFiles: UploadedFile[] = []
-    fileArray.forEach((file) => {
+    fileArray.forEach(file => {
       if (file.size > maxSize * 1024 * 1024) {
         newErrors.files = `File "${file.name}" exceeds ${maxSize}MB limit`
         return
@@ -106,7 +110,7 @@ export function FormWithUpload({
         const reader = new FileReader()
         reader.onloadend = () => {
           uploadedFile.preview = reader.result as string
-          setUploadedFiles((prev) => [...prev, uploadedFile])
+          setUploadedFiles(prev => [...prev, uploadedFile])
         }
         reader.readAsDataURL(file)
       } else {
@@ -115,7 +119,7 @@ export function FormWithUpload({
     })
 
     if (validFiles.length > 0) {
-      setUploadedFiles((prev) => [...prev, ...validFiles])
+      setUploadedFiles(prev => [...prev, ...validFiles])
     }
 
     setErrors(newErrors)
@@ -153,8 +157,8 @@ export function FormWithUpload({
   }
 
   const removeFile = (index: number) => {
-    setUploadedFiles((prev) => prev.filter((_, idx) => idx !== index))
-    setErrors((prev) => ({ ...prev, files: undefined }))
+    setUploadedFiles(prev => prev.filter((_, idx) => idx !== index))
+    setErrors(prev => ({ ...prev, files: undefined }))
   }
 
   const validate = (): boolean => {
@@ -186,17 +190,17 @@ export function FormWithUpload({
     try {
       const submitData: FormWithUploadData = {
         ...formData,
-        files: uploadedFiles.map((f) => f.file),
+        files: uploadedFiles.map(f => f.file),
       }
 
       if (onSubmit) {
         await onSubmit(submitData)
       } else {
         // Simulate API call
-        await new Promise((resolve) => setTimeout(resolve, 1500))
+        await new Promise(resolve => setTimeout(resolve, 1500))
         console.log('Form submitted:', {
           ...submitData,
-          files: submitData.files.map((f) => ({ name: f.name, size: f.size })),
+          files: submitData.files.map(f => ({ name: f.name, size: f.size })),
         })
         alert('Files uploaded successfully!')
       }
@@ -224,7 +228,7 @@ export function FormWithUpload({
             type="text"
             placeholder="Enter a title"
             value={formData.title}
-            onChange={(e) => setFormData((prev) => ({ ...prev, title: e.target.value }))}
+            onChange={e => setFormData(prev => ({ ...prev, title: e.target.value }))}
             className={errors.title ? 'border-destructive' : ''}
           />
           {errors.title && <p className="text-sm text-destructive">{errors.title}</p>}
@@ -238,7 +242,7 @@ export function FormWithUpload({
           <Textarea
             placeholder="Provide a description"
             value={formData.description}
-            onChange={(e) => setFormData((prev) => ({ ...prev, description: e.target.value }))}
+            onChange={e => setFormData(prev => ({ ...prev, description: e.target.value }))}
             className={`min-h-[100px] ${errors.description ? 'border-destructive' : ''}`}
           />
           {errors.description && <p className="text-sm text-destructive">{errors.description}</p>}
@@ -259,11 +263,13 @@ export function FormWithUpload({
               isDragging
                 ? 'border-primary bg-primary/5'
                 : errors.files
-                ? 'border-destructive'
-                : 'border-border hover:border-primary hover:bg-muted/20'
+                  ? 'border-destructive'
+                  : 'border-border hover:border-primary hover:bg-muted/20'
             }`}
           >
-            <Upload className={`w-12 h-12 mx-auto mb-4 ${isDragging ? 'text-primary' : 'text-muted-foreground'}`} />
+            <Upload
+              className={`w-12 h-12 mx-auto mb-4 ${isDragging ? 'text-primary' : 'text-muted-foreground'}`}
+            />
             <p className="text-sm font-medium mb-1">
               {isDragging ? 'Drop files here' : 'Click to upload or drag and drop'}
             </p>
@@ -296,7 +302,11 @@ export function FormWithUpload({
                 >
                   {item.preview ? (
                     <div className="w-12 h-12 rounded overflow-hidden bg-muted flex-shrink-0">
-                      <img src={item.preview} alt={item.file.name} className="w-full h-full object-cover" />
+                      <img
+                        src={item.preview}
+                        alt={item.file.name}
+                        className="w-full h-full object-cover"
+                      />
                     </div>
                   ) : (
                     <div className="w-12 h-12 rounded bg-muted flex items-center justify-center flex-shrink-0">
@@ -305,7 +315,9 @@ export function FormWithUpload({
                   )}
                   <div className="flex-1 min-w-0">
                     <p className="text-sm font-medium truncate">{item.file.name}</p>
-                    <p className="text-xs text-muted-foreground">{formatFileSize(item.file.size)}</p>
+                    <p className="text-xs text-muted-foreground">
+                      {formatFileSize(item.file.size)}
+                    </p>
                   </div>
                   <div className="flex items-center gap-2">
                     <CheckCircle2 className="w-4 h-4 text-green-500" />

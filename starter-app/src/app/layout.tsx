@@ -7,7 +7,8 @@ export const metadata: Metadata = {
     template: '%s | Starter App',
     default: 'Starter App Template',
   },
-  description: 'Production-ready Next.js starter with auth, payments, email, and AI-powered Q&A chatbot',
+  description:
+    'Production-ready Next.js starter with auth, payments, email, and AI-powered Q&A chatbot',
   keywords: ['Next.js', 'React', 'TypeScript', 'Supabase', 'Stripe', 'OpenAI', 'RAG', 'Chatbot'],
   authors: [{ name: 'Starter App Team' }],
   creator: 'Starter App',

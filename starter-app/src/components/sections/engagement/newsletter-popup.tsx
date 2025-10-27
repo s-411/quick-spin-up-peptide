@@ -87,9 +87,7 @@ export function NewsletterPopup({
             <div className="w-16 h-16 rounded-full bg-primary/10 flex items-center justify-center mx-auto">
               <Check className="w-8 h-8 text-primary" />
             </div>
-            <DialogTitle className="text-2xl font-heading">
-              You're subscribed!
-            </DialogTitle>
+            <DialogTitle className="text-2xl font-heading">You're subscribed!</DialogTitle>
             <DialogDescription>
               Thank you for subscribing. Check your inbox for confirmation.
             </DialogDescription>
@@ -97,12 +95,8 @@ export function NewsletterPopup({
         ) : (
           <>
             <DialogHeader>
-              <DialogTitle className="text-2xl font-heading">
-                {title}
-              </DialogTitle>
-              <DialogDescription className="text-base">
-                {description}
-              </DialogDescription>
+              <DialogTitle className="text-2xl font-heading">{title}</DialogTitle>
+              <DialogDescription className="text-base">{description}</DialogDescription>
             </DialogHeader>
 
             <form onSubmit={handleSubmit} className="space-y-4 pt-4">
@@ -111,7 +105,7 @@ export function NewsletterPopup({
                 type="email"
                 placeholder={placeholder}
                 value={email}
-                onChange={(e) => setEmail(e.target.value)}
+                onChange={e => setEmail(e.target.value)}
                 className="px-3 py-3"
                 disabled={status === 'loading'}
                 autoFocus
@@ -126,19 +120,13 @@ export function NewsletterPopup({
               )}
 
               {/* Submit Button */}
-              <button
-                type="submit"
-                className="btn-mm w-full"
-                disabled={status === 'loading'}
-              >
+              <button type="submit" className="btn-mm w-full" disabled={status === 'loading'}>
                 {status === 'loading' ? 'Subscribing...' : buttonText}
               </button>
 
               {/* Privacy Note */}
               {privacyNote && (
-                <p className="text-xs text-center text-muted-foreground">
-                  {privacyNote}
-                </p>
+                <p className="text-xs text-center text-muted-foreground">{privacyNote}</p>
               )}
             </form>
           </>

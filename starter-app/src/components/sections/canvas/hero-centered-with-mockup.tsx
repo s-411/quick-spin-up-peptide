@@ -50,7 +50,6 @@ export function HeroCenteredWithMockup({
   showMockup = true,
   mockupElement,
 }: HeroCenteredWithMockupProps) {
-
   return (
     <section className="py-12 md:py-20 px-4">
       <div className="max-w-5xl mx-auto">
@@ -79,16 +78,10 @@ export function HeroCenteredWithMockup({
 
           {/* CTA Buttons - Primary and Secondary */}
           <div className="pt-2 flex flex-wrap gap-4 justify-center">
-            <button
-              className="btn-mm"
-              onClick={onPrimaryClick}
-            >
+            <button className="btn-mm" onClick={onPrimaryClick}>
               {primaryButtonText}
             </button>
-            <button
-              className="btn-secondary"
-              onClick={onSecondaryClick}
-            >
+            <button className="btn-secondary" onClick={onSecondaryClick}>
               {secondaryButtonText}
             </button>
           </div>

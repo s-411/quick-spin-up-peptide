@@ -65,9 +65,7 @@ export default function AnalyticsPage() {
               <CardContent>
                 <div className="text-center">
                   <div className="text-4xl font-bold text-primary mb-2">-</div>
-                  <p className="text-sm text-muted-foreground">
-                    Based on schedule adherence
-                  </p>
+                  <p className="text-sm text-muted-foreground">Based on schedule adherence</p>
                 </div>
               </CardContent>
             </Card>
@@ -83,9 +81,7 @@ export default function AnalyticsPage() {
               <CardContent>
                 <div className="text-center">
                   <div className="text-4xl font-bold text-primary mb-2">-</div>
-                  <p className="text-sm text-muted-foreground">
-                    Last {adherenceDays} days
-                  </p>
+                  <p className="text-sm text-muted-foreground">Last {adherenceDays} days</p>
                 </div>
               </CardContent>
             </Card>
@@ -101,9 +97,7 @@ export default function AnalyticsPage() {
               <CardContent>
                 <div className="text-center">
                   <div className="text-4xl font-bold text-primary mb-2">-</div>
-                  <p className="text-sm text-muted-foreground">
-                    Days between injections
-                  </p>
+                  <p className="text-sm text-muted-foreground">Days between injections</p>
                 </div>
               </CardContent>
             </Card>
@@ -124,8 +118,8 @@ export default function AnalyticsPage() {
                     Adherence Tracking
                   </h4>
                   <p className="text-sm text-muted-foreground">
-                    Your adherence data is calculated based on your scheduled protocols and
-                    logged injections. Maintain consistency to see better long-term results.
+                    Your adherence data is calculated based on your scheduled protocols and logged
+                    injections. Maintain consistency to see better long-term results.
                   </p>
                 </div>
 
@@ -156,11 +150,11 @@ export default function AnalyticsPage() {
           <Card className="border-yellow-500/30 bg-yellow-500/5">
             <CardContent className="p-6">
               <p className="text-sm text-muted-foreground">
-                <strong className="font-medium text-foreground">Medical Disclaimer:</strong>{' '}
-                This app is for tracking purposes only and does not provide medical advice.
-                Always consult with your healthcare provider before making changes to your
-                medication protocols. Your injection schedules should be prescribed by a licensed
-                medical professional.
+                <strong className="font-medium text-foreground">Medical Disclaimer:</strong> This
+                app is for tracking purposes only and does not provide medical advice. Always
+                consult with your healthcare provider before making changes to your medication
+                protocols. Your injection schedules should be prescribed by a licensed medical
+                professional.
               </p>
             </CardContent>
           </Card>

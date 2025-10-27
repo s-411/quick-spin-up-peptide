@@ -52,7 +52,6 @@ export function TextImageSplitWithTagline({
   imageElement,
   imagePosition = 'right',
 }: TextImageSplitWithTaglineProps) {
-
   // Text content column
   const textContent = (
     <div className="space-y-6">
@@ -67,22 +66,14 @@ export function TextImageSplitWithTagline({
       </h2>
 
       {/* Body Copy - Using MM Design System default font (ESKlarheit) */}
-      <p className="text-base md:text-lg text-muted-foreground leading-relaxed">
-        {bodyCopy}
-      </p>
+      <p className="text-base md:text-lg text-muted-foreground leading-relaxed">{bodyCopy}</p>
 
       {/* CTA Buttons - Primary and Secondary */}
       <div className="pt-2 flex flex-wrap gap-4">
-        <button
-          className="btn-mm"
-          onClick={onPrimaryClick}
-        >
+        <button className="btn-mm" onClick={onPrimaryClick}>
           {primaryButtonText}
         </button>
-        <button
-          className="btn-secondary"
-          onClick={onSecondaryClick}
-        >
+        <button className="btn-secondary" onClick={onSecondaryClick}>
           {secondaryButtonText}
         </button>
       </div>

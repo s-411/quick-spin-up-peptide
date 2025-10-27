@@ -54,10 +54,7 @@ const TopNavigation = React.forwardRef<HTMLDivElement, TopNavigationProps>(
     ]
 
     return (
-      <div
-        ref={ref}
-        className={`w-full bg-card border-b border-border ${className || ''}`}
-      >
+      <div ref={ref} className={`w-full bg-card border-b border-border ${className || ''}`}>
         <div className="max-w-screen-2xl mx-auto px-4 h-16 flex items-center justify-between">
           {/* Logo */}
           <div className="flex items-center gap-3">
@@ -70,7 +67,7 @@ const TopNavigation = React.forwardRef<HTMLDivElement, TopNavigationProps>(
 
           {/* Center Menu Items */}
           <nav className="hidden md:flex items-center gap-1">
-            {menuItems.map((item) => {
+            {menuItems.map(item => {
               const Icon = item.icon
               const isActive = activeItem === item.id
 

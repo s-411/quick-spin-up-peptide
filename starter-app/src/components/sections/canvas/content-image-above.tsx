@@ -34,12 +34,11 @@ export interface ContentImageAboveProps {
 export function ContentImageAbove({
   tagline = 'Brief Tagline',
   heading = 'A longer header to introduce your website content',
-  bodyCopy = 'Full-width paragraphs need more line spacing. We increased the Text line-height in the Design settings. Sentences by are, snapped was luxury. An be most service, in, research various out the as tone just or good has a and is behind their have latest rest her. From horn to and just have caution thin to precipitate, concepts will. The mouse it circles to good even sleeping.\n\nMade, hall frequency, thoroughly, avoided fundamental; Movement twice with the allpowerful create sample link occupied had focus could because nor showed set who rush out indication stopped they analyzed case that I times, one overcome first phase wasn\'t of the sofa writing but any the to the in partiality the with go of people clearly, of where be devious with hard the founding by or the beacon due decisions, pattern. To her tone didn\'t to the drops. Counter. Sitting for that of you star position.',
+  bodyCopy = "Full-width paragraphs need more line spacing. We increased the Text line-height in the Design settings. Sentences by are, snapped was luxury. An be most service, in, research various out the as tone just or good has a and is behind their have latest rest her. From horn to and just have caution thin to precipitate, concepts will. The mouse it circles to good even sleeping.\n\nMade, hall frequency, thoroughly, avoided fundamental; Movement twice with the allpowerful create sample link occupied had focus could because nor showed set who rush out indication stopped they analyzed case that I times, one overcome first phase wasn't of the sofa writing but any the to the in partiality the with go of people clearly, of where be devious with hard the founding by or the beacon due decisions, pattern. To her tone didn't to the drops. Counter. Sitting for that of you star position.",
   showImage = true,
   imageElement,
   linkText = 'sample link',
 }: ContentImageAboveProps) {
-
   return (
     <section className="py-12 md:py-20 px-4">
       <div className="max-w-7xl mx-auto space-y-8 md:space-y-12">
@@ -74,7 +73,10 @@ export function ContentImageAbove({
                 {paragraph.includes(linkText) ? (
                   <>
                     {paragraph.split(linkText)[0]}
-                    <a href="#" className="text-foreground font-semibold underline hover:text-primary transition-colors">
+                    <a
+                      href="#"
+                      className="text-foreground font-semibold underline hover:text-primary transition-colors"
+                    >
                       {linkText}
                     </a>
                     {paragraph.split(linkText)[1]}

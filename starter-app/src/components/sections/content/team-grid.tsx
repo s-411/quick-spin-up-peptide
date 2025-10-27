@@ -58,15 +58,9 @@ export function TeamGrid({
         {/* Header */}
         {(title || description) && (
           <div className="text-center mb-12">
-            {title && (
-              <h2 className="text-3xl md:text-4xl font-heading mb-4">
-                {title}
-              </h2>
-            )}
+            {title && <h2 className="text-3xl md:text-4xl font-heading mb-4">{title}</h2>}
             {description && (
-              <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-                {description}
-              </p>
+              <p className="text-lg text-muted-foreground max-w-2xl mx-auto">{description}</p>
             )}
           </div>
         )}
@@ -94,9 +88,7 @@ export function TeamGrid({
 
               {/* Bio */}
               {showBio && member.bio && (
-                <p className="text-sm text-muted-foreground mb-4">
-                  {member.bio}
-                </p>
+                <p className="text-sm text-muted-foreground mb-4">{member.bio}</p>
               )}
 
               {/* Social Links */}

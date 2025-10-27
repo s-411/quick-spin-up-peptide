@@ -89,7 +89,7 @@ export function MultiStepForm({ title = 'Complete Your Profile', onSubmit }: Mul
         await onSubmit(formData)
       } else {
         // Simulate API call
-        await new Promise((resolve) => setTimeout(resolve, 1500))
+        await new Promise(resolve => setTimeout(resolve, 1500))
         console.log('Form submitted:', formData)
         alert('Profile completed successfully!')
       }
@@ -101,7 +101,7 @@ export function MultiStepForm({ title = 'Complete Your Profile', onSubmit }: Mul
   }
 
   const updateFormData = (field: string, value: any) => {
-    setFormData((prev) => ({ ...prev, [field]: value }))
+    setFormData(prev => ({ ...prev, [field]: value }))
   }
 
   return (
@@ -130,8 +130,8 @@ export function MultiStepForm({ title = 'Complete Your Profile', onSubmit }: Mul
                     idx < currentStep
                       ? 'bg-primary border-primary text-primary-foreground'
                       : idx === currentStep
-                      ? 'border-primary text-primary'
-                      : 'border-border text-muted-foreground'
+                        ? 'border-primary text-primary'
+                        : 'border-border text-muted-foreground'
                   }`}
                 >
                   {idx < currentStep ? <Check className="w-5 h-5" /> : step.icon}
@@ -169,7 +169,7 @@ export function MultiStepForm({ title = 'Complete Your Profile', onSubmit }: Mul
                   type="text"
                   placeholder="John"
                   value={formData.firstName}
-                  onChange={(e) => updateFormData('firstName', e.target.value)}
+                  onChange={e => updateFormData('firstName', e.target.value)}
                   required
                 />
               </div>
@@ -181,7 +181,7 @@ export function MultiStepForm({ title = 'Complete Your Profile', onSubmit }: Mul
                   type="text"
                   placeholder="Doe"
                   value={formData.lastName}
-                  onChange={(e) => updateFormData('lastName', e.target.value)}
+                  onChange={e => updateFormData('lastName', e.target.value)}
                   required
                 />
               </div>
@@ -194,7 +194,7 @@ export function MultiStepForm({ title = 'Complete Your Profile', onSubmit }: Mul
                 type="email"
                 placeholder="john@example.com"
                 value={formData.email}
-                onChange={(e) => updateFormData('email', e.target.value)}
+                onChange={e => updateFormData('email', e.target.value)}
                 required
               />
             </div>
@@ -204,7 +204,7 @@ export function MultiStepForm({ title = 'Complete Your Profile', onSubmit }: Mul
                 type="tel"
                 placeholder="+1 (555) 123-4567"
                 value={formData.phone}
-                onChange={(e) => updateFormData('phone', e.target.value)}
+                onChange={e => updateFormData('phone', e.target.value)}
               />
             </div>
           </div>
@@ -221,7 +221,7 @@ export function MultiStepForm({ title = 'Complete Your Profile', onSubmit }: Mul
                 type="text"
                 placeholder="Acme Inc."
                 value={formData.company}
-                onChange={(e) => updateFormData('company', e.target.value)}
+                onChange={e => updateFormData('company', e.target.value)}
                 required
               />
             </div>
@@ -233,7 +233,7 @@ export function MultiStepForm({ title = 'Complete Your Profile', onSubmit }: Mul
                 type="text"
                 placeholder="Software Engineer"
                 value={formData.position}
-                onChange={(e) => updateFormData('position', e.target.value)}
+                onChange={e => updateFormData('position', e.target.value)}
                 required
               />
             </div>
@@ -241,7 +241,7 @@ export function MultiStepForm({ title = 'Complete Your Profile', onSubmit }: Mul
               <label className="text-sm font-medium">Years of Experience</label>
               <select
                 value={formData.experience}
-                onChange={(e) => updateFormData('experience', e.target.value)}
+                onChange={e => updateFormData('experience', e.target.value)}
                 className="select-mm w-full"
               >
                 <option value="">Select...</option>
@@ -264,7 +264,7 @@ export function MultiStepForm({ title = 'Complete Your Profile', onSubmit }: Mul
               <div className="flex items-start gap-3 p-4 rounded-lg border border-border hover:bg-muted/20 transition-colors">
                 <Checkbox
                   checked={formData.newsletter}
-                  onCheckedChange={(checked) => updateFormData('newsletter', checked)}
+                  onCheckedChange={checked => updateFormData('newsletter', checked)}
                   className="mt-0.5"
                 />
                 <div className="flex-1">
@@ -277,7 +277,7 @@ export function MultiStepForm({ title = 'Complete Your Profile', onSubmit }: Mul
               <div className="flex items-start gap-3 p-4 rounded-lg border border-border hover:bg-muted/20 transition-colors">
                 <Checkbox
                   checked={formData.updates}
-                  onCheckedChange={(checked) => updateFormData('updates', checked)}
+                  onCheckedChange={checked => updateFormData('updates', checked)}
                   className="mt-0.5"
                 />
                 <div className="flex-1">
@@ -290,7 +290,7 @@ export function MultiStepForm({ title = 'Complete Your Profile', onSubmit }: Mul
               <div className="flex items-start gap-3 p-4 rounded-lg border border-border hover:bg-muted/20 transition-colors">
                 <Checkbox
                   checked={formData.marketing}
-                  onCheckedChange={(checked) => updateFormData('marketing', checked)}
+                  onCheckedChange={checked => updateFormData('marketing', checked)}
                   className="mt-0.5"
                 />
                 <div className="flex-1">
@@ -309,7 +309,6 @@ export function MultiStepForm({ title = 'Complete Your Profile', onSubmit }: Mul
           <button
             className="btn-secondary"
             type="button"
-            
             onClick={handlePrevious}
             disabled={currentStep === 0}
           >

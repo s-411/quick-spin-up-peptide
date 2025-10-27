@@ -1,7 +1,14 @@
 'use client'
 
 import * as React from 'react'
-import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table'
+import {
+  Table,
+  TableBody,
+  TableCell,
+  TableHead,
+  TableHeader,
+  TableRow,
+} from '@/components/ui/table'
 import { Input } from '@/components/ui/input'
 import { Button } from '@/components/ui/button'
 import { Search, X, Filter } from 'lucide-react'
@@ -79,8 +86,8 @@ export function TableWithFilters<T extends Record<string, any>>({
 
     // Apply search
     if (searchQuery) {
-      result = result.filter((row) => {
-        return Object.values(row).some((value) =>
+      result = result.filter(row => {
+        return Object.values(row).some(value =>
           String(value).toLowerCase().includes(searchQuery.toLowerCase())
         )
       })
@@ -89,7 +96,7 @@ export function TableWithFilters<T extends Record<string, any>>({
     // Apply column filters
     Object.entries(activeFilters).forEach(([key, value]) => {
       if (value) {
-        result = result.filter((row) => {
+        result = result.filter(row => {
           const rowValue = String(row[key]).toLowerCase()
           return rowValue.includes(value.toLowerCase())
         })
@@ -100,14 +107,14 @@ export function TableWithFilters<T extends Record<string, any>>({
   }, [data, searchQuery, activeFilters])
 
   const handleFilterChange = (key: string, value: string) => {
-    setActiveFilters((prev) => ({
+    setActiveFilters(prev => ({
       ...prev,
       [key]: value,
     }))
   }
 
   const clearFilter = (key: string) => {
-    setActiveFilters((prev) => {
+    setActiveFilters(prev => {
       const newFilters = { ...prev }
       delete newFilters[key]
       return newFilters
@@ -119,7 +126,8 @@ export function TableWithFilters<T extends Record<string, any>>({
     setSearchQuery('')
   }
 
-  const activeFilterCount = Object.values(activeFilters).filter(Boolean).length + (searchQuery ? 1 : 0)
+  const activeFilterCount =
+    Object.values(activeFilters).filter(Boolean).length + (searchQuery ? 1 : 0)
 
   return (
     <EnhancedCard tilt={false} glowEffect={false} className="overflow-hidden">
@@ -149,7 +157,7 @@ export function TableWithFilters<T extends Record<string, any>>({
             type="text"
             placeholder={searchPlaceholder}
             value={searchQuery}
-            onChange={(e) => setSearchQuery(e.target.value)}
+            onChange={e => setSearchQuery(e.target.value)}
             startIcon={<Search className="w-4 h-4" />}
             clearable
             onClear={() => setSearchQuery('')}
@@ -168,17 +176,17 @@ export function TableWithFilters<T extends Record<string, any>>({
               )}
             </div>
             <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
-              {filters.map((filter) => (
+              {filters.map(filter => (
                 <div key={filter.key} className="space-y-1">
                   <label className="text-sm text-muted-foreground">{filter.label}</label>
                   {filter.type === 'select' ? (
                     <select
                       value={activeFilters[filter.key] || ''}
-                      onChange={(e) => handleFilterChange(filter.key, e.target.value)}
+                      onChange={e => handleFilterChange(filter.key, e.target.value)}
                       className="select-mm w-full"
                     >
                       <option value="">All</option>
-                      {filter.options?.map((option) => (
+                      {filter.options?.map(option => (
                         <option key={option} value={option}>
                           {option}
                         </option>
@@ -188,7 +196,7 @@ export function TableWithFilters<T extends Record<string, any>>({
                     <Input
                       type="text"
                       value={activeFilters[filter.key] || ''}
-                      onChange={(e) => handleFilterChange(filter.key, e.target.value)}
+                      onChange={e => handleFilterChange(filter.key, e.target.value)}
                       placeholder={`Filter by ${filter.label.toLowerCase()}`}
                     />
                   )}
@@ -213,7 +221,7 @@ export function TableWithFilters<T extends Record<string, any>>({
               ([key, value]) =>
                 value && (
                   <Badge key={key} variant="secondary" className="flex items-center gap-1">
-                    {filters.find((f) => f.key === key)?.label}: {value}
+                    {filters.find(f => f.key === key)?.label}: {value}
                     <button onClick={() => clearFilter(key)} className="hover:text-foreground">
                       <X className="w-3 h-3" />
                     </button>
@@ -229,7 +237,7 @@ export function TableWithFilters<T extends Record<string, any>>({
         <Table>
           <TableHeader>
             <TableRow>
-              {columns.map((column) => (
+              {columns.map(column => (
                 <TableHead key={column.accessorKey}>{column.header}</TableHead>
               ))}
             </TableRow>
@@ -237,14 +245,17 @@ export function TableWithFilters<T extends Record<string, any>>({
           <TableBody>
             {filteredData.length === 0 ? (
               <TableRow>
-                <TableCell colSpan={columns.length} className="text-center text-muted-foreground py-8">
+                <TableCell
+                  colSpan={columns.length}
+                  className="text-center text-muted-foreground py-8"
+                >
                   No results found
                 </TableCell>
               </TableRow>
             ) : (
               filteredData.map((row, idx) => (
                 <TableRow key={idx}>
-                  {columns.map((column) => (
+                  {columns.map(column => (
                     <TableCell key={column.accessorKey}>
                       {column.cell ? column.cell(row) : row[column.accessorKey]}
                     </TableCell>

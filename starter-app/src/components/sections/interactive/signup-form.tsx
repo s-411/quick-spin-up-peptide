@@ -102,7 +102,10 @@ export function SignupForm({
 
   const passwordRequirements = [
     { label: 'At least 8 characters', test: (p: string) => p.length >= 8 },
-    { label: 'Contains uppercase & lowercase', test: (p: string) => /[a-z]/.test(p) && /[A-Z]/.test(p) },
+    {
+      label: 'Contains uppercase & lowercase',
+      test: (p: string) => /[a-z]/.test(p) && /[A-Z]/.test(p),
+    },
     { label: 'Contains a number', test: (p: string) => /\d/.test(p) },
     { label: 'Contains a special character', test: (p: string) => /[^a-zA-Z0-9]/.test(p) },
   ]
@@ -152,7 +155,7 @@ export function SignupForm({
         await onSubmit(formData)
       } else {
         // Simulate API call
-        await new Promise((resolve) => setTimeout(resolve, 1500))
+        await new Promise(resolve => setTimeout(resolve, 1500))
         console.log('Signup submitted:', { ...formData, password: '[REDACTED]' })
         alert('Account created successfully!')
       }
@@ -164,9 +167,9 @@ export function SignupForm({
   }
 
   const handleChange = (field: keyof SignupFormData, value: string | boolean) => {
-    setFormData((prev) => ({ ...prev, [field]: value }))
+    setFormData(prev => ({ ...prev, [field]: value }))
     if (errors[field]) {
-      setErrors((prev) => ({ ...prev, [field]: undefined }))
+      setErrors(prev => ({ ...prev, [field]: undefined }))
     }
   }
 
@@ -188,7 +191,7 @@ export function SignupForm({
             type="text"
             placeholder="John Doe"
             value={formData.name}
-            onChange={(e) => handleChange('name', e.target.value)}
+            onChange={e => handleChange('name', e.target.value)}
             className={errors.name ? 'border-destructive' : ''}
           />
           {errors.name && <p className="text-sm text-destructive">{errors.name}</p>}
@@ -204,7 +207,7 @@ export function SignupForm({
             type="email"
             placeholder="john@example.com"
             value={formData.email}
-            onChange={(e) => handleChange('email', e.target.value)}
+            onChange={e => handleChange('email', e.target.value)}
             className={errors.email ? 'border-destructive' : ''}
           />
           {errors.email && <p className="text-sm text-destructive">{errors.email}</p>}
@@ -221,7 +224,7 @@ export function SignupForm({
               type={showPassword ? 'text' : 'password'}
               placeholder="Create a strong password"
               value={formData.password}
-              onChange={(e) => handleChange('password', e.target.value)}
+              onChange={e => handleChange('password', e.target.value)}
               className={`pr-10 ${errors.password ? 'border-destructive' : ''}`}
             />
             <button
@@ -239,7 +242,9 @@ export function SignupForm({
             <div className="space-y-2">
               <div className="flex items-center justify-between text-xs">
                 <span className="text-muted-foreground">Password strength:</span>
-                <span className={`font-medium capitalize ${getStrengthColor(passwordStrength).replace('bg-', 'text-')}`}>
+                <span
+                  className={`font-medium capitalize ${getStrengthColor(passwordStrength).replace('bg-', 'text-')}`}
+                >
                   {passwordStrength}
                 </span>
               </div>
@@ -280,7 +285,7 @@ export function SignupForm({
               type={showConfirmPassword ? 'text' : 'password'}
               placeholder="Confirm your password"
               value={formData.confirmPassword}
-              onChange={(e) => handleChange('confirmPassword', e.target.value)}
+              onChange={e => handleChange('confirmPassword', e.target.value)}
               className={`pr-10 ${errors.confirmPassword ? 'border-destructive' : ''}`}
             />
             <button
@@ -291,7 +296,9 @@ export function SignupForm({
               {showConfirmPassword ? <EyeOff className="w-4 h-4" /> : <Eye className="w-4 h-4" />}
             </button>
           </div>
-          {errors.confirmPassword && <p className="text-sm text-destructive">{errors.confirmPassword}</p>}
+          {errors.confirmPassword && (
+            <p className="text-sm text-destructive">{errors.confirmPassword}</p>
+          )}
         </div>
 
         {/* Terms Checkbox */}
@@ -300,7 +307,7 @@ export function SignupForm({
             <div className="flex items-start gap-2">
               <Checkbox
                 checked={formData.acceptTerms}
-                onCheckedChange={(checked) => handleChange('acceptTerms', checked as boolean)}
+                onCheckedChange={checked => handleChange('acceptTerms', checked as boolean)}
                 className="mt-0.5"
               />
               <label className="text-sm leading-relaxed">

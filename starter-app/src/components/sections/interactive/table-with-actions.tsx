@@ -1,7 +1,14 @@
 'use client'
 
 import * as React from 'react'
-import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table'
+import {
+  Table,
+  TableBody,
+  TableCell,
+  TableHead,
+  TableHeader,
+  TableRow,
+} from '@/components/ui/table'
 import { Button } from '@/components/ui/button'
 import { DropdownMenu } from '@/components/ui/dropdown-menu'
 import { Edit, Trash2, Eye, MoreVertical } from 'lucide-react'
@@ -72,10 +79,12 @@ export function TableWithActions<T extends Record<string, any>>({
   showStatus = false,
   statusKey = 'status',
 }: TableWithActionsProps<T>) {
-  const inlineActions = actions.filter((action) => !action.dropdown)
-  const dropdownActions = actions.filter((action) => action.dropdown)
+  const inlineActions = actions.filter(action => !action.dropdown)
+  const dropdownActions = actions.filter(action => action.dropdown)
 
-  const getStatusVariant = (status: string): 'default' | 'secondary' | 'destructive' | 'outline' => {
+  const getStatusVariant = (
+    status: string
+  ): 'default' | 'secondary' | 'destructive' | 'outline' => {
     const lowerStatus = status.toLowerCase()
     if (lowerStatus === 'active' || lowerStatus === 'approved') return 'default'
     if (lowerStatus === 'pending' || lowerStatus === 'review') return 'secondary'
@@ -96,7 +105,7 @@ export function TableWithActions<T extends Record<string, any>>({
         <Table>
           <TableHeader>
             <TableRow>
-              {columns.map((column) => (
+              {columns.map(column => (
                 <TableHead key={column.accessorKey}>{column.header}</TableHead>
               ))}
               {showStatus && <TableHead>Status</TableHead>}
@@ -116,7 +125,7 @@ export function TableWithActions<T extends Record<string, any>>({
             ) : (
               data.map((row, idx) => (
                 <TableRow key={idx}>
-                  {columns.map((column) => (
+                  {columns.map(column => (
                     <TableCell key={column.accessorKey}>
                       {column.cell ? column.cell(row) : row[column.accessorKey]}
                     </TableCell>

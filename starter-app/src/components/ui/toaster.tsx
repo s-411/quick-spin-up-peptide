@@ -25,9 +25,7 @@ export function Toaster() {
               {Icon && <div className="flex-shrink-0 mt-0.5">{Icon}</div>}
               <div className="grid gap-1 flex-1">
                 {title && <ToastTitle>{title}</ToastTitle>}
-                {description && (
-                  <ToastDescription>{description}</ToastDescription>
-                )}
+                {description && <ToastDescription>{description}</ToastDescription>}
               </div>
               {action}
             </div>

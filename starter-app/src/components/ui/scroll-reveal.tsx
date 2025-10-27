@@ -86,7 +86,7 @@ const ScrollReveal = React.forwardRef<HTMLDivElement, ScrollRevealProps>(
 
     return (
       <div
-        ref={(node) => {
+        ref={node => {
           elementRef.current = node
           if (typeof ref === 'function') {
             ref(node)

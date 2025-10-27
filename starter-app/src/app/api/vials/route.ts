@@ -56,10 +56,12 @@ export async function GET(request: NextRequest) {
     // Build query - join with medications to verify ownership
     let query = supabase
       .from('vials')
-      .select(`
+      .select(
+        `
         *,
         medication:medications(*)
-      `)
+      `
+      )
       .is('deleted_at', null)
       .order('created_at', { ascending: false })
 
@@ -173,10 +175,12 @@ export async function POST(request: NextRequest) {
         batch_number: validatedData.batchNumber || null,
         notes: validatedData.notes || null,
       })
-      .select(`
+      .select(
+        `
         *,
         medication:medications(*)
-      `)
+      `
+      )
       .single()
 
     if (createError || !vial) {

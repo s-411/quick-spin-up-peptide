@@ -54,10 +54,7 @@ export function HeroVideo({
       )}
 
       {/* Overlay */}
-      <div
-        className="absolute inset-0 bg-background"
-        style={{ opacity: overlayOpacity }}
-      />
+      <div className="absolute inset-0 bg-background" style={{ opacity: overlayOpacity }} />
 
       {/* Content */}
       <div className="relative z-10 max-w-4xl mx-auto text-center px-4 space-y-8">
@@ -70,10 +67,7 @@ export function HeroVideo({
         </p>
 
         <div className="flex flex-col sm:flex-row gap-4 justify-center items-center pt-4">
-          <MagneticButton
-            variant="primary"
-            onClick={onPrimaryClick}
-          >
+          <MagneticButton variant="primary" onClick={onPrimaryClick}>
             <Play className="w-4 h-4" />
             {primaryCTA}
           </MagneticButton>
@@ -84,11 +78,7 @@ export function HeroVideo({
               className="p-3 rounded-full bg-card/80 backdrop-blur-sm hover:bg-card transition-colors"
               aria-label={isMuted ? 'Unmute' : 'Mute'}
             >
-              {isMuted ? (
-                <VolumeX className="w-5 h-5" />
-              ) : (
-                <Volume2 className="w-5 h-5" />
-              )}
+              {isMuted ? <VolumeX className="w-5 h-5" /> : <Volume2 className="w-5 h-5" />}
             </button>
           )}
         </div>

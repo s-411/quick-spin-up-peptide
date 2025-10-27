@@ -211,8 +211,8 @@ export default function MedicationsPage() {
             <div className="max-w-md mx-auto">
               <h3 className="font-heading text-xl font-semibold mb-2">No medications yet</h3>
               <p className="text-sm text-muted-foreground mb-6">
-                Get started by adding your first medication. You can track peptides, TRT,
-                GLP-1s, and other injectable medications.
+                Get started by adding your first medication. You can track peptides, TRT, GLP-1s,
+                and other injectable medications.
               </p>
               <Button onClick={() => setShowMedicationForm(true)}>
                 <Plus className="h-4 w-4 mr-2" />

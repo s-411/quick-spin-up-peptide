@@ -57,10 +57,12 @@ export async function GET(request: NextRequest, { params }: RouteParams) {
     // Fetch vial with medication to verify ownership
     const { data: vial, error: fetchError } = await supabase
       .from('vials')
-      .select(`
+      .select(
+        `
         *,
         medication:medications(*)
-      `)
+      `
+      )
       .eq('id', vialId)
       .is('deleted_at', null)
       .single()
@@ -112,10 +114,12 @@ export async function PATCH(request: NextRequest, { params }: RouteParams) {
     // Verify vial ownership
     const { data: existingVial, error: fetchError } = await supabase
       .from('vials')
-      .select(`
+      .select(
+        `
         *,
         medication:medications!inner(user_id)
-      `)
+      `
+      )
       .eq('id', vialId)
       .is('deleted_at', null)
       .single()
@@ -167,10 +171,12 @@ export async function PATCH(request: NextRequest, { params }: RouteParams) {
       .update(updates)
       .eq('id', vialId)
       .is('deleted_at', null)
-      .select(`
+      .select(
+        `
         *,
         medication:medications(*)
-      `)
+      `
+      )
       .single()
 
     if (updateError || !vial) {
@@ -216,10 +222,12 @@ export async function DELETE(request: NextRequest, { params }: RouteParams) {
     // Verify vial ownership
     const { data: existingVial, error: fetchError } = await supabase
       .from('vials')
-      .select(`
+      .select(
+        `
         *,
         medication:medications!inner(user_id)
-      `)
+      `
+      )
       .eq('id', vialId)
       .is('deleted_at', null)
       .single()

@@ -30,12 +30,11 @@ export interface ContentSplitDividedProps {
  */
 export function ContentSplitDivided({
   heading = 'Sample heading to introduce the content',
-  bodyCopy = 'Your content goes here. Edit or remove this text inline or in the module Content settings. You can also style every aspect of this content in the module Design settings and even apply custom CSS to this text in the module Advanced settings.\n\nIn write mathematicians frequency, at unmolested made like the muff it or on slight and reposed doctor\'s magnitude, bulk; Little in and or was herself for while could avarice expect, frequency; Really actual looked. All the both wasn\'t missions to the creative home by the in be in a to the then for in look design would government he flatter more time thoughts each of for she slight coordinates review, me in pass will. Would often if in it the should remember eyes of sublime lady the and soon to the postage think turn past in yes, back all decision-making.\n\nComment and chime in sometimes one. Everyone shortcuts. The a with too. Of as quitting months that in found odd more by learn that have far made and choose a synthesizers he any a versus in effectiveness back multi you\'d in of purpose a one me on up and one.',
+  bodyCopy = "Your content goes here. Edit or remove this text inline or in the module Content settings. You can also style every aspect of this content in the module Design settings and even apply custom CSS to this text in the module Advanced settings.\n\nIn write mathematicians frequency, at unmolested made like the muff it or on slight and reposed doctor's magnitude, bulk; Little in and or was herself for while could avarice expect, frequency; Really actual looked. All the both wasn't missions to the creative home by the in be in a to the then for in look design would government he flatter more time thoughts each of for she slight coordinates review, me in pass will. Would often if in it the should remember eyes of sublime lady the and soon to the postage think turn past in yes, back all decision-making.\n\nComment and chime in sometimes one. Everyone shortcuts. The a with too. Of as quitting months that in found odd more by learn that have far made and choose a synthesizers he any a versus in effectiveness back multi you'd in of purpose a one me on up and one.",
   learnMoreText = 'Learn more',
   onLearnMoreClick,
   layout = 'heading-left',
 }: ContentSplitDividedProps) {
-
   const headingColumn = heading ? (
     <div className="space-y-6">
       <h2 className="text-2xl md:text-3xl lg:text-4xl font-heading leading-tight text-foreground">
@@ -44,7 +43,7 @@ export function ContentSplitDivided({
       {learnMoreText && (
         <a
           href="#"
-          onClick={(e) => {
+          onClick={e => {
             e.preventDefault()
             onLearnMoreClick?.()
           }}
@@ -59,7 +58,7 @@ export function ContentSplitDivided({
       {learnMoreText && (
         <a
           href="#"
-          onClick={(e) => {
+          onClick={e => {
             e.preventDefault()
             onLearnMoreClick?.()
           }}

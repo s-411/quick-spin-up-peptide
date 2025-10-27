@@ -46,9 +46,8 @@ export function PortfolioGrid({
   const categories = ['All', ...Array.from(new Set(projects.map(p => p.category)))]
 
   // Filter projects
-  const filteredProjects = selectedCategory === 'All'
-    ? projects
-    : projects.filter(p => p.category === selectedCategory)
+  const filteredProjects =
+    selectedCategory === 'All' ? projects : projects.filter(p => p.category === selectedCategory)
 
   const gridCols = {
     2: 'md:grid-cols-2',
@@ -61,15 +60,9 @@ export function PortfolioGrid({
         {/* Header */}
         {(title || description) && (
           <div className="text-center mb-12">
-            {title && (
-              <h2 className="text-3xl md:text-4xl font-heading mb-4">
-                {title}
-              </h2>
-            )}
+            {title && <h2 className="text-3xl md:text-4xl font-heading mb-4">{title}</h2>}
             {description && (
-              <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-                {description}
-              </p>
+              <p className="text-lg text-muted-foreground max-w-2xl mx-auto">{description}</p>
             )}
           </div>
         )}
@@ -77,7 +70,7 @@ export function PortfolioGrid({
         {/* Filters */}
         {showFilters && categories.length > 1 && (
           <div className="flex flex-wrap justify-center gap-2 mb-12">
-            {categories.map((category) => (
+            {categories.map(category => (
               <button
                 key={category}
                 onClick={() => setSelectedCategory(category)}
@@ -99,7 +92,7 @@ export function PortfolioGrid({
             <EnhancedCard
               key={index}
               className="!p-0 overflow-hidden group cursor-pointer"
-              onClick={() => window.location.href = project.href}
+              onClick={() => (window.location.href = project.href)}
             >
               {/* Project Image */}
               <div className="relative aspect-[4/3] overflow-hidden">
@@ -119,9 +112,7 @@ export function PortfolioGrid({
               <div className="p-6">
                 {/* Category */}
                 <div className="mb-2">
-                  <span className="text-xs font-semibold text-primary">
-                    {project.category}
-                  </span>
+                  <span className="text-xs font-semibold text-primary">{project.category}</span>
                 </div>
 
                 {/* Title */}
@@ -155,9 +146,7 @@ export function PortfolioGrid({
         {/* Empty State */}
         {filteredProjects.length === 0 && (
           <div className="text-center py-12">
-            <p className="text-muted-foreground">
-              No projects found in this category.
-            </p>
+            <p className="text-muted-foreground">No projects found in this category.</p>
           </div>
         )}
       </div>

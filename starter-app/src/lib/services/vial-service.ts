@@ -11,11 +11,7 @@ import { calculateRemainingDoses, calculateDoseVolume } from './calculator-servi
 /**
  * Calculate remaining doses in a vial
  */
-export function getRemainingDoses(
-  vial: Vial,
-  doseValue: number,
-  doseUnits: DoseUnits
-): number {
+export function getRemainingDoses(vial: Vial, doseValue: number, doseUnits: DoseUnits): number {
   const doseVolume = calculateDoseVolume(
     doseValue,
     doseUnits,

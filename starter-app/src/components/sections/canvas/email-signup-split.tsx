@@ -70,9 +70,7 @@ export function EmailSignupSplit({
       </h2>
 
       {/* Body Copy - Using MM Design System default font (ESKlarheit) */}
-      <p className="text-base md:text-lg text-muted-foreground leading-relaxed">
-        {bodyCopy}
-      </p>
+      <p className="text-base md:text-lg text-muted-foreground leading-relaxed">{bodyCopy}</p>
 
       {/* Email Signup Form */}
       <form onSubmit={handleSubmit} className="space-y-4">
@@ -81,14 +79,11 @@ export function EmailSignupSplit({
             type="email"
             placeholder={emailPlaceholder}
             value={email}
-            onChange={(e) => setEmail(e.target.value)}
+            onChange={e => setEmail(e.target.value)}
             className="input-mm flex-1"
             required
           />
-          <button
-            type="submit"
-            className="btn-mm whitespace-nowrap"
-          >
+          <button type="submit" className="btn-mm whitespace-nowrap">
             {buttonText}
           </button>
         </div>

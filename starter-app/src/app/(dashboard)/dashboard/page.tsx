@@ -154,16 +154,13 @@ export default async function DashboardPage() {
               <div className="space-y-3">
                 {upcomingReminders.map((reminder: any) => {
                   const scheduledDate = new Date(reminder.scheduled_for)
-                  const isToday =
-                    scheduledDate.toDateString() === new Date().toDateString()
+                  const isToday = scheduledDate.toDateString() === new Date().toDateString()
 
                   return (
                     <div
                       key={reminder.id}
                       className={`p-3 rounded-lg border ${
-                        isToday
-                          ? 'bg-primary/10 border-primary/30'
-                          : 'bg-muted/50 border-border'
+                        isToday ? 'bg-primary/10 border-primary/30' : 'bg-muted/50 border-border'
                       }`}
                     >
                       <div className="flex items-start justify-between">
@@ -177,7 +174,13 @@ export default async function DashboardPage() {
                         </div>
                         <div className="text-right">
                           <p className="text-xs font-medium">
-                            {isToday ? 'Today' : scheduledDate.toLocaleDateString('en-US', { weekday: 'short', month: 'short', day: 'numeric' })}
+                            {isToday
+                              ? 'Today'
+                              : scheduledDate.toLocaleDateString('en-US', {
+                                  weekday: 'short',
+                                  month: 'short',
+                                  day: 'numeric',
+                                })}
                           </p>
                           {reminder.scheduled_time && (
                             <p className="text-xs text-muted-foreground">
@@ -192,9 +195,7 @@ export default async function DashboardPage() {
               </div>
             ) : (
               <div className="text-center py-8">
-                <p className="text-sm text-muted-foreground">
-                  No upcoming injections scheduled
-                </p>
+                <p className="text-sm text-muted-foreground">No upcoming injections scheduled</p>
                 <Link href="/protocols" className="inline-block mt-3">
                   <Button size="sm" variant="outline">
                     Create Protocol

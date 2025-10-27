@@ -31,12 +31,8 @@ export function FaqTwoColumn({
       <div className="max-w-7xl mx-auto">
         {/* Header */}
         <div className="text-center mb-16">
-          <h2 className="text-4xl md:text-5xl font-heading mb-4">
-            {title}
-          </h2>
-          <p className="text-lg text-muted-foreground">
-            {description}
-          </p>
+          <h2 className="text-4xl md:text-5xl font-heading mb-4">{title}</h2>
+          <p className="text-lg text-muted-foreground">{description}</p>
         </div>
 
         {/* Categories */}
@@ -53,14 +49,10 @@ export function FaqTwoColumn({
                 {category.items.map((item, itemIndex) => (
                   <div key={itemIndex} className="space-y-3">
                     {/* Question */}
-                    <div className="text-lg font-semibold text-foreground">
-                      {item.question}
-                    </div>
+                    <div className="text-lg font-semibold text-foreground">{item.question}</div>
 
                     {/* Answer */}
-                    <div className="text-muted-foreground leading-relaxed">
-                      {item.answer}
-                    </div>
+                    <div className="text-muted-foreground leading-relaxed">{item.answer}</div>
                   </div>
                 ))}
               </div>

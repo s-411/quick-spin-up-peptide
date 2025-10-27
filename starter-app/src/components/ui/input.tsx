@@ -3,8 +3,7 @@
 import * as React from 'react'
 import { Loader2, X } from 'lucide-react'
 
-export interface InputProps
-  extends React.InputHTMLAttributes<HTMLInputElement> {
+export interface InputProps extends React.InputHTMLAttributes<HTMLInputElement> {
   /** Icon to display at the start of the input */
   startIcon?: React.ReactNode
   /** Icon to display at the end of the input */
@@ -89,9 +88,7 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
 
           {/* End Icons/Actions */}
           <div className="absolute right-3 flex items-center gap-2">
-            {loading && (
-              <Loader2 className="h-4 w-4 animate-spin text-muted-foreground" />
-            )}
+            {loading && <Loader2 className="h-4 w-4 animate-spin text-muted-foreground" />}
             {!loading && clearable && hasValue && !disabled && (
               <button
                 type="button"
@@ -102,17 +99,13 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
                 <X className="h-4 w-4" />
               </button>
             )}
-            {!loading && endIcon && (
-              <div className="text-muted-foreground">{endIcon}</div>
-            )}
+            {!loading && endIcon && <div className="text-muted-foreground">{endIcon}</div>}
           </div>
         </div>
 
         {/* Error Message or Character Count */}
         <div className="flex justify-between items-center mt-1 min-h-[20px]">
-          {error && (
-            <p className="text-error text-xs">{error}</p>
-          )}
+          {error && <p className="text-error text-xs">{error}</p>}
           {!error && showCount && maxLength && (
             <p className="text-xs text-muted-foreground ml-auto">
               {String(value || '').length} / {maxLength}
@@ -125,8 +118,7 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
 )
 Input.displayName = 'Input'
 
-export interface TextareaProps
-  extends React.TextareaHTMLAttributes<HTMLTextAreaElement> {
+export interface TextareaProps extends React.TextareaHTMLAttributes<HTMLTextAreaElement> {
   /** Error message to display below textarea */
   error?: string
   /** Character counter - shows current/max characters */
@@ -136,17 +128,7 @@ export interface TextareaProps
 }
 
 const Textarea = React.forwardRef<HTMLTextAreaElement, TextareaProps>(
-  (
-    {
-      className,
-      error,
-      maxLength,
-      showCount,
-      value,
-      ...props
-    },
-    ref
-  ) => {
+  ({ className, error, maxLength, showCount, value, ...props }, ref) => {
     return (
       <div className="w-full">
         <textarea
@@ -162,9 +144,7 @@ const Textarea = React.forwardRef<HTMLTextAreaElement, TextareaProps>(
 
         {/* Error Message or Character Count */}
         <div className="flex justify-between items-center mt-1 min-h-[20px]">
-          {error && (
-            <p className="text-error text-xs">{error}</p>
-          )}
+          {error && <p className="text-error text-xs">{error}</p>}
           {!error && showCount && maxLength && (
             <p className="text-xs text-muted-foreground ml-auto">
               {String(value || '').length} / {maxLength}

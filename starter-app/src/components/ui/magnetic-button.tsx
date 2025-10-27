@@ -2,8 +2,7 @@
 
 import * as React from 'react'
 
-export interface MagneticButtonProps
-  extends React.ButtonHTMLAttributes<HTMLButtonElement> {
+export interface MagneticButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   /** Button text or content */
   children: React.ReactNode
   /** Strength of magnetic effect (0-1, default 0.5) */
@@ -61,10 +60,10 @@ const MagneticButton = React.forwardRef<HTMLButtonElement, MagneticButtonProps>(
         const y = e.clientY - rect.top
         const id = Date.now()
 
-        setRipples((prev) => [...prev, { x, y, id }])
+        setRipples(prev => [...prev, { x, y, id }])
 
         setTimeout(() => {
-          setRipples((prev) => prev.filter((r) => r.id !== id))
+          setRipples(prev => prev.filter(r => r.id !== id))
         }, 600)
       }
 
@@ -73,7 +72,7 @@ const MagneticButton = React.forwardRef<HTMLButtonElement, MagneticButtonProps>(
 
     return (
       <button
-        ref={(node) => {
+        ref={node => {
           buttonRef.current = node
           if (typeof ref === 'function') {
             ref(node)
@@ -95,7 +94,7 @@ const MagneticButton = React.forwardRef<HTMLButtonElement, MagneticButtonProps>(
         {children}
 
         {/* Ripple effects */}
-        {ripples.map((ripple) => (
+        {ripples.map(ripple => (
           <span
             key={ripple.id}
             className="absolute rounded-full bg-white/30 pointer-events-none animate-ripple"

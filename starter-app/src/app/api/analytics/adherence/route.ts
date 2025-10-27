@@ -47,7 +47,8 @@ export async function GET(request: NextRequest) {
     // Get user's active protocols
     let protocolsQuery = supabase
       .from('protocols')
-      .select(`
+      .select(
+        `
         id,
         name,
         schedule_type,
@@ -56,7 +57,8 @@ export async function GET(request: NextRequest) {
         start_date,
         is_active,
         medication:medications!inner(id, name, type, user_id)
-      `)
+      `
+      )
       .eq('medication.user_id', user.id)
       .is('deleted_at', null)
 
@@ -104,7 +106,8 @@ export async function GET(request: NextRequest) {
         // Calculate expected injections based on schedule type
         let expectedInjections = 0
         const daysDiff = Math.floor(
-          (endDate.getTime() - Math.max(startDate.getTime(), new Date(protocol.start_date).getTime())) /
+          (endDate.getTime() -
+            Math.max(startDate.getTime(), new Date(protocol.start_date).getTime())) /
             (1000 * 60 * 60 * 24)
         )
 

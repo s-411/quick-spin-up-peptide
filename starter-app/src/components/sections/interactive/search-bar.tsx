@@ -84,15 +84,15 @@ export function SearchBar({
   const filteredSuggestions = React.useMemo(() => {
     if (!query) return suggestions
 
-    return suggestions.filter((s) => s.text.toLowerCase().includes(query.toLowerCase()))
+    return suggestions.filter(s => s.text.toLowerCase().includes(query.toLowerCase()))
   }, [query, suggestions])
 
   const handleSearch = (searchQuery: string) => {
     if (!searchQuery.trim()) return
 
     // Add to recent searches
-    setRecentSearches((prev) => {
-      const updated = [searchQuery, ...prev.filter((s) => s !== searchQuery)]
+    setRecentSearches(prev => {
+      const updated = [searchQuery, ...prev.filter(s => s !== searchQuery)]
       return updated.slice(0, 5)
     })
 
@@ -117,9 +117,11 @@ export function SearchBar({
     inputRef.current?.focus()
   }
 
-  const recentSuggestions = recentSearches.filter((s) => s.toLowerCase().includes(query.toLowerCase()))
+  const recentSuggestions = recentSearches.filter(s =>
+    s.toLowerCase().includes(query.toLowerCase())
+  )
 
-  const trendingSuggestions = suggestions.filter((s) => s.isTrending)
+  const trendingSuggestions = suggestions.filter(s => s.isTrending)
 
   return (
     <div ref={containerRef} className="relative w-full">
@@ -129,7 +131,7 @@ export function SearchBar({
           type="text"
           placeholder={placeholder}
           value={query}
-          onChange={(e) => {
+          onChange={e => {
             setQuery(e.target.value)
             setShowSuggestions(true)
           }}
@@ -169,7 +171,9 @@ export function SearchBar({
               {filteredSuggestions.length > 0 && (
                 <div className="mb-4">
                   {query && (
-                    <div className="px-3 py-2 text-xs font-medium text-muted-foreground">Suggestions</div>
+                    <div className="px-3 py-2 text-xs font-medium text-muted-foreground">
+                      Suggestions
+                    </div>
                   )}
                   {filteredSuggestions.slice(0, 5).map((suggestion, idx) => (
                     <button
@@ -216,13 +220,11 @@ export function SearchBar({
               )}
 
               {/* No Results */}
-              {query &&
-                filteredSuggestions.length === 0 &&
-                recentSuggestions.length === 0 && (
-                  <div className="px-3 py-8 text-center text-sm text-muted-foreground">
-                    No suggestions found for "{query}"
-                  </div>
-                )}
+              {query && filteredSuggestions.length === 0 && recentSuggestions.length === 0 && (
+                <div className="px-3 py-8 text-center text-sm text-muted-foreground">
+                  No suggestions found for "{query}"
+                </div>
+              )}
             </EnhancedCard>
           </div>
         )}

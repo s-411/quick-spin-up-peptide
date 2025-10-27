@@ -20,7 +20,7 @@ const Avatar = React.forwardRef<HTMLDivElement, AvatarProps>(
     const initials = fallback
       ? fallback
           .split(' ')
-          .map((n) => n[0])
+          .map(n => n[0])
           .join('')
           .toUpperCase()
           .slice(0, 2)

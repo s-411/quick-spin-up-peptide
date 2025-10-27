@@ -44,10 +44,7 @@ export function HeroMinimal({
 
         {/* CTA */}
         <div className="flex flex-col sm:flex-row gap-6 justify-center items-center pt-8">
-          <MagneticButton
-            variant="primary"
-            onClick={onPrimaryClick}
-          >
+          <MagneticButton variant="primary" onClick={onPrimaryClick}>
             {primaryCTA}
             <ArrowRight className="w-4 h-4" />
           </MagneticButton>

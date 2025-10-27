@@ -36,12 +36,8 @@ export function FeatureList({
       <div className="max-w-6xl mx-auto">
         {/* Header */}
         <div className="text-center max-w-3xl mx-auto mb-16">
-          <h2 className="text-4xl md:text-5xl font-heading mb-4">
-            {title}
-          </h2>
-          <p className="text-lg text-muted-foreground">
-            {description}
-          </p>
+          <h2 className="text-4xl md:text-5xl font-heading mb-4">{title}</h2>
+          <p className="text-lg text-muted-foreground">{description}</p>
         </div>
 
         {/* Features List */}
@@ -68,12 +64,8 @@ export function FeatureList({
 
                 {/* Content */}
                 <div className="space-y-1 flex-1">
-                  <h3 className="text-lg font-heading">
-                    {feature.title}
-                  </h3>
-                  <p className="text-muted-foreground">
-                    {feature.description}
-                  </p>
+                  <h3 className="text-lg font-heading">{feature.title}</h3>
+                  <p className="text-muted-foreground">{feature.description}</p>
                 </div>
               </div>
             )

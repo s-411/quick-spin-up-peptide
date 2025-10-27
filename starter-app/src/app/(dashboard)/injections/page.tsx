@@ -170,9 +170,7 @@ export default function InjectionsPage() {
         <div className="mb-8 flex items-center justify-between">
           <div>
             <h1 className="font-heading text-4xl font-bold">Injections</h1>
-            <p className="mt-2 text-muted-foreground">
-              Log and track your injection history
-            </p>
+            <p className="mt-2 text-muted-foreground">Log and track your injection history</p>
           </div>
           <Button
             onClick={() => setShowForm(true)}
@@ -350,11 +348,7 @@ export default function InjectionsPage() {
             {/* Load More */}
             {hasMore && (
               <div className="text-center pt-4">
-                <Button
-                  variant="outline"
-                  onClick={() => setPage(p => p + 1)}
-                  disabled={loading}
-                >
+                <Button variant="outline" onClick={() => setPage(p => p + 1)} disabled={loading}>
                   {loading ? (
                     <>
                       <Loader2 className="h-4 w-4 mr-2 animate-spin" />

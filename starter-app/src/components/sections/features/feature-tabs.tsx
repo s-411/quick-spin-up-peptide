@@ -37,25 +37,20 @@ export function FeatureTabs({
       <div className="max-w-7xl mx-auto">
         {/* Header */}
         <div className="text-center max-w-3xl mx-auto mb-16">
-          <h2 className="text-4xl md:text-5xl font-heading mb-4">
-            {title}
-          </h2>
-          <p className="text-lg text-muted-foreground">
-            {description}
-          </p>
+          <h2 className="text-4xl md:text-5xl font-heading mb-4">{title}</h2>
+          <p className="text-lg text-muted-foreground">{description}</p>
         </div>
 
         {/* Tabs */}
         <Tabs defaultValue={defaultTab || tabs[0]?.id} className="w-full">
-          <TabsList className="grid w-full max-w-2xl mx-auto mb-12" style={{ gridTemplateColumns: `repeat(${tabs.length}, 1fr)` }}>
-            {tabs.map((tab) => {
+          <TabsList
+            className="grid w-full max-w-2xl mx-auto mb-12"
+            style={{ gridTemplateColumns: `repeat(${tabs.length}, 1fr)` }}
+          >
+            {tabs.map(tab => {
               const Icon = tab.icon
               return (
-                <TabsTrigger
-                  key={tab.id}
-                  value={tab.id}
-                  className="flex items-center gap-2"
-                >
+                <TabsTrigger key={tab.id} value={tab.id} className="flex items-center gap-2">
                   <Icon className="w-4 h-4" />
                   <span className="hidden sm:inline">{tab.label}</span>
                 </TabsTrigger>
@@ -63,18 +58,14 @@ export function FeatureTabs({
             })}
           </TabsList>
 
-          {tabs.map((tab) => (
+          {tabs.map(tab => (
             <TabsContent key={tab.id} value={tab.id} className="mt-0">
               <div className="grid lg:grid-cols-2 gap-12 items-center">
                 {/* Content */}
                 <div className="space-y-6">
-                  <h3 className="text-3xl md:text-4xl font-heading">
-                    {tab.title}
-                  </h3>
+                  <h3 className="text-3xl md:text-4xl font-heading">{tab.title}</h3>
 
-                  <p className="text-lg text-muted-foreground">
-                    {tab.description}
-                  </p>
+                  <p className="text-lg text-muted-foreground">{tab.description}</p>
 
                   {/* Optional feature list */}
                   {tab.features && tab.features.length > 0 && (
@@ -93,12 +84,7 @@ export function FeatureTabs({
                 <div>
                   {typeof tab.image === 'string' ? (
                     <div className="relative aspect-video rounded-card overflow-hidden border border-border">
-                      <Image
-                        src={tab.image}
-                        alt={tab.title}
-                        fill
-                        className="object-cover"
-                      />
+                      <Image src={tab.image} alt={tab.title} fill className="object-cover" />
                     </div>
                   ) : tab.image ? (
                     tab.image

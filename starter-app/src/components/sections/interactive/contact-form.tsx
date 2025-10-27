@@ -38,7 +38,7 @@ export interface ContactFormData {
  */
 export function ContactForm({
   title = 'Contact Us',
-  description = 'Fill out the form below and we\'ll get back to you soon.',
+  description = "Fill out the form below and we'll get back to you soon.",
   onSubmit,
   showSuccessMessage = true,
 }: ContactFormProps) {
@@ -91,7 +91,7 @@ export function ContactForm({
         await onSubmit(formData)
       } else {
         // Simulate API call
-        await new Promise((resolve) => setTimeout(resolve, 1000))
+        await new Promise(resolve => setTimeout(resolve, 1000))
         console.log('Form submitted:', formData)
       }
 
@@ -108,10 +108,10 @@ export function ContactForm({
   }
 
   const handleChange = (field: keyof ContactFormData, value: string) => {
-    setFormData((prev) => ({ ...prev, [field]: value }))
+    setFormData(prev => ({ ...prev, [field]: value }))
     // Clear error when user starts typing
     if (errors[field]) {
-      setErrors((prev) => ({ ...prev, [field]: undefined }))
+      setErrors(prev => ({ ...prev, [field]: undefined }))
     }
   }
 
@@ -152,7 +152,7 @@ export function ContactForm({
             type="text"
             placeholder="John Doe"
             value={formData.name}
-            onChange={(e) => handleChange('name', e.target.value)}
+            onChange={e => handleChange('name', e.target.value)}
             className={errors.name ? 'border-destructive' : ''}
           />
           {errors.name && <p className="text-sm text-destructive">{errors.name}</p>}
@@ -168,7 +168,7 @@ export function ContactForm({
             type="email"
             placeholder="john@example.com"
             value={formData.email}
-            onChange={(e) => handleChange('email', e.target.value)}
+            onChange={e => handleChange('email', e.target.value)}
             className={errors.email ? 'border-destructive' : ''}
           />
           {errors.email && <p className="text-sm text-destructive">{errors.email}</p>}
@@ -184,7 +184,7 @@ export function ContactForm({
             type="text"
             placeholder="How can we help?"
             value={formData.subject}
-            onChange={(e) => handleChange('subject', e.target.value)}
+            onChange={e => handleChange('subject', e.target.value)}
             className={errors.subject ? 'border-destructive' : ''}
           />
           {errors.subject && <p className="text-sm text-destructive">{errors.subject}</p>}
@@ -198,7 +198,7 @@ export function ContactForm({
           <Textarea
             placeholder="Tell us more about your inquiry..."
             value={formData.message}
-            onChange={(e) => handleChange('message', e.target.value)}
+            onChange={e => handleChange('message', e.target.value)}
             className={`min-h-[150px] ${errors.message ? 'border-destructive' : ''}`}
           />
           {errors.message && <p className="text-sm text-destructive">{errors.message}</p>}

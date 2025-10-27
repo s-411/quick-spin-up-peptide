@@ -41,12 +41,8 @@ export function TestimonialWall({
       <div className="max-w-7xl mx-auto">
         {/* Header */}
         <div className="text-center max-w-3xl mx-auto mb-16">
-          <h2 className="text-4xl md:text-5xl font-heading mb-4">
-            {title}
-          </h2>
-          <p className="text-lg text-muted-foreground">
-            {description}
-          </p>
+          <h2 className="text-4xl md:text-5xl font-heading mb-4">{title}</h2>
+          <p className="text-lg text-muted-foreground">{description}</p>
         </div>
 
         {/* Masonry Grid */}
@@ -54,9 +50,7 @@ export function TestimonialWall({
           {testimonials.map((testimonial, index) => (
             <EnhancedCard
               key={index}
-              className={`!p-6 ${
-                testimonial.featured ? 'md:col-span-2 lg:col-span-1' : ''
-              }`}
+              className={`!p-6 ${testimonial.featured ? 'md:col-span-2 lg:col-span-1' : ''}`}
             >
               <div className="space-y-4">
                 {/* Rating */}
@@ -66,9 +60,7 @@ export function TestimonialWall({
                       <Star
                         key={i}
                         className={`w-4 h-4 ${
-                          i < testimonial.rating!
-                            ? 'fill-primary text-primary'
-                            : 'text-muted'
+                          i < testimonial.rating! ? 'fill-primary text-primary' : 'text-muted'
                         }`}
                       />
                     ))}

@@ -63,10 +63,7 @@ const MobileMenu = React.forwardRef<HTMLDivElement, MobileMenuProps>(
         />
 
         {/* Menu */}
-        <div
-          ref={ref}
-          className="fixed inset-0 z-[70] animate-in slide-in-from-right duration-300"
-        >
+        <div ref={ref} className="fixed inset-0 z-[70] animate-in slide-in-from-right duration-300">
           <div className="flex flex-col h-full bg-card p-6">
             {/* Header */}
             <div className="mb-8">
@@ -85,7 +82,7 @@ const MobileMenu = React.forwardRef<HTMLDivElement, MobileMenuProps>(
 
             {/* Menu Items */}
             <nav className="flex-1 space-y-1 overflow-y-auto">
-              {menuItems.map((item) => {
+              {menuItems.map(item => {
                 const Icon = item.icon
                 const isActive = activeItem === item.id
 

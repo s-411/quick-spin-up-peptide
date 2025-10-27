@@ -42,15 +42,9 @@ export function PortfolioShowcase({
         {/* Header */}
         {(title || description) && (
           <div className="text-center mb-16">
-            {title && (
-              <h2 className="text-3xl md:text-4xl font-heading mb-4">
-                {title}
-              </h2>
-            )}
+            {title && <h2 className="text-3xl md:text-4xl font-heading mb-4">{title}</h2>}
             {description && (
-              <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-                {description}
-              </p>
+              <p className="text-lg text-muted-foreground max-w-2xl mx-auto">{description}</p>
             )}
           </div>
         )}
@@ -63,9 +57,13 @@ export function PortfolioShowcase({
             return (
               <div key={index} className="group">
                 <EnhancedCard className="!p-0 overflow-hidden">
-                  <div className={`grid md:grid-cols-2 gap-0 ${!isEven ? 'md:grid-flow-col-dense' : ''}`}>
+                  <div
+                    className={`grid md:grid-cols-2 gap-0 ${!isEven ? 'md:grid-flow-col-dense' : ''}`}
+                  >
                     {/* Image */}
-                    <div className={`relative aspect-[4/3] overflow-hidden ${!isEven ? 'md:col-start-2' : ''}`}>
+                    <div
+                      className={`relative aspect-[4/3] overflow-hidden ${!isEven ? 'md:col-start-2' : ''}`}
+                    >
                       <Image
                         src={project.thumbnail}
                         alt={project.title}
@@ -75,7 +73,7 @@ export function PortfolioShowcase({
                       <a
                         href={project.href}
                         className="absolute inset-0 bg-primary/90 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center"
-                        onClick={(e) => {
+                        onClick={e => {
                           e.stopPropagation()
                           window.location.href = project.href
                         }}

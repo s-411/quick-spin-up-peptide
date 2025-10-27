@@ -36,12 +36,8 @@ export function PricingCards({
       <div className="max-w-7xl mx-auto">
         {/* Header */}
         <div className="text-center max-w-3xl mx-auto mb-16">
-          <h2 className="text-4xl md:text-5xl font-heading mb-4">
-            {title}
-          </h2>
-          <p className="text-lg text-muted-foreground">
-            {description}
-          </p>
+          <h2 className="text-4xl md:text-5xl font-heading mb-4">{title}</h2>
+          <p className="text-lg text-muted-foreground">{description}</p>
         </div>
 
         {/* Pricing Cards */}
@@ -50,9 +46,7 @@ export function PricingCards({
             <EnhancedCard
               key={index}
               className={`relative p-8 space-y-6 ${
-                tier.popular
-                  ? 'border-2 border-primary shadow-lg scale-105'
-                  : ''
+                tier.popular ? 'border-2 border-primary shadow-lg scale-105' : ''
               }`}
             >
               {/* Popular Badge */}
@@ -77,9 +71,7 @@ export function PricingCards({
                   <span className="text-5xl font-heading">
                     {typeof tier.price === 'number' ? `$${tier.price}` : tier.price}
                   </span>
-                  {tier.period && (
-                    <span className="text-muted-foreground">/{tier.period}</span>
-                  )}
+                  {tier.period && <span className="text-muted-foreground">/{tier.period}</span>}
                 </div>
               </div>
 

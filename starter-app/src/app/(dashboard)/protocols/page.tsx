@@ -118,9 +118,7 @@ export default function ProtocolsPage() {
         return `Every ${protocol.frequencyDays} day${protocol.frequencyDays !== 1 ? 's' : ''}`
       case 'weekly':
         const days = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat']
-        return protocol.weeklyDays
-          ?.map(d => days[d])
-          .join(', ') || 'Weekly'
+        return protocol.weeklyDays?.map(d => days[d]).join(', ') || 'Weekly'
       case 'custom':
         return 'Custom Schedule'
       default:

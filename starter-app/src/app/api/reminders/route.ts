@@ -32,13 +32,15 @@ export async function GET(request: NextRequest) {
 
     const { data: reminders, error: fetchError } = await supabase
       .from('reminders')
-      .select(`
+      .select(
+        `
         *,
         protocol:protocols!inner(
           *,
           medication:medications!inner(*)
         )
-      `)
+      `
+      )
       .eq('status', status)
       .gte('next_due_date', today)
       .lte('next_due_date', futureDate)
@@ -50,9 +52,8 @@ export async function GET(request: NextRequest) {
     }
 
     // Filter to user's reminders only
-    const userReminders = reminders?.filter(
-      (rem: any) => rem.protocol?.medication?.user_id === user.id
-    ) || []
+    const userReminders =
+      reminders?.filter((rem: any) => rem.protocol?.medication?.user_id === user.id) || []
 
     return NextResponse.json({
       reminders: userReminders,

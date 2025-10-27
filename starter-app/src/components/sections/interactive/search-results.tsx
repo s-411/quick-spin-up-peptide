@@ -72,7 +72,7 @@ export function SearchResults({
     // Filter by query
     if (query) {
       filtered = filtered.filter(
-        (result) =>
+        result =>
           result.title.toLowerCase().includes(query.toLowerCase()) ||
           result.description.toLowerCase().includes(query.toLowerCase())
       )
@@ -80,14 +80,12 @@ export function SearchResults({
 
     // Filter by category
     if (selectedCategory && selectedCategory !== 'All') {
-      filtered = filtered.filter((result) => result.category === selectedCategory)
+      filtered = filtered.filter(result => result.category === selectedCategory)
     }
 
     // Filter by tags
     if (selectedTags.size > 0) {
-      filtered = filtered.filter((result) =>
-        result.tags?.some((tag) => selectedTags.has(tag))
-      )
+      filtered = filtered.filter(result => result.tags?.some(tag => selectedTags.has(tag)))
     }
 
     return filtered
@@ -101,7 +99,7 @@ export function SearchResults({
   }
 
   const toggleTag = (tag: string) => {
-    setSelectedTags((prev) => {
+    setSelectedTags(prev => {
       const next = new Set(prev)
       if (next.has(tag)) {
         next.delete(tag)
@@ -129,7 +127,7 @@ export function SearchResults({
               type="text"
               placeholder="Search..."
               value={query}
-              onChange={(e) => handleSearch(e.target.value)}
+              onChange={e => handleSearch(e.target.value)}
               startIcon={<Search className="w-5 h-5" />}
               clearable
               onClear={() => handleSearch('')}
@@ -187,7 +185,7 @@ export function SearchResults({
             <div className="mb-4">
               <p className="text-sm text-muted-foreground mb-2">Category</p>
               <div className="flex flex-wrap gap-2">
-                {['All', ...categories].map((category) => (
+                {['All', ...categories].map(category => (
                   <Badge
                     key={category}
                     variant={selectedCategory === category ? 'default' : 'outline'}
@@ -206,7 +204,7 @@ export function SearchResults({
             <div>
               <p className="text-sm text-muted-foreground mb-2">Tags</p>
               <div className="flex flex-wrap gap-2">
-                {tags.map((tag) => (
+                {tags.map(tag => (
                   <Badge
                     key={tag}
                     variant={selectedTags.has(tag) ? 'default' : 'outline'}
@@ -236,13 +234,9 @@ export function SearchResults({
         </EnhancedCard>
       ) : (
         <div
-          className={
-            viewMode === 'grid'
-              ? 'grid gap-6 sm:grid-cols-2 lg:grid-cols-3'
-              : 'space-y-4'
-          }
+          className={viewMode === 'grid' ? 'grid gap-6 sm:grid-cols-2 lg:grid-cols-3' : 'space-y-4'}
         >
-          {filteredResults.map((result) => (
+          {filteredResults.map(result => (
             <EnhancedCard key={result.id} className={viewMode === 'list' ? 'p-0' : ''}>
               <div className={viewMode === 'list' ? 'flex gap-4 p-4' : ''}>
                 {result.image && (
@@ -253,16 +247,18 @@ export function SearchResults({
                         : 'w-full aspect-video rounded-t-lg overflow-hidden bg-muted'
                     }
                   >
-                    <img src={result.image} alt={result.title} className="w-full h-full object-cover" />
+                    <img
+                      src={result.image}
+                      alt={result.title}
+                      className="w-full h-full object-cover"
+                    />
                   </div>
                 )}
                 <div className={viewMode === 'grid' ? 'p-4' : 'flex-1 min-w-0'}>
                   <div className="flex items-start justify-between gap-2 mb-2">
                     <h3 className="font-heading text-lg">{result.title}</h3>
                     {result.price !== undefined && (
-                      <p className="font-bold text-primary flex-shrink-0">
-                        ${result.price}
-                      </p>
+                      <p className="font-bold text-primary flex-shrink-0">${result.price}</p>
                     )}
                   </div>
                   <p className="text-sm text-muted-foreground mb-3 line-clamp-2">
@@ -272,7 +268,7 @@ export function SearchResults({
                     <Badge variant="secondary" className="text-xs">
                       {result.category}
                     </Badge>
-                    {result.tags?.map((tag) => (
+                    {result.tags?.map(tag => (
                       <Badge key={tag} variant="outline" className="text-xs">
                         {tag}
                       </Badge>

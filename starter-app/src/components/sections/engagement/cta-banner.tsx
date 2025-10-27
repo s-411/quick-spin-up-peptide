@@ -58,9 +58,7 @@ export function CtaBanner({
 
       <div className="max-w-5xl mx-auto text-center relative z-10">
         {/* Headline */}
-        <h2 className="text-4xl md:text-6xl font-heading mb-6">
-          {headline}
-        </h2>
+        <h2 className="text-4xl md:text-6xl font-heading mb-6">{headline}</h2>
 
         {/* Description */}
         {description && (
@@ -71,10 +69,7 @@ export function CtaBanner({
 
         {/* CTAs */}
         <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
-          <button
-            onClick={onPrimaryClick}
-            className="btn-mm"
-          >
+          <button onClick={onPrimaryClick} className="btn-mm">
             {primaryCta}
           </button>
           {secondaryCta && (

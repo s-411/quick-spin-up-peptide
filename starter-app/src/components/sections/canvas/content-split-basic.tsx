@@ -33,12 +33,11 @@ export interface ContentSplitBasicProps {
 export function ContentSplitBasic({
   tagline = 'Brief Catchy Tagline',
   heading = 'This can be a longer heading. Your content goes here. Edit or remove this text inline or in the module Content settings.',
-  bodyCopy = 'Your content goes here. Edit or remove this text inline or in the module Content settings. You can also style every aspect of this content in the module Design settings and even apply custom CSS to this text in the module Advanced settings.\n\nIn write mathematicians frequency, at unmolested made like the muff it or on slight and reposed doctor\'s magnitude, bulk; Little in and or was herself for while could avarice expect, frequency; Really actual looked. All the both wasn\'t missions to the creative home by the in be in a to the then for in look design would government he flatter more time thoughts each of for she slight coordinates review, me in pass will. Would often if in it the should remember eyes of sublime lady the and soon to the postage think turn past in yes, back all decision-making.',
+  bodyCopy = "Your content goes here. Edit or remove this text inline or in the module Content settings. You can also style every aspect of this content in the module Design settings and even apply custom CSS to this text in the module Advanced settings.\n\nIn write mathematicians frequency, at unmolested made like the muff it or on slight and reposed doctor's magnitude, bulk; Little in and or was herself for while could avarice expect, frequency; Really actual looked. All the both wasn't missions to the creative home by the in be in a to the then for in look design would government he flatter more time thoughts each of for she slight coordinates review, me in pass will. Would often if in it the should remember eyes of sublime lady the and soon to the postage think turn past in yes, back all decision-making.",
   learnMoreText = 'Learn more',
   onLearnMoreClick,
   layout = 'heading-left',
 }: ContentSplitBasicProps) {
-
   const headingColumn = (
     <div className="space-y-4">
       {tagline && (
@@ -60,7 +59,7 @@ export function ContentSplitBasic({
       {learnMoreText && (
         <a
           href="#"
-          onClick={(e) => {
+          onClick={e => {
             e.preventDefault()
             onLearnMoreClick?.()
           }}

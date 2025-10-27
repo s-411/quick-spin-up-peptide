@@ -33,7 +33,7 @@ export function FaqTabs({
   const [openIndexes, setOpenIndexes] = React.useState<Record<string, Set<number>>>({})
 
   const toggleItem = (categoryId: string, index: number) => {
-    setOpenIndexes((prev) => {
+    setOpenIndexes(prev => {
       const categorySet = new Set(prev[categoryId] || [])
       if (categorySet.has(index)) {
         categorySet.delete(index)
@@ -52,31 +52,23 @@ export function FaqTabs({
       <div className="max-w-4xl mx-auto">
         {/* Header */}
         <div className="text-center mb-16">
-          <h2 className="text-4xl md:text-5xl font-heading mb-4">
-            {title}
-          </h2>
-          <p className="text-lg text-muted-foreground">
-            {description}
-          </p>
+          <h2 className="text-4xl md:text-5xl font-heading mb-4">{title}</h2>
+          <p className="text-lg text-muted-foreground">{description}</p>
         </div>
 
         {/* Tabs */}
         <Tabs defaultValue={categories[0]?.id} className="w-full">
           {/* Tab List */}
           <TabsList className="mb-8 flex-wrap h-auto">
-            {categories.map((category) => (
-              <TabsTrigger
-                key={category.id}
-                value={category.id}
-                className="flex-1 min-w-[120px]"
-              >
+            {categories.map(category => (
+              <TabsTrigger key={category.id} value={category.id} className="flex-1 min-w-[120px]">
                 {category.label}
               </TabsTrigger>
             ))}
           </TabsList>
 
           {/* Tab Content */}
-          {categories.map((category) => {
+          {categories.map(category => {
             const categoryOpenIndexes = openIndexes[category.id] || new Set()
 
             return (

@@ -37,7 +37,19 @@ import { ContactForm } from '@/components/sections/interactive/contact-form'
 import { PricingCards } from '@/components/sections/pricing/pricing-cards'
 import { PricingTable } from '@/components/sections/pricing/pricing-table'
 import { PricingToggle } from '@/components/sections/pricing/pricing-toggle'
-import { Zap, Sparkles, Rocket, Shield, Users, Globe, CheckCircle, Star, Mail, Phone, MapPin } from 'lucide-react'
+import {
+  Zap,
+  Sparkles,
+  Rocket,
+  Shield,
+  Users,
+  Globe,
+  CheckCircle,
+  Star,
+  Mail,
+  Phone,
+  MapPin,
+} from 'lucide-react'
 
 export default function CanvasPage() {
   const { toast } = useToast()
@@ -80,7 +92,7 @@ export default function CanvasPage() {
             {/* Section Navigation */}
             <nav className="flex-1 overflow-x-auto">
               <div className="flex items-center gap-1 md:gap-2 min-w-max">
-                {sections.map((section) => (
+                {sections.map(section => (
                   <a
                     key={section.id}
                     href={`#${section.id}`}
@@ -103,7 +115,9 @@ export default function CanvasPage() {
         <div className="text-center space-y-4">
           <h1 className="text-4xl md:text-5xl font-heading text-primary">Canvas Layouts</h1>
           <p className="text-lg text-muted-foreground max-w-3xl mx-auto">
-            A comprehensive showcase of 50+ section components across all categories: Heroes, Features, Content, Blog, Stats, Teams, CTAs, Testimonials, Newsletter, FAQ, Contact, and Pricing. All styled with the MM Design System.
+            A comprehensive showcase of 50+ section components across all categories: Heroes,
+            Features, Content, Blog, Stats, Teams, CTAs, Testimonials, Newsletter, FAQ, Contact, and
+            Pricing. All styled with the MM Design System.
           </p>
         </div>
       </div>
@@ -116,7 +130,6 @@ export default function CanvasPage() {
       {/* Layout Demo Section */}
       <div className="max-w-7xl mx-auto px-4 py-8">
         <div className="space-y-12">
-
           {/* ========== CANVAS SECTION ========== */}
           <div id="canvas" className="scroll-mt-20">
             <div className="mb-6">
@@ -239,7 +252,7 @@ export default function CanvasPage() {
               bodyCopy="Your content goes here. Edit or remove this text inline or in the module Content settings. You can also style every aspect of this content in the module Design settings."
               emailPlaceholder="Email"
               buttonText="SIGN UP"
-              onSubmit={(email) => {
+              onSubmit={email => {
                 toast({
                   title: 'Signed up!',
                   description: `Email: ${email}`,
@@ -416,10 +429,7 @@ Made, hall frequency, thoroughly, avoided fundamental; Movement twice with the a
             <div className="mb-6">
               <h2 className="text-2xl font-heading mb-2">hero-centered</h2>
             </div>
-            <HeroCentered
-              onPrimaryClick={handleButtonClick}
-              onSecondaryClick={handleButtonClick}
-            />
+            <HeroCentered onPrimaryClick={handleButtonClick} onSecondaryClick={handleButtonClick} />
           </div>
 
           {/* Divider */}
@@ -430,10 +440,7 @@ Made, hall frequency, thoroughly, avoided fundamental; Movement twice with the a
             <div className="mb-6">
               <h2 className="text-2xl font-heading mb-2">hero-gradient</h2>
             </div>
-            <HeroGradient
-              onPrimaryClick={handleButtonClick}
-              onSecondaryClick={handleButtonClick}
-            />
+            <HeroGradient onPrimaryClick={handleButtonClick} onSecondaryClick={handleButtonClick} />
           </div>
 
           {/* Divider */}
@@ -444,9 +451,7 @@ Made, hall frequency, thoroughly, avoided fundamental; Movement twice with the a
             <div className="mb-6">
               <h2 className="text-2xl font-heading mb-2">hero-minimal</h2>
             </div>
-            <HeroMinimal
-              onPrimaryClick={handleButtonClick}
-            />
+            <HeroMinimal onPrimaryClick={handleButtonClick} />
           </div>
 
           {/* Divider */}
@@ -457,10 +462,7 @@ Made, hall frequency, thoroughly, avoided fundamental; Movement twice with the a
             <div className="mb-6">
               <h2 className="text-2xl font-heading mb-2">hero-split</h2>
             </div>
-            <HeroSplit
-              onPrimaryClick={handleButtonClick}
-              onSecondaryClick={handleButtonClick}
-            />
+            <HeroSplit onPrimaryClick={handleButtonClick} onSecondaryClick={handleButtonClick} />
           </div>
 
           {/* Divider */}
@@ -471,10 +473,7 @@ Made, hall frequency, thoroughly, avoided fundamental; Movement twice with the a
             <div className="mb-6">
               <h2 className="text-2xl font-heading mb-2">hero-video</h2>
             </div>
-            <HeroVideo
-              onPrimaryClick={handleButtonClick}
-              onSecondaryClick={handleButtonClick}
-            />
+            <HeroVideo onPrimaryClick={handleButtonClick} onSecondaryClick={handleButtonClick} />
           </div>
 
           {/* Divider */}
@@ -495,12 +494,32 @@ Made, hall frequency, thoroughly, avoided fundamental; Movement twice with the a
             </div>
             <FeatureGrid
               features={[
-                { icon: Zap, title: 'Lightning Fast', description: 'Optimized for speed and performance' },
-                { icon: Shield, title: 'Secure by Default', description: 'Enterprise-grade security built in' },
-                { icon: Users, title: 'Team Collaboration', description: 'Work together seamlessly' },
-                { icon: Rocket, title: 'Deploy Anywhere', description: 'Cloud, on-premise, or hybrid' },
+                {
+                  icon: Zap,
+                  title: 'Lightning Fast',
+                  description: 'Optimized for speed and performance',
+                },
+                {
+                  icon: Shield,
+                  title: 'Secure by Default',
+                  description: 'Enterprise-grade security built in',
+                },
+                {
+                  icon: Users,
+                  title: 'Team Collaboration',
+                  description: 'Work together seamlessly',
+                },
+                {
+                  icon: Rocket,
+                  title: 'Deploy Anywhere',
+                  description: 'Cloud, on-premise, or hybrid',
+                },
                 { icon: Globe, title: 'Global Scale', description: 'Scale to millions of users' },
-                { icon: Sparkles, title: 'Beautiful UI', description: 'Stunning design out of the box' },
+                {
+                  icon: Sparkles,
+                  title: 'Beautiful UI',
+                  description: 'Stunning design out of the box',
+                },
               ]}
             />
           </div>
@@ -515,9 +534,21 @@ Made, hall frequency, thoroughly, avoided fundamental; Movement twice with the a
             </div>
             <FeatureList
               features={[
-                { icon: CheckCircle, title: 'Easy Setup', description: 'Get started in minutes, not hours' },
-                { icon: CheckCircle, title: 'No Code Required', description: 'Visual editor for everyone' },
-                { icon: CheckCircle, title: '24/7 Support', description: 'We are here to help anytime' },
+                {
+                  icon: CheckCircle,
+                  title: 'Easy Setup',
+                  description: 'Get started in minutes, not hours',
+                },
+                {
+                  icon: CheckCircle,
+                  title: 'No Code Required',
+                  description: 'Visual editor for everyone',
+                },
+                {
+                  icon: CheckCircle,
+                  title: '24/7 Support',
+                  description: 'We are here to help anytime',
+                },
               ]}
             />
           </div>
@@ -532,8 +563,26 @@ Made, hall frequency, thoroughly, avoided fundamental; Movement twice with the a
             </div>
             <FeatureAlternating
               features={[
-                { title: 'Lightning Fast Performance', description: 'Built for speed with modern optimization techniques', benefits: ['Optimized rendering', 'Lazy loading', 'Code splitting', 'CDN delivery'] },
-                { title: 'Enterprise Security', description: 'Bank-level security protecting your data', benefits: ['End-to-end encryption', 'SOC 2 compliant', 'Regular audits', '24/7 monitoring'] },
+                {
+                  title: 'Lightning Fast Performance',
+                  description: 'Built for speed with modern optimization techniques',
+                  benefits: [
+                    'Optimized rendering',
+                    'Lazy loading',
+                    'Code splitting',
+                    'CDN delivery',
+                  ],
+                },
+                {
+                  title: 'Enterprise Security',
+                  description: 'Bank-level security protecting your data',
+                  benefits: [
+                    'End-to-end encryption',
+                    'SOC 2 compliant',
+                    'Regular audits',
+                    '24/7 monitoring',
+                  ],
+                },
               ]}
             />
           </div>
@@ -548,9 +597,30 @@ Made, hall frequency, thoroughly, avoided fundamental; Movement twice with the a
             </div>
             <FeatureTabs
               tabs={[
-                { id: 'design', label: 'Design', icon: Sparkles, title: 'Beautiful Design', description: 'Stunning UI components', features: ['Modern aesthetics', 'Customizable themes', 'Responsive layouts'] },
-                { id: 'dev', label: 'Development', icon: Rocket, title: 'Developer Tools', description: 'Everything you need to build', features: ['TypeScript support', 'Hot reload', 'CLI tools'] },
-                { id: 'deploy', label: 'Deployment', icon: Globe, title: 'Easy Deployment', description: 'Ship with confidence', features: ['One-click deploy', 'Auto scaling', 'Zero downtime'] },
+                {
+                  id: 'design',
+                  label: 'Design',
+                  icon: Sparkles,
+                  title: 'Beautiful Design',
+                  description: 'Stunning UI components',
+                  features: ['Modern aesthetics', 'Customizable themes', 'Responsive layouts'],
+                },
+                {
+                  id: 'dev',
+                  label: 'Development',
+                  icon: Rocket,
+                  title: 'Developer Tools',
+                  description: 'Everything you need to build',
+                  features: ['TypeScript support', 'Hot reload', 'CLI tools'],
+                },
+                {
+                  id: 'deploy',
+                  label: 'Deployment',
+                  icon: Globe,
+                  title: 'Easy Deployment',
+                  description: 'Ship with confidence',
+                  features: ['One-click deploy', 'Auto scaling', 'Zero downtime'],
+                },
               ]}
             />
           </div>
@@ -562,7 +632,9 @@ Made, hall frequency, thoroughly, avoided fundamental; Movement twice with the a
           <div id="content" className="scroll-mt-20">
             <div className="mb-6">
               <h2 className="text-3xl font-heading mb-2 text-primary">Blog & Content</h2>
-              <p className="text-muted-foreground">Display blog posts, portfolios, and team members</p>
+              <p className="text-muted-foreground">
+                Display blog posts, portfolios, and team members
+              </p>
             </div>
           </div>
 
@@ -570,12 +642,17 @@ Made, hall frequency, thoroughly, avoided fundamental; Movement twice with the a
           <div>
             <div className="mb-6">
               <h2 className="text-2xl font-heading mb-2">blog-featured, blog-grid, blog-list</h2>
-              <p className="text-muted-foreground text-sm">These components require image assets and more complex data structures.</p>
+              <p className="text-muted-foreground text-sm">
+                These components require image assets and more complex data structures.
+              </p>
             </div>
             <div className="py-20 px-4">
               <div className="max-w-3xl mx-auto text-center space-y-4">
                 <h3 className="text-2xl font-heading">Blog Components Available</h3>
-                <p className="text-muted-foreground">BlogFeatured, BlogGrid, and BlogList components are included in your project at [starter-app/src/components/sections/content/](starter-app/src/components/sections/content/)</p>
+                <p className="text-muted-foreground">
+                  BlogFeatured, BlogGrid, and BlogList components are included in your project at
+                  [starter-app/src/components/sections/content/](starter-app/src/components/sections/content/)
+                </p>
               </div>
             </div>
           </div>
@@ -608,9 +685,17 @@ Made, hall frequency, thoroughly, avoided fundamental; Movement twice with the a
             </div>
             <TeamGrid
               members={[
-                { name: 'Sarah Johnson', role: 'CEO & Founder', bio: 'Passionate about building great products' },
+                {
+                  name: 'Sarah Johnson',
+                  role: 'CEO & Founder',
+                  bio: 'Passionate about building great products',
+                },
                 { name: 'Mike Chen', role: 'CTO', bio: 'Tech enthusiast and problem solver' },
-                { name: 'Emily Davis', role: 'Head of Design', bio: 'Creating beautiful experiences' },
+                {
+                  name: 'Emily Davis',
+                  role: 'Head of Design',
+                  bio: 'Creating beautiful experiences',
+                },
               ]}
             />
           </div>
@@ -680,7 +765,11 @@ Made, hall frequency, thoroughly, avoided fundamental; Movement twice with the a
           <div id="testimonials" className="scroll-mt-20">
             <div className="mb-6">
               <h2 className="text-3xl font-heading mb-2 text-primary">Testimonials</h2>
-              <p className="text-muted-foreground">Social proof from happy customers - TestimonialGrid, TestimonialCarousel, and TestimonialWall components are available at [starter-app/src/components/sections/engagement/](starter-app/src/components/sections/engagement/)</p>
+              <p className="text-muted-foreground">
+                Social proof from happy customers - TestimonialGrid, TestimonialCarousel, and
+                TestimonialWall components are available at
+                [starter-app/src/components/sections/engagement/](starter-app/src/components/sections/engagement/)
+              </p>
             </div>
           </div>
 
@@ -703,7 +792,7 @@ Made, hall frequency, thoroughly, avoided fundamental; Movement twice with the a
             <NewsletterCard
               headline="Stay Updated"
               description="Get the latest news and updates delivered to your inbox"
-              onSubmit={(email) => {
+              onSubmit={email => {
                 toast({
                   title: 'Subscribed!',
                   description: `Email: ${email}`,
@@ -722,7 +811,7 @@ Made, hall frequency, thoroughly, avoided fundamental; Movement twice with the a
             </div>
             <NewsletterInline
               placeholder="Enter your email"
-              onSubmit={(email) => {
+              onSubmit={email => {
                 toast({
                   title: 'Subscribed!',
                   description: `Email: ${email}`,
@@ -749,9 +838,18 @@ Made, hall frequency, thoroughly, avoided fundamental; Movement twice with the a
             </div>
             <FaqAccordion
               faqs={[
-                { question: 'How do I get started?', answer: 'Simply sign up for a free account and follow our onboarding guide.' },
-                { question: 'What payment methods do you accept?', answer: 'We accept all major credit cards, PayPal, and wire transfers.' },
-                { question: 'Can I cancel anytime?', answer: 'Yes, you can cancel your subscription at any time with no penalties.' },
+                {
+                  question: 'How do I get started?',
+                  answer: 'Simply sign up for a free account and follow our onboarding guide.',
+                },
+                {
+                  question: 'What payment methods do you accept?',
+                  answer: 'We accept all major credit cards, PayPal, and wire transfers.',
+                },
+                {
+                  question: 'Can I cancel anytime?',
+                  answer: 'Yes, you can cancel your subscription at any time with no penalties.',
+                },
               ]}
             />
           </div>
@@ -773,7 +871,7 @@ Made, hall frequency, thoroughly, avoided fundamental; Movement twice with the a
               <h2 className="text-2xl font-heading mb-2">contact-form</h2>
             </div>
             <ContactForm
-              onSubmit={(data) => {
+              onSubmit={data => {
                 toast({
                   title: 'Message Sent!',
                   description: `We'll get back to you soon.`,
@@ -800,9 +898,44 @@ Made, hall frequency, thoroughly, avoided fundamental; Movement twice with the a
             </div>
             <PricingCards
               tiers={[
-                { name: 'Starter', price: '$9', period: '/month', description: 'Perfect for getting started', features: ['5 Projects', '10GB Storage', 'Basic Support'], cta: 'Start Free', onCTAClick: handleButtonClick },
-                { name: 'Pro', price: '$29', period: '/month', description: 'Best for growing teams', features: ['Unlimited Projects', '100GB Storage', 'Priority Support', 'Advanced Analytics'], cta: 'Get Started', onCTAClick: handleButtonClick, popular: true },
-                { name: 'Enterprise', price: '$99', period: '/month', description: 'For large organizations', features: ['Unlimited Everything', 'Dedicated Support', 'Custom Integrations', 'SLA'], cta: 'Contact Sales', onCTAClick: handleButtonClick },
+                {
+                  name: 'Starter',
+                  price: '$9',
+                  period: '/month',
+                  description: 'Perfect for getting started',
+                  features: ['5 Projects', '10GB Storage', 'Basic Support'],
+                  cta: 'Start Free',
+                  onCTAClick: handleButtonClick,
+                },
+                {
+                  name: 'Pro',
+                  price: '$29',
+                  period: '/month',
+                  description: 'Best for growing teams',
+                  features: [
+                    'Unlimited Projects',
+                    '100GB Storage',
+                    'Priority Support',
+                    'Advanced Analytics',
+                  ],
+                  cta: 'Get Started',
+                  onCTAClick: handleButtonClick,
+                  popular: true,
+                },
+                {
+                  name: 'Enterprise',
+                  price: '$99',
+                  period: '/month',
+                  description: 'For large organizations',
+                  features: [
+                    'Unlimited Everything',
+                    'Dedicated Support',
+                    'Custom Integrations',
+                    'SLA',
+                  ],
+                  cta: 'Contact Sales',
+                  onCTAClick: handleButtonClick,
+                },
               ]}
             />
           </div>
@@ -817,12 +950,28 @@ Made, hall frequency, thoroughly, avoided fundamental; Movement twice with the a
             </div>
             <PricingToggle
               plans={[
-                { name: 'Basic', monthlyPrice: 10, annualPrice: 100, description: 'Essential features', features: ['Feature 1', 'Feature 2'], cta: 'Choose Plan', onCTAClick: () => handleButtonClick() },
-                { name: 'Pro', monthlyPrice: 30, annualPrice: 300, description: 'Advanced features', features: ['Everything in Basic', 'Feature 3', 'Feature 4'], cta: 'Choose Plan', onCTAClick: () => handleButtonClick(), popular: true },
+                {
+                  name: 'Basic',
+                  monthlyPrice: 10,
+                  annualPrice: 100,
+                  description: 'Essential features',
+                  features: ['Feature 1', 'Feature 2'],
+                  cta: 'Choose Plan',
+                  onCTAClick: () => handleButtonClick(),
+                },
+                {
+                  name: 'Pro',
+                  monthlyPrice: 30,
+                  annualPrice: 300,
+                  description: 'Advanced features',
+                  features: ['Everything in Basic', 'Feature 3', 'Feature 4'],
+                  cta: 'Choose Plan',
+                  onCTAClick: () => handleButtonClick(),
+                  popular: true,
+                },
               ]}
             />
           </div>
-
         </div>
       </div>
 
@@ -831,12 +980,18 @@ Made, hall frequency, thoroughly, avoided fundamental; Movement twice with the a
         <div className="text-center space-y-4 pb-8">
           <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary/10 text-primary text-sm">
             <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth={2}
+                d="M13 10V3L4 14h7v7l9-11h-7z"
+              />
             </svg>
             Powered by MM Design System
           </div>
           <p className="text-sm text-muted-foreground">
-            All layouts automatically inherit your design system's fonts, colors, spacing, and dark mode support.
+            All layouts automatically inherit your design system's fonts, colors, spacing, and dark
+            mode support.
           </p>
         </div>
       </div>

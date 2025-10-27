@@ -22,7 +22,7 @@ import {
   TrendingUp,
   Shield,
   Sparkles,
-  ArrowRight
+  ArrowRight,
 } from 'lucide-react'
 
 export default function LandingPage() {
@@ -38,32 +38,38 @@ export default function LandingPage() {
     {
       icon: Target,
       title: 'Smart Protocol Builder',
-      description: 'Create flexible injection schedules with cycle management, automatic reminders, and intelligent dose tracking.',
+      description:
+        'Create flexible injection schedules with cycle management, automatic reminders, and intelligent dose tracking.',
     },
     {
       icon: Syringe,
       title: 'One-Tap Logging',
-      description: 'Log injections instantly with automatic site rotation, vial tracking, and dose adjustments. Never forget which side you used.',
+      description:
+        'Log injections instantly with automatic site rotation, vial tracking, and dose adjustments. Never forget which side you used.',
     },
     {
       icon: Calculator,
       title: 'Advanced Calculator',
-      description: 'Convert between mg/mL, IU, and syringe units. Calculate doses, volumes, and remaining vial capacity with precision.',
+      description:
+        'Convert between mg/mL, IU, and syringe units. Calculate doses, volumes, and remaining vial capacity with precision.',
     },
     {
       icon: LineChart,
       title: 'Analytics Dashboard',
-      description: 'Visualize adherence timelines, track measurements, and monitor progress with beautiful charts and insights.',
+      description:
+        'Visualize adherence timelines, track measurements, and monitor progress with beautiful charts and insights.',
     },
     {
       icon: Database,
       title: 'Backup & Export',
-      description: 'Local-first storage with cloud sync. Export to CSV/PDF for your records or doctor appointments. Your data, your control.',
+      description:
+        'Local-first storage with cloud sync. Export to CSV/PDF for your records or doctor appointments. Your data, your control.',
     },
     {
       icon: Sparkles,
       title: 'AI Coach (Coming Soon)',
-      description: 'Get personalized insights, conversational guidance, and auto-generated doctor reports powered by AI.',
+      description:
+        'Get personalized insights, conversational guidance, and auto-generated doctor reports powered by AI.',
     },
   ]
 
@@ -71,7 +77,8 @@ export default function LandingPage() {
   const deepDiveFeatures = [
     {
       title: 'Medication & Vial Management Made Simple',
-      description: 'Add your medications with flexible unit systems (mg, IU, mcg), set concentrations, and let the app auto-calculate everything. Track expiration dates, monitor remaining doses, and never waste another vial.',
+      description:
+        'Add your medications with flexible unit systems (mg, IU, mcg), set concentrations, and let the app auto-calculate everything. Track expiration dates, monitor remaining doses, and never waste another vial.',
       benefits: [
         'Auto-calculate vial volumes and remaining doses',
         'Track multiple medications and vials simultaneously',
@@ -89,7 +96,8 @@ export default function LandingPage() {
     },
     {
       title: 'Calendar View & Smart Scheduling',
-      description: 'See your entire injection schedule at a glance. The calendar view shows completed doses, upcoming injections, and adherence patterns. Never miss a dose with automated reminders and next-dose previews.',
+      description:
+        'See your entire injection schedule at a glance. The calendar view shows completed doses, upcoming injections, and adherence patterns. Never miss a dose with automated reminders and next-dose previews.',
       benefits: [
         'Visual calendar with adherence tracking',
         'Flexible scheduling (every X days, weekly, custom)',
@@ -107,7 +115,8 @@ export default function LandingPage() {
     },
     {
       title: 'Analytics That Actually Help',
-      description: 'Track your progress with visual analytics. See adherence rates, monitor body measurements (weight, blood pressure), and identify trends over time. Export reports for your healthcare provider.',
+      description:
+        'Track your progress with visual analytics. See adherence rates, monitor body measurements (weight, blood pressure), and identify trends over time. Export reports for your healthcare provider.',
       benefits: [
         'Adherence timeline (completed vs. scheduled)',
         'Measurements graphs (weight, BP, custom metrics)',
@@ -128,21 +137,24 @@ export default function LandingPage() {
   // Testimonials
   const testimonials = [
     {
-      quote: 'I used to have a spreadsheet nightmare tracking my TRT protocol. This app calculated everything automatically and saved me hours every month.',
+      quote:
+        'I used to have a spreadsheet nightmare tracking my TRT protocol. This app calculated everything automatically and saved me hours every month.',
       name: 'Michael Chen',
       title: 'TRT Patient',
       company: '2 Years',
       rating: 5,
     },
     {
-      quote: 'The vial calculator alone is worth it. I was constantly overthinking my doses and wasting peptides. Now I just trust the math.',
+      quote:
+        'The vial calculator alone is worth it. I was constantly overthinking my doses and wasting peptides. Now I just trust the math.',
       name: 'Sarah Rodriguez',
       title: 'Peptide User',
       company: '18 Months',
       rating: 5,
     },
     {
-      quote: 'As someone managing both GLP-1s and peptides, the multi-medication tracking is a game-changer. Everything in one place, always accurate.',
+      quote:
+        'As someone managing both GLP-1s and peptides, the multi-medication tracking is a game-changer. Everything in one place, always accurate.',
       name: 'David Park',
       title: 'Multi-Protocol',
       company: '1 Year',
@@ -294,11 +306,7 @@ export default function LandingPage() {
         secondaryCta="View Pricing"
         onPrimaryClick={() => router.push('/signup')}
         onSecondaryClick={scrollToPricing}
-        trustIndicators={[
-          '10,000+ active users',
-          'HIPAA-compliant storage',
-          'Export anytime',
-        ]}
+        trustIndicators={['10,000+ active users', 'HIPAA-compliant storage', 'Export anytime']}
       />
     </div>
   )

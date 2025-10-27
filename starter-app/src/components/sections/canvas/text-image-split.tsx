@@ -41,7 +41,6 @@ export function TextImageSplit({
   imageElement,
   imagePosition = 'right',
 }: TextImageSplitProps) {
-
   // Text content column
   const textContent = (
     <div className="space-y-6">
@@ -51,16 +50,11 @@ export function TextImageSplit({
       </h2>
 
       {/* Body Copy - Using MM Design System default font (ESKlarheit) */}
-      <p className="text-base md:text-lg text-muted-foreground leading-relaxed">
-        {bodyCopy}
-      </p>
+      <p className="text-base md:text-lg text-muted-foreground leading-relaxed">{bodyCopy}</p>
 
       {/* CTA Button - Using MM Design System btn-mm class (100px radius, primary color) */}
       <div className="pt-2">
-        <button
-          className="btn-mm"
-          onClick={onButtonClick}
-        >
+        <button className="btn-mm" onClick={onButtonClick}>
           {buttonText}
         </button>
       </div>

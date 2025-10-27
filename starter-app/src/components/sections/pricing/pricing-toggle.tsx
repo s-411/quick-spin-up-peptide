@@ -40,12 +40,8 @@ export function PricingToggle({
       <div className="w-[95%] md:w-[90%] lg:w-[80%] mx-auto">
         {/* Header */}
         <div className="text-center max-w-3xl mx-auto mb-12">
-          <h2 className="text-4xl md:text-5xl font-heading mb-4">
-            {title}
-          </h2>
-          <p className="text-lg text-muted-foreground mb-8">
-            {description}
-          </p>
+          <h2 className="text-4xl md:text-5xl font-heading mb-4">{title}</h2>
+          <p className="text-lg text-muted-foreground mb-8">{description}</p>
 
           {/* Toggle */}
           <div className="inline-flex items-center gap-4 p-1 rounded-full bg-muted">
@@ -87,9 +83,7 @@ export function PricingToggle({
               <EnhancedCard
                 key={index}
                 className={`relative p-8 space-y-6 ${
-                  plan.popular
-                    ? 'border-2 border-primary shadow-lg'
-                    : ''
+                  plan.popular ? 'border-2 border-primary shadow-lg' : ''
                 }`}
               >
                 {/* Popular Badge */}
@@ -111,9 +105,7 @@ export function PricingToggle({
                 <div className="mb-8">
                   <div className="flex items-baseline gap-2">
                     <span className="text-5xl font-heading">${price}</span>
-                    <span className="text-muted-foreground">
-                      /{isAnnual ? 'year' : 'month'}
-                    </span>
+                    <span className="text-muted-foreground">/{isAnnual ? 'year' : 'month'}</span>
                   </div>
                   {isAnnual && savings > 0 && (
                     <p className="text-sm text-success mt-2">

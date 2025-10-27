@@ -52,9 +52,12 @@ export function PortfolioCarousel({
     if (emblaApi) emblaApi.scrollNext()
   }, [emblaApi])
 
-  const scrollTo = React.useCallback((index: number) => {
-    if (emblaApi) emblaApi.scrollTo(index)
-  }, [emblaApi])
+  const scrollTo = React.useCallback(
+    (index: number) => {
+      if (emblaApi) emblaApi.scrollTo(index)
+    },
+    [emblaApi]
+  )
 
   const onSelect = React.useCallback(() => {
     if (!emblaApi) return
@@ -85,15 +88,9 @@ export function PortfolioCarousel({
         {/* Header */}
         {(title || description) && (
           <div className="text-center mb-12">
-            {title && (
-              <h2 className="text-3xl md:text-4xl font-heading mb-4">
-                {title}
-              </h2>
-            )}
+            {title && <h2 className="text-3xl md:text-4xl font-heading mb-4">{title}</h2>}
             {description && (
-              <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-                {description}
-              </p>
+              <p className="text-lg text-muted-foreground max-w-2xl mx-auto">{description}</p>
             )}
           </div>
         )}
@@ -104,10 +101,7 @@ export function PortfolioCarousel({
           <div className="overflow-hidden" ref={emblaRef}>
             <div className="flex">
               {projects.map((project, index) => (
-                <div
-                  key={index}
-                  className="flex-[0_0_100%] min-w-0 px-2"
-                >
+                <div key={index} className="flex-[0_0_100%] min-w-0 px-2">
                   <EnhancedCard className="!p-0 overflow-hidden group">
                     <div className="grid md:grid-cols-2 gap-0">
                       {/* Project Image */}
@@ -121,7 +115,7 @@ export function PortfolioCarousel({
                         <a
                           href={project.href}
                           className="absolute inset-0 bg-primary/90 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center"
-                          onClick={(e) => {
+                          onClick={e => {
                             e.stopPropagation()
                             window.location.href = project.href
                           }}
@@ -140,14 +134,10 @@ export function PortfolioCarousel({
                         </div>
 
                         {/* Title */}
-                        <h3 className="text-3xl font-heading mb-4">
-                          {project.title}
-                        </h3>
+                        <h3 className="text-3xl font-heading mb-4">{project.title}</h3>
 
                         {/* Description */}
-                        <p className="text-muted-foreground mb-6">
-                          {project.description}
-                        </p>
+                        <p className="text-muted-foreground mb-6">{project.description}</p>
 
                         {/* Tags */}
                         {project.tags && project.tags.length > 0 && (
@@ -205,9 +195,7 @@ export function PortfolioCarousel({
               key={index}
               onClick={() => scrollTo(index)}
               className={`w-2 h-2 rounded-full transition-all ${
-                index === selectedIndex
-                  ? 'bg-primary w-8'
-                  : 'bg-muted-foreground/30'
+                index === selectedIndex ? 'bg-primary w-8' : 'bg-muted-foreground/30'
               }`}
               aria-label={`Go to project ${index + 1}`}
             />

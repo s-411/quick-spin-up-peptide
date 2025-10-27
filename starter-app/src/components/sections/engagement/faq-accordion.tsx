@@ -30,7 +30,7 @@ export function FaqAccordion({
   const [openIndexes, setOpenIndexes] = React.useState<Set<number>>(new Set())
 
   const toggleItem = (index: number) => {
-    setOpenIndexes((prev) => {
+    setOpenIndexes(prev => {
       const newSet = new Set(prev)
       if (newSet.has(index)) {
         newSet.delete(index)
@@ -49,12 +49,8 @@ export function FaqAccordion({
       <div className="max-w-4xl mx-auto">
         {/* Header */}
         <div className="text-center mb-16">
-          <h2 className="text-4xl md:text-5xl font-heading mb-4">
-            {title}
-          </h2>
-          <p className="text-lg text-muted-foreground">
-            {description}
-          </p>
+          <h2 className="text-4xl md:text-5xl font-heading mb-4">{title}</h2>
+          <p className="text-lg text-muted-foreground">{description}</p>
         </div>
 
         {/* FAQ Items */}
@@ -72,9 +68,7 @@ export function FaqAccordion({
                   className="faq-toggle w-full px-6 py-5 flex items-center justify-between gap-4 text-left transition-colors"
                   aria-expanded={isOpen}
                 >
-                  <span className="text-lg font-semibold text-foreground">
-                    {faq.question}
-                  </span>
+                  <span className="text-lg font-semibold text-foreground">{faq.question}</span>
                   <ChevronDown
                     className={`w-5 h-5 text-muted-foreground shrink-0 transition-transform ${
                       isOpen ? 'rotate-180' : ''
