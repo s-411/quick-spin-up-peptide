@@ -31,25 +31,10 @@ import { CtaSplit } from '@/components/sections/engagement/cta-split'
 import { NewsletterCard } from '@/components/sections/engagement/newsletter-card'
 import { NewsletterInline } from '@/components/sections/engagement/newsletter-inline'
 import { FaqAccordion } from '@/components/sections/engagement/faq-accordion'
-import { FaqTabs } from '@/components/sections/engagement/faq-tabs'
-import { FaqTwoColumn } from '@/components/sections/engagement/faq-two-column'
 import { ContactForm } from '@/components/sections/interactive/contact-form'
 import { PricingCards } from '@/components/sections/pricing/pricing-cards'
-import { PricingTable } from '@/components/sections/pricing/pricing-table'
 import { PricingToggle } from '@/components/sections/pricing/pricing-toggle'
-import {
-  Zap,
-  Sparkles,
-  Rocket,
-  Shield,
-  Users,
-  Globe,
-  CheckCircle,
-  Star,
-  Mail,
-  Phone,
-  MapPin,
-} from 'lucide-react'
+import { Zap, Sparkles, Rocket, Shield, Users, Globe, CheckCircle } from 'lucide-react'
 
 export default function CanvasPage() {
   const { toast } = useToast()
