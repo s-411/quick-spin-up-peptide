@@ -7,12 +7,10 @@ import OpenAI from 'openai'
 import { env } from './env'
 
 /**
- * OpenAI client instance
- * Configured with API key from environment
+ * OpenAI client instance (lazy-loaded to avoid initialization errors during build)
+ * Only instantiated when actually used
  */
-export const openai = new OpenAI({
-  apiKey: env.OPENAI_API_KEY,
-})
+let openaiInstance: OpenAI | null = null
 
 /**
  * Default models for different tasks
@@ -51,12 +49,29 @@ export function isOpenAIConfigured(): boolean {
 }
 
 /**
- * Get OpenAI client
+ * Get OpenAI client (lazy-loaded)
  * Throws error if not configured
  */
 export function getOpenAIClient(): OpenAI {
   if (!isOpenAIConfigured()) {
     throw new Error('OpenAI is not configured. Please set OPENAI_API_KEY environment variable.')
   }
-  return openai
+
+  if (!openaiInstance) {
+    openaiInstance = new OpenAI({
+      apiKey: env.OPENAI_API_KEY,
+    })
+  }
+
+  return openaiInstance
 }
+
+/**
+ * Legacy export for backward compatibility
+ * @deprecated Use getOpenAIClient() instead
+ */
+export const openai = new Proxy({} as OpenAI, {
+  get(_target, prop) {
+    return getOpenAIClient()[prop as keyof OpenAI]
+  },
+})
