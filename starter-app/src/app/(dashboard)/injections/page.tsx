@@ -5,7 +5,7 @@ import { Button } from '@/components/ui/button'
 import { Card, CardContent } from '@/components/ui/card'
 import { InjectionForm, InjectionFormData } from '@/components/peptide/injection-form'
 import type { Protocol, Vial, InjectionSite } from '@/types'
-import { Activity, Loader2, Edit, Trash2, MapPin, Syringe } from 'lucide-react'
+import { Activity, Loader2, Edit, Trash2, MapPin } from 'lucide-react'
 import { format } from 'date-fns'
 
 interface Injection {
