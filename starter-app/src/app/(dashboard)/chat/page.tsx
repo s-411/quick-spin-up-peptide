@@ -6,7 +6,6 @@
 'use client'
 
 import { useState } from 'react'
-import { Container } from '@/components/layout/container'
 import { MessageList } from '@/components/chat/message-list'
 import { ChatInput } from '@/components/chat/chat-input'
 import { useChat } from '@/hooks/use-chat'
