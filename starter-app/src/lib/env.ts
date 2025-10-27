@@ -127,25 +127,37 @@ const featureValidationSchema = envSchema.refine(
 
 // Parse and validate environment variables
 function parseEnv() {
+  // Check if we're in browser (client-side)
+  const isBrowser = typeof window !== 'undefined'
+
   const parsed = envSchema.safeParse(process.env)
 
   if (!parsed.success) {
-    // During build or in browser, only warn about missing required env vars
-    if (typeof window !== 'undefined' || process.env.NODE_ENV === 'production') {
+    // In browser, always just log and return empty object
+    if (isBrowser) {
       console.error('❌ Invalid environment variables:')
       console.error(JSON.stringify(parsed.error.format(), null, 2))
-
-      // Only throw in production server-side
-      if (typeof window === 'undefined' && process.env.NODE_ENV === 'production') {
-        throw new Error('Invalid environment variables')
-      }
+      return {} as z.infer<typeof envSchema>
     }
-    // In development server-side, just return empty object typed as env
+
+    // Server-side: only throw in production during page data collection
+    const isProduction = process.env.NODE_ENV === 'production'
+    const isBuildTime = process.env.NEXT_PHASE === 'phase-production-build'
+
+    console.error('❌ Invalid environment variables:')
+    console.error(JSON.stringify(parsed.error.format(), null, 2))
+
+    // Only throw during runtime in production (not during build)
+    if (isProduction && !isBuildTime) {
+      throw new Error('Invalid environment variables')
+    }
+
+    // During build or in development, return empty object
     return {} as z.infer<typeof envSchema>
   }
 
-  // Apply production and feature validations (only on server-side)
-  if (typeof window === 'undefined') {
+  // Apply production and feature validations (only on server-side, skip during build)
+  if (!isBrowser && process.env.NEXT_PHASE !== 'phase-production-build') {
     const productionValidated = productionSchema.safeParse(parsed.data)
     if (!productionValidated.success) {
       console.error('❌ Production validation failed:')
