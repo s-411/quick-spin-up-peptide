@@ -5,7 +5,7 @@ import { Button } from '@/components/ui/button'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { ProtocolForm, ProtocolFormData } from '@/components/peptide/protocol-form'
 import { SchedulePreview } from '@/components/peptide/schedule-preview'
-import type { Protocol, Medication, ScheduledInjection } from '@/types'
+import type { Protocol, Medication } from '@/types'
 import { Plus, Calendar, Edit, Pause, Play, Trash2, Loader2, Eye } from 'lucide-react'
 
 export default function ProtocolsPage() {
