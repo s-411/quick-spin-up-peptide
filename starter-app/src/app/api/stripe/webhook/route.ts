@@ -88,8 +88,12 @@ async function handleSubscriptionUpdate(subscription: Stripe.Subscription) {
       stripe_customer_id: subscription.customer as string,
       status: subscription.status,
       plan_id: subscription.items.data[0]?.price.id || '',
-      current_period_start: new Date((subscription as any).current_period_start * 1000).toISOString(),
-      current_period_end: new Date((subscription as any).current_period_end * 1000).toISOString(),
+      current_period_start: new Date(
+        (subscription as any).current_period_start * 1000
+      ).toISOString(),
+      current_period_end: new Date(
+        (subscription as any).current_period_end * 1000
+      ).toISOString(),
       cancel_at_period_end: subscription.cancel_at_period_end,
     },
     { onConflict: 'stripe_subscription_id' }
