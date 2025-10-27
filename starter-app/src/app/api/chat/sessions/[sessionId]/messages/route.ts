@@ -180,7 +180,7 @@ export async function POST(request: NextRequest, { params }: RouteParams) {
  * GET /api/chat/sessions/[sessionId]/messages
  * Get message history
  */
-export async function GET(request: NextRequest, { params }: RouteParams) {
+export async function GET(_request: NextRequest, { params }: RouteParams) {
   try {
     const supabase = createServerSupabaseClient()
     const { sessionId } = params
