@@ -1,4 +1,5 @@
 /* Auto-generated token exports. Do not edit manually. */
+/* eslint-disable no-restricted-syntax */
 
 export type TokenMode = 'light' | 'dark' | (string & {})
 
