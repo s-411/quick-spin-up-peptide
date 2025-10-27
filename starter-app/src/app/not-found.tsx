@@ -1,6 +1,7 @@
 /**
  * 404 Not Found Page
  */
+'use client'
 
 import Link from 'next/link'
 import { Container } from '@/components/layout/container'

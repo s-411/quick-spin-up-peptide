@@ -641,7 +641,11 @@ export function getSemanticTokenValue(
   if (!token) {
     throw new Error(`Unknown semantic token: ${String(name)}`)
   }
-  return token.values[mode] ?? token.values.light ?? Object.values(token.values)[0]
+  return (
+    (token.values as Record<string, string>)[mode] ??
+    (token.values as Record<string, string>).light ??
+    Object.values(token.values)[0]
+  )
 }
 
 export function getChartTokenValue(
@@ -652,9 +656,11 @@ export function getChartTokenValue(
   if (!charts) {
     throw new Error('No chart tokens configured.')
   }
-  const token = charts[name as string]
+  const token = (charts as Record<string, any>)[name as string]
   if (!token) {
     throw new Error(`Unknown chart token: ${String(name)}`)
   }
-  return token.values[mode] ?? token.values.light ?? Object.values(token.values)[0]
+  return ((token.values as Record<string, string>)[mode] ??
+    (token.values as Record<string, string>).light ??
+    Object.values(token.values)[0]) as string
 }

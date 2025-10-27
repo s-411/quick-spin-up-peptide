@@ -69,18 +69,9 @@ const envSchema = z.object({
   NEXT_PUBLIC_VERCEL_ANALYTICS_ID: z.string().optional(),
 
   // Feature Flags
-  NEXT_PUBLIC_ENABLE_RAG: z
-    .string()
-    .default('true')
-    .transform(val => val === 'true'),
-  NEXT_PUBLIC_ENABLE_PAYMENTS: z
-    .string()
-    .default('true')
-    .transform(val => val === 'true'),
-  NEXT_PUBLIC_ENABLE_EMAIL_MARKETING: z
-    .string()
-    .default('true')
-    .transform(val => val === 'true'),
+  NEXT_PUBLIC_ENABLE_RAG: z.string().default('true'),
+  NEXT_PUBLIC_ENABLE_PAYMENTS: z.string().default('true'),
+  NEXT_PUBLIC_ENABLE_EMAIL_MARKETING: z.string().default('true'),
 })
 
 // Production-specific validations
@@ -106,18 +97,18 @@ const productionSchema = envSchema.refine(
 const featureValidationSchema = envSchema.refine(
   data => {
     // If RAG is enabled, require OpenAI key
-    if (data.NEXT_PUBLIC_ENABLE_RAG && !data.OPENAI_API_KEY) {
+    if (data.NEXT_PUBLIC_ENABLE_RAG === 'true' && !data.OPENAI_API_KEY) {
       return false
     }
     // If payments enabled, require Stripe keys
     if (
-      data.NEXT_PUBLIC_ENABLE_PAYMENTS &&
+      data.NEXT_PUBLIC_ENABLE_PAYMENTS === 'true' &&
       (!data.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY || !data.STRIPE_SECRET_KEY)
     ) {
       return false
     }
     // If email marketing enabled, require provider and corresponding key
-    if (data.NEXT_PUBLIC_ENABLE_EMAIL_MARKETING) {
+    if (data.NEXT_PUBLIC_ENABLE_EMAIL_MARKETING === 'true') {
       if (!data.EMAIL_PROVIDER) return false
       const providerKeys = {
         convertkit: data.CONVERTKIT_API_KEY,
