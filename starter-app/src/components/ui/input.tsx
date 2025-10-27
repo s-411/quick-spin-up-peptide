@@ -41,7 +41,6 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
     },
     ref
   ) => {
-    const [isFocused, setIsFocused] = React.useState(false)
     const hasValue = value !== undefined && value !== ''
 
     const handleClear = () => {
@@ -81,8 +80,6 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
             disabled={disabled || loading}
             maxLength={maxLength}
             value={value}
-            onFocus={() => setIsFocused(true)}
-            onBlur={() => setIsFocused(false)}
             {...props}
           />
 

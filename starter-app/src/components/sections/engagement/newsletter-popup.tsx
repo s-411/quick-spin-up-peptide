@@ -7,10 +7,9 @@ import {
   DialogHeader,
   DialogTitle,
   DialogDescription,
-  DialogClose,
 } from '@/components/ui/dialog'
 import { Input } from '@/components/ui/input'
-import { Check, AlertCircle, X } from 'lucide-react'
+import { Check, AlertCircle } from 'lucide-react'
 
 export interface NewsletterPopupProps {
   /** Modal title */
@@ -51,6 +50,7 @@ export function NewsletterPopup({
       }, delay)
       return () => clearTimeout(timer)
     }
+    return undefined
   }, [delay])
 
   const handleSubmit = async (e: React.FormEvent) => {

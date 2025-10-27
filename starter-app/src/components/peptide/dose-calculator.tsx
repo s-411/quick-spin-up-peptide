@@ -3,7 +3,6 @@
 import { useState, useEffect } from 'react'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Input } from '@/components/ui/input'
-import { Button } from '@/components/ui/button'
 import type { DoseUnits, ConcentrationUnits, DoseCalculation } from '@/types'
 import { calculateVialDosing, getCalculatorTips } from '@/lib/services/calculator-service'
 import { AlertCircle, Calculator } from 'lucide-react'

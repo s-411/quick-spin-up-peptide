@@ -1,10 +1,5 @@
 import { env } from '@/lib/env'
-import type {
-  EmailProvider,
-  AddSubscriberOptions,
-  SendEmailOptions,
-  SubscriberInfo,
-} from '../provider-interface'
+import type { EmailProvider, AddSubscriberOptions, SubscriberInfo } from '../provider-interface'
 import { EmailProviderError } from '../provider-interface'
 
 export class ConvertKitProvider implements EmailProvider {
@@ -65,12 +60,12 @@ export class ConvertKitProvider implements EmailProvider {
     }
   }
 
-  async updateSubscriber(email: string, options?: any): Promise<void> {
+  async updateSubscriber(_email: string, _options?: any): Promise<void> {
     // ConvertKit updates via tags
     throw new EmailProviderError('Update not implemented for ConvertKit', 'convertkit')
   }
 
-  async sendEmail(options: SendEmailOptions): Promise<void> {
+  async sendEmail(): Promise<void> {
     throw new EmailProviderError(
       'ConvertKit is for marketing emails only. Use Resend for transactional emails.',
       'convertkit'

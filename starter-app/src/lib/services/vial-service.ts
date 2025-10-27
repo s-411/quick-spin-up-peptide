@@ -277,7 +277,6 @@ export function selectBestVialForInjection(
 ): VialWithMedication | null {
   // Filter to only active vials with enough volume
   const usableVials = vials.filter(vial => {
-    const status = getVialStatus(vial, doseValue, doseUnits)
     const remainingDoses = getRemainingDoses(vial, doseValue, doseUnits)
     return !isVialExpired(vial) && remainingDoses > 0
   })

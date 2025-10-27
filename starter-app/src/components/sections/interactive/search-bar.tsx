@@ -3,7 +3,7 @@
 import * as React from 'react'
 import { Input } from '@/components/ui/input'
 import { EnhancedCard } from '@/components/ui/enhanced-card'
-import { Search, X, TrendingUp, Clock, ArrowRight } from 'lucide-react'
+import { Search, TrendingUp, Clock, ArrowRight } from 'lucide-react'
 
 export interface SearchSuggestion {
   /** Suggestion text */

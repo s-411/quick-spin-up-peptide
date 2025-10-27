@@ -652,10 +652,10 @@ Made, hall frequency, thoroughly, avoided fundamental; Movement twice with the a
             </div>
             <StatsGrid
               stats={[
-                { value: '10K+', label: 'Active Users' },
-                { value: '99.9%', label: 'Uptime' },
-                { value: '24/7', label: 'Support' },
-                { value: '150+', label: 'Countries' },
+                { number: 10000, label: 'Active Users', suffix: '+' },
+                { number: 99.9, label: 'Uptime', suffix: '%' },
+                { number: 24, label: 'Support', suffix: '/7' },
+                { number: 150, label: 'Countries', suffix: '+' },
               ]}
             />
           </div>
@@ -672,14 +672,21 @@ Made, hall frequency, thoroughly, avoided fundamental; Movement twice with the a
               members={[
                 {
                   name: 'Sarah Johnson',
-                  role: 'CEO & Founder',
+                  title: 'CEO & Founder',
                   bio: 'Passionate about building great products',
+                  photo: '/placeholder-avatar.jpg',
                 },
-                { name: 'Mike Chen', role: 'CTO', bio: 'Tech enthusiast and problem solver' },
+                {
+                  name: 'Mike Chen',
+                  title: 'CTO',
+                  bio: 'Tech enthusiast and problem solver',
+                  photo: '/placeholder-avatar.jpg',
+                },
                 {
                   name: 'Emily Davis',
-                  role: 'Head of Design',
+                  title: 'Head of Design',
                   bio: 'Creating beautiful experiences',
+                  photo: '/placeholder-avatar.jpg',
                 },
               ]}
             />
@@ -721,9 +728,9 @@ Made, hall frequency, thoroughly, avoided fundamental; Movement twice with the a
               <h2 className="text-2xl font-heading mb-2">cta-banner</h2>
             </div>
             <CtaBanner
-              message="Limited Time Offer: Get 50% off annual plans"
-              ctaText="Claim Offer"
-              onCtaClick={handleButtonClick}
+              headline="Limited Time Offer: Get 50% off annual plans"
+              primaryCta="Claim Offer"
+              onPrimaryClick={handleButtonClick}
             />
           </div>
 
@@ -738,8 +745,8 @@ Made, hall frequency, thoroughly, avoided fundamental; Movement twice with the a
             <CtaSplit
               headline="Transform Your Workflow Today"
               description="Everything you need to build modern applications"
-              ctaText="Get Started"
-              onCtaClick={handleButtonClick}
+              primaryCta="Get Started"
+              onPrimaryClick={handleButtonClick}
             />
           </div>
 
@@ -775,9 +782,9 @@ Made, hall frequency, thoroughly, avoided fundamental; Movement twice with the a
               <h2 className="text-2xl font-heading mb-2">newsletter-card</h2>
             </div>
             <NewsletterCard
-              headline="Stay Updated"
+              title="Stay Updated"
               description="Get the latest news and updates delivered to your inbox"
-              onSubmit={email => {
+              onSubmit={async email => {
                 toast({
                   title: 'Subscribed!',
                   description: `Email: ${email}`,
@@ -796,7 +803,7 @@ Made, hall frequency, thoroughly, avoided fundamental; Movement twice with the a
             </div>
             <NewsletterInline
               placeholder="Enter your email"
-              onSubmit={email => {
+              onSubmit={async email => {
                 toast({
                   title: 'Subscribed!',
                   description: `Email: ${email}`,
@@ -856,7 +863,7 @@ Made, hall frequency, thoroughly, avoided fundamental; Movement twice with the a
               <h2 className="text-2xl font-heading mb-2">contact-form</h2>
             </div>
             <ContactForm
-              onSubmit={data => {
+              onSubmit={_data => {
                 toast({
                   title: 'Message Sent!',
                   description: `We'll get back to you soon.`,

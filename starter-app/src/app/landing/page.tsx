@@ -22,7 +22,6 @@ import {
   TrendingUp,
   Shield,
   Sparkles,
-  ArrowRight,
 } from 'lucide-react'
 
 export default function LandingPage() {
@@ -177,7 +176,7 @@ export default function LandingPage() {
         'CSV export',
       ],
       cta: 'Start Free',
-      onCTAClick: (isAnnual: boolean) => router.push('/signup'),
+      onCTAClick: (_isAnnual: boolean) => router.push('/signup'),
     },
     {
       name: 'Pro',
@@ -194,7 +193,7 @@ export default function LandingPage() {
         'Priority support',
       ],
       cta: 'Upgrade to Pro',
-      onCTAClick: (isAnnual: boolean) => router.push('/signup?plan=pro'),
+      onCTAClick: (_isAnnual: boolean) => router.push('/signup?plan=pro'),
       popular: true,
     },
     {
@@ -211,7 +210,7 @@ export default function LandingPage() {
         'Pattern detection',
       ],
       cta: 'Join Waitlist',
-      onCTAClick: (isAnnual: boolean) => router.push('/waitlist'),
+      onCTAClick: (_isAnnual: boolean) => router.push('/waitlist'),
     },
   ]
 

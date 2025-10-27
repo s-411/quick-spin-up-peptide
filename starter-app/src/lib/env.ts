@@ -71,16 +71,16 @@ const envSchema = z.object({
   // Feature Flags
   NEXT_PUBLIC_ENABLE_RAG: z
     .string()
-    .transform(val => val === 'true')
-    .default('true'),
+    .default('true')
+    .transform(val => val === 'true'),
   NEXT_PUBLIC_ENABLE_PAYMENTS: z
     .string()
-    .transform(val => val === 'true')
-    .default('true'),
+    .default('true')
+    .transform(val => val === 'true'),
   NEXT_PUBLIC_ENABLE_EMAIL_MARKETING: z
     .string()
-    .transform(val => val === 'true')
-    .default('true'),
+    .default('true')
+    .transform(val => val === 'true'),
 })
 
 // Production-specific validations

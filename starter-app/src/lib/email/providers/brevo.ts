@@ -1,26 +1,22 @@
 import { env } from '@/lib/env'
-import type {
-  EmailProvider,
-  AddSubscriberOptions,
-  SendEmailOptions,
-  SubscriberInfo,
-} from '../provider-interface'
+import type { EmailProvider, AddSubscriberOptions, SubscriberInfo } from '../provider-interface'
 import { EmailProviderError } from '../provider-interface'
 
 export class BrevoProvider implements EmailProvider {
-  private apiKey: string
   private baseUrl = 'https://api.brevo.com/v3'
 
   constructor() {
     if (!env.BREVO_API_KEY) throw new Error('Brevo API key not configured')
-    this.apiKey = env.BREVO_API_KEY
   }
 
   async addSubscriber(email: string, options?: AddSubscriberOptions): Promise<string> {
     try {
       const response = await fetch(`${this.baseUrl}/contacts`, {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json', 'api-key': this.apiKey },
+        headers: {
+          'Content-Type': 'application/json',
+          'api-key': env.BREVO_API_KEY || '',
+        },
         body: JSON.stringify({
           email,
           attributes: { FIRSTNAME: options?.firstName, LASTNAME: options?.lastName },
@@ -33,11 +29,11 @@ export class BrevoProvider implements EmailProvider {
     }
   }
 
-  async removeSubscriber(email: string): Promise<void> {
+  async removeSubscriber(_email: string): Promise<void> {
     throw new EmailProviderError('Not implemented', 'brevo')
   }
 
-  async updateSubscriber(): Promise<void> {
+  async updateSubscriber(_email: string): Promise<void> {
     throw new EmailProviderError('Not implemented', 'brevo')
   }
 
@@ -45,7 +41,7 @@ export class BrevoProvider implements EmailProvider {
     throw new EmailProviderError('Use Resend for transactional emails', 'brevo')
   }
 
-  async getSubscriber(): Promise<SubscriberInfo | null> {
+  async getSubscriber(_email: string): Promise<SubscriberInfo | null> {
     return null
   }
 }

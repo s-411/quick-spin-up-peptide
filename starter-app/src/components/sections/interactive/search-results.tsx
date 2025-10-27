@@ -5,7 +5,7 @@ import { Input } from '@/components/ui/input'
 import { Button } from '@/components/ui/button'
 import { Badge } from '@/components/ui/badge'
 import { EnhancedCard } from '@/components/ui/enhanced-card'
-import { Search, X, SlidersHorizontal, Grid, List } from 'lucide-react'
+import { Search, SlidersHorizontal, Grid, List } from 'lucide-react'
 
 export interface SearchResult {
   id: string

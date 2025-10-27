@@ -165,7 +165,11 @@ export function DocumentUpload({
                   />
                 </div>
                 <p className="text-xs text-muted-foreground">
-                  {progress < 30 ? 'Uploading...' : progress < 100 ? 'Processing...' : 'Complete!'}
+                  {progress && progress < 30
+                    ? 'Uploading...'
+                    : progress && progress < 100
+                      ? 'Processing...'
+                      : 'Complete!'}
                 </p>
               </div>
             )}

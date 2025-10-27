@@ -2,8 +2,7 @@
 
 import * as React from 'react'
 import { EnhancedCard } from '@/components/ui/enhanced-card'
-import { Input } from '@/components/ui/input'
-import { Check, AlertCircle } from 'lucide-react'
+import { Check } from 'lucide-react'
 
 export interface NewsletterCardProps {
   /** Section title */
@@ -26,36 +25,9 @@ export function NewsletterCard({
   title = 'Stay in the Loop',
   description = 'Join thousands of subscribers and get the latest news',
   benefits = ['Weekly updates', 'Exclusive content', 'No spam, ever'],
-  placeholder = 'your@email.com',
-  buttonText = 'Subscribe',
   privacyNote = 'We respect your privacy. Unsubscribe at any time.',
-  onSubmit,
 }: NewsletterCardProps) {
-  const [email, setEmail] = React.useState('')
-  const [status, setStatus] = React.useState<'idle' | 'loading' | 'success' | 'error'>('idle')
-  const [errorMessage, setErrorMessage] = React.useState('')
-
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault()
-
-    if (!email || !email.includes('@')) {
-      setStatus('error')
-      setErrorMessage('Please enter a valid email address')
-      return
-    }
-
-    setStatus('loading')
-    setErrorMessage('')
-
-    try {
-      await onSubmit?.(email)
-      setStatus('success')
-      setEmail('')
-    } catch (error) {
-      setStatus('error')
-      setErrorMessage('Something went wrong. Please try again.')
-    }
-  }
+  const [status] = React.useState<'idle' | 'loading' | 'success' | 'error'>('idle')
 
   return (
     <section className="py-20 px-4">

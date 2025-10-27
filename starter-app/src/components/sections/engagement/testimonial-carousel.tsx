@@ -57,6 +57,7 @@ export function TestimonialCarousel({
       const interval = setInterval(goToNext, autoAdvance)
       return () => clearInterval(interval)
     }
+    return undefined
   }, [autoAdvance, goToNext])
 
   const activeTestimonial = testimonials[activeIndex]

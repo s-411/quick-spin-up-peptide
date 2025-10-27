@@ -14,19 +14,17 @@ interface InjectionSiteSelectorProps {
 }
 
 const INJECTION_SITES: { value: InjectionSite; label: string; region: string }[] = [
-  { value: 'abdomen_left', label: 'Left Abdomen', region: 'Abdomen' },
-  { value: 'abdomen_right', label: 'Right Abdomen', region: 'Abdomen' },
-  { value: 'thigh_left', label: 'Left Thigh', region: 'Legs' },
-  { value: 'thigh_right', label: 'Right Thigh', region: 'Legs' },
-  { value: 'glute_left', label: 'Left Glute', region: 'Glutes' },
-  { value: 'glute_right', label: 'Right Glute', region: 'Glutes' },
-  { value: 'shoulder_left', label: 'Left Shoulder', region: 'Shoulders' },
-  { value: 'shoulder_right', label: 'Right Shoulder', region: 'Shoulders' },
-  { value: 'arm_left', label: 'Left Arm', region: 'Arms' },
-  { value: 'arm_right', label: 'Right Arm', region: 'Arms' },
+  { value: 'abdomen_upper_left', label: 'Left Abdomen', region: 'Abdomen' },
+  { value: 'abdomen_upper_right', label: 'Right Abdomen', region: 'Abdomen' },
+  { value: 'left_thigh', label: 'Left Thigh', region: 'Legs' },
+  { value: 'right_thigh', label: 'Right Thigh', region: 'Legs' },
+  { value: 'left_glute', label: 'Left Glute', region: 'Glutes' },
+  { value: 'right_glute', label: 'Right Glute', region: 'Glutes' },
+  { value: 'left_delt', label: 'Left Shoulder', region: 'Shoulders' },
+  { value: 'right_delt', label: 'Right Shoulder', region: 'Shoulders' },
 ]
 
-const REGIONS = ['Abdomen', 'Legs', 'Glutes', 'Shoulders', 'Arms']
+const REGIONS = ['Abdomen', 'Legs', 'Glutes', 'Shoulders']
 
 export function InjectionSiteSelector({
   value,

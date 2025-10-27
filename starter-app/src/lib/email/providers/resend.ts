@@ -18,7 +18,7 @@ export class ResendProvider implements EmailProvider {
     this.client = new Resend(env.RESEND_API_KEY)
   }
 
-  async addSubscriber(email: string, options?: AddSubscriberOptions): Promise<string> {
+  async addSubscriber(_email: string, _options?: AddSubscriberOptions): Promise<string> {
     // Resend doesn't have built-in subscriber management
     // This would typically integrate with a separate service or database
     throw new EmailProviderError(
@@ -27,14 +27,14 @@ export class ResendProvider implements EmailProvider {
     )
   }
 
-  async removeSubscriber(email: string): Promise<void> {
+  async removeSubscriber(_email: string): Promise<void> {
     throw new EmailProviderError(
       'Resend does not support subscriber management. Use a marketing email provider.',
       'resend'
     )
   }
 
-  async updateSubscriber(email: string): Promise<void> {
+  async updateSubscriber(_email: string): Promise<void> {
     throw new EmailProviderError(
       'Resend does not support subscriber management. Use a marketing email provider.',
       'resend'
@@ -49,7 +49,7 @@ export class ResendProvider implements EmailProvider {
         subject: options.subject,
         html: options.html,
         text: options.text,
-        reply_to: options.replyTo,
+        replyTo: options.replyTo,
       })
 
       if (error) {
@@ -64,7 +64,7 @@ export class ResendProvider implements EmailProvider {
     }
   }
 
-  async getSubscriber(email: string): Promise<SubscriberInfo | null> {
+  async getSubscriber(_email: string): Promise<SubscriberInfo | null> {
     throw new EmailProviderError(
       'Resend does not support subscriber management. Use a marketing email provider.',
       'resend'

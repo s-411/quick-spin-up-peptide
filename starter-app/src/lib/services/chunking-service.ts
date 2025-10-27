@@ -191,7 +191,7 @@ export function chunkByCharacters(
  */
 export function mergeSmallChunks(
   chunks: Chunk[],
-  minTokens: number = 100,
+  _minTokens: number = 100,
   maxTokens: number = OPENAI_CONFIG.maxChunkTokens
 ): Chunk[] {
   if (chunks.length === 0) return []
