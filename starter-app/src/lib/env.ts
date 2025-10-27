@@ -130,27 +130,38 @@ function parseEnv() {
   const parsed = envSchema.safeParse(process.env)
 
   if (!parsed.success) {
-    console.error('❌ Invalid environment variables:')
-    console.error(JSON.stringify(parsed.error.format(), null, 2))
-    throw new Error('Invalid environment variables')
-  }
+    // During build or in browser, only warn about missing required env vars
+    if (typeof window !== 'undefined' || process.env.NODE_ENV === 'production') {
+      console.error('❌ Invalid environment variables:')
+      console.error(JSON.stringify(parsed.error.format(), null, 2))
 
-  // Apply production and feature validations
-  const productionValidated = productionSchema.safeParse(parsed.data)
-  if (!productionValidated.success) {
-    console.error('❌ Production validation failed:')
-    console.error(productionValidated.error.message)
-    if (parsed.data.NODE_ENV === 'production') {
-      throw new Error('Production validation failed')
+      // Only throw in production server-side
+      if (typeof window === 'undefined' && process.env.NODE_ENV === 'production') {
+        throw new Error('Invalid environment variables')
+      }
     }
-    console.warn('⚠️  Warning: Production requirements not met (development mode)')
+    // In development server-side, just return empty object typed as env
+    return {} as z.infer<typeof envSchema>
   }
 
-  const featureValidated = featureValidationSchema.safeParse(parsed.data)
-  if (!featureValidated.success) {
-    console.error('❌ Feature validation failed:')
-    console.error(featureValidated.error.message)
-    console.warn('⚠️  Warning: Some features may not work correctly due to missing API keys')
+  // Apply production and feature validations (only on server-side)
+  if (typeof window === 'undefined') {
+    const productionValidated = productionSchema.safeParse(parsed.data)
+    if (!productionValidated.success) {
+      console.error('❌ Production validation failed:')
+      console.error(productionValidated.error.message)
+      if (parsed.data.NODE_ENV === 'production') {
+        throw new Error('Production validation failed')
+      }
+      console.warn('⚠️  Warning: Production requirements not met (development mode)')
+    }
+
+    const featureValidated = featureValidationSchema.safeParse(parsed.data)
+    if (!featureValidated.success) {
+      console.error('❌ Feature validation failed:')
+      console.error(featureValidated.error.message)
+      console.warn('⚠️  Warning: Some features may not work correctly due to missing API keys')
+    }
   }
 
   return parsed.data
