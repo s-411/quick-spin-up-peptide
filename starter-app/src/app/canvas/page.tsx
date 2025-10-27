@@ -447,7 +447,7 @@ Made, hall frequency, thoroughly, avoided fundamental; Movement twice with the a
             <div className="mb-6">
               <h2 className="text-2xl font-heading mb-2">hero-split</h2>
             </div>
-            <HeroSplit onPrimaryClick={handleButtonClick} onSecondaryClick={handleButtonClick} />
+            <HeroSplit onPrimaryClick={handleButtonClick} />
           </div>
 
           {/* Divider */}
@@ -458,7 +458,7 @@ Made, hall frequency, thoroughly, avoided fundamental; Movement twice with the a
             <div className="mb-6">
               <h2 className="text-2xl font-heading mb-2">hero-video</h2>
             </div>
-            <HeroVideo onPrimaryClick={handleButtonClick} onSecondaryClick={handleButtonClick} />
+            <HeroVideo onPrimaryClick={handleButtonClick} />
           </div>
 
           {/* Divider */}
