@@ -1,0 +1,781 @@
+import { promises as fs } from "fs"
+import path from "path"
+
+type ModeValues = Record<string, string>
+
+interface BrandToken {
+  cssVar: string
+  value: string
+  description?: string
+}
+
+type SemanticFormat = "raw" | "hsl" | "hsl-channel"
+
+interface SemanticAlias {
+  name: string
+  format?: "raw" | "hsl"
+  description?: string
+}
+
+interface SemanticToken {
+  cssVar: string
+  values: ModeValues
+  format?: SemanticFormat
+  aliases?: SemanticAlias[]
+  description?: string
+}
+
+interface CssValueToken {
+  cssVar?: string
+  value: string
+  description?: string
+}
+
+interface FontFile {
+  path: string
+  format: string
+}
+
+interface FontToken {
+  name: string
+  cssVar: string
+  family: string
+  fallback: string[]
+  weight?: number | string
+  style?: string
+  display?: string
+  files?: FontFile[]
+  usage?: string
+}
+
+interface TypographyTokens {
+  fonts: FontToken[]
+  sizes: {
+    desktop: Record<string, string>
+    mobile?: Record<string, string>
+  }
+  lineHeight: Record<string, string>
+  letterSpacing: Record<string, string>
+}
+
+interface LayoutTokens {
+  radius: Record<string, CssValueToken>
+  containers?: Record<string, CssValueToken>
+}
+
+interface MotionTokens {
+  transitions: Record<string, CssValueToken>
+  easings: Record<string, string>
+  animations: Record<
+    string,
+    {
+      duration: string
+      easing: string
+      className: string
+    }
+  >
+}
+
+interface TokenSource {
+  $schema?: string
+  meta: {
+    name: string
+    version: string
+    updated?: string
+    description?: string
+  }
+  brand: Record<string, BrandToken>
+  semantic: Record<string, SemanticToken>
+  dataViz?: {
+    charts?: Record<string, SemanticToken>
+  }
+  typography: TypographyTokens
+  layout: LayoutTokens
+  spacing: {
+    padding: Record<string, string>
+    margin: Record<string, string>
+    gap: Record<string, string>
+  }
+  motion: MotionTokens
+  breakpoints?: Record<string, string | boolean>
+  zIndex?: Record<string, number>
+}
+
+const PROJECT_ROOT = path.resolve(__dirname, "..", "..")
+const CONFIG_DIR = path.join(PROJECT_ROOT, "config")
+const STYLES_DIR = path.join(PROJECT_ROOT, "styles")
+const LIB_DIR = path.join(PROJECT_ROOT, "lib")
+const OUTPUTS: Record<string, (tokens: TokenSource) => string> = {
+  [path.join(STYLES_DIR, "color-tokens.css")]: generateColorTokensCss,
+  [path.join(STYLES_DIR, "globals.css")]: generateGlobalsCss,
+  [path.join(CONFIG_DIR, "generated-tailwind-theme.ts")]: generateTailwindThemeModule,
+  [path.join(LIB_DIR, "tokens.ts")]: generateTypeScriptExports,
+}
+
+const GENERIC_FONT_NAMES = new Set([
+  "serif",
+  "sans-serif",
+  "monospace",
+  "cursive",
+  "fantasy",
+  "system-ui",
+  "ui-serif",
+  "ui-sans-serif",
+  "ui-monospace",
+  "emoji",
+  "math",
+  "fangsong",
+])
+
+async function main() {
+  const isCheck = process.argv.includes("--check")
+  const sourcePath = path.join(CONFIG_DIR, "design-tokens.json")
+  const raw = await fs.readFile(sourcePath, "utf-8")
+  const parsed = JSON.parse(raw) as TokenSource
+
+  validateTokens(parsed)
+
+  const tokens = { ...parsed }
+  delete tokens.$schema
+
+  let hasDiff = false
+
+  for (const [filePath, generator] of Object.entries(OUTPUTS)) {
+    const nextContent = generator(tokens)
+    const existing = await readFileIfExists(filePath)
+
+    if (existing === nextContent) {
+      continue
+    }
+
+    if (isCheck) {
+      hasDiff = true
+      console.error(
+        `Token artifact out of date: ${path.relative(PROJECT_ROOT, filePath)}`
+      )
+      continue
+    }
+
+    await fs.mkdir(path.dirname(filePath), { recursive: true })
+    await fs.writeFile(filePath, nextContent, "utf-8")
+    console.log(`Updated ${path.relative(PROJECT_ROOT, filePath)}`)
+  }
+
+  if (isCheck && hasDiff) {
+    process.exitCode = 1
+  }
+}
+
+function validateTokens(tokens: TokenSource) {
+  if (!tokens.meta?.name) {
+    throw new Error("meta.name is required in design-tokens.json")
+  }
+  if (!tokens.brand || Object.keys(tokens.brand).length === 0) {
+    throw new Error("brand tokens are required")
+  }
+  if (!tokens.semantic || Object.keys(tokens.semantic).length === 0) {
+    throw new Error("semantic tokens are required")
+  }
+  if (!tokens.typography?.fonts?.length) {
+    throw new Error("typography.fonts must include at least one font")
+  }
+  for (const [key, token] of Object.entries(tokens.brand)) {
+    if (!token.cssVar || !token.value) {
+      throw new Error(`brand.${key} must include cssVar and value`)
+    }
+  }
+  for (const [key, token] of Object.entries(tokens.semantic)) {
+    if (!token.cssVar || !token.values) {
+      throw new Error(`semantic.${key} must include cssVar and values`)
+    }
+  }
+}
+
+function generateColorTokensCss(tokens: TokenSource): string {
+  const lines: string[] = []
+  const comment = [
+    "/*",
+    " * ---------------------------------------------------------------------------",
+    " * This file is auto-generated by scripts/build-tokens.ts.",
+    " * Edit design-system/config/design-tokens.json and run `npm run tokens:build`.",
+    " * ---------------------------------------------------------------------------",
+    " */",
+  ]
+  lines.push(...comment, "")
+
+  // @theme block combines brand tokens and semantic aliases (defaults to light mode)
+  const themeEntries: string[] = []
+  for (const token of Object.values(tokens.brand)) {
+    themeEntries.push(`${token.cssVar}: ${token.value};`)
+  }
+  const semanticAliasEntries = collectSemanticAliases(tokens.semantic, "light")
+  themeEntries.push(...semanticAliasEntries)
+  if (tokens.dataViz?.charts) {
+    const vizAliases = collectSemanticAliases(tokens.dataViz.charts, "light")
+    themeEntries.push(...vizAliases)
+  }
+  if (themeEntries.length > 0) {
+    lines.push("@theme {")
+    for (const entry of themeEntries) {
+      lines.push(`  ${entry}`)
+    }
+    lines.push("}", "")
+  }
+
+  lines.push("@layer base {")
+  lines.push("  :root,")
+  lines.push('  [data-theme="light"] {')
+  lines.push("    /* Brand tokens */")
+  for (const token of Object.values(tokens.brand)) {
+    lines.push(`    ${token.cssVar}: ${token.value};`)
+  }
+  lines.push("", "    /* Semantic tokens – light mode */")
+  lines.push(
+    ...renderSemanticBlock(tokens.semantic, "light", "    ", true, tokens.dataViz?.charts)
+  )
+  lines.push("  }", "")
+
+  lines.push("  .dark,")
+  lines.push('  [data-theme="dark"] {')
+  lines.push("    /* Semantic tokens – dark mode */")
+  lines.push(
+    ...renderSemanticBlock(tokens.semantic, "dark", "    ", true, tokens.dataViz?.charts)
+  )
+  lines.push("  }")
+  lines.push("}", "")
+
+  return ensureTrailingNewline(lines.join("\n"))
+}
+
+function collectSemanticAliases(
+  semantic: Record<string, SemanticToken>,
+  mode: string
+): string[] {
+  const entries: string[] = []
+  for (const token of Object.values(semantic)) {
+    if (!token.aliases?.length) continue
+    const value = resolveModeValue(token, mode)
+    for (const alias of token.aliases) {
+      const formatted = formatValue(value, alias.format ?? token.format ?? "raw")
+      entries.push(`${alias.name}: ${formatted};`)
+    }
+  }
+  return entries
+}
+
+function renderSemanticBlock(
+  semantic: Record<string, SemanticToken>,
+  mode: string,
+  indent: string,
+  includeAliases: boolean,
+  charts?: Record<string, SemanticToken>
+): string[] {
+  const lines: string[] = []
+  const entries = Object.entries(semantic).sort(([a], [b]) => a.localeCompare(b))
+  for (const [, token] of entries) {
+    const value = resolveModeValue(token, mode)
+    const formatted = formatValue(value, token.format ?? "raw")
+    lines.push(`${indent}${token.cssVar}: ${formatted};`)
+    if (includeAliases && token.aliases) {
+      for (const alias of token.aliases) {
+        const aliasValue = formatValue(value, alias.format ?? "raw")
+        lines.push(`${indent}${alias.name}: ${aliasValue};`)
+      }
+    }
+  }
+  if (charts) {
+    lines.push("", `${indent}/* Data visualization tokens */`)
+    const chartEntries = Object.entries(charts).sort(([a], [b]) => a.localeCompare(b))
+    for (const [, token] of chartEntries) {
+      const value = resolveModeValue(token, mode)
+      const formatted = formatValue(value, token.format ?? "raw")
+      lines.push(`${indent}${token.cssVar}: ${formatted};`)
+      if (includeAliases && token.aliases) {
+        for (const alias of token.aliases) {
+          const aliasValue = formatValue(value, alias.format ?? "raw")
+          lines.push(`${indent}${alias.name}: ${aliasValue};`)
+        }
+      }
+    }
+  }
+  return lines
+}
+
+function formatValue(value: string, format: SemanticFormat): string {
+  if (format === "hsl") {
+    return `hsl(${value})`
+  }
+  return value
+}
+
+function resolveModeValue(token: SemanticToken, mode: string): string {
+  if (token.values[mode]) {
+    return token.values[mode]
+  }
+  const fallback = token.values.light ?? Object.values(token.values)[0]
+  return fallback
+}
+
+function generateGlobalsCss(tokens: TokenSource): string {
+  const lines: string[] = []
+  const header = [
+    "@import \"tailwindcss\";",
+    "@import \"./color-tokens.css\";",
+    "",
+    "/*",
+    " * Auto-generated global styles. Do not edit manually.",
+    " * Update design-tokens.json and re-run `npm run tokens:build`.",
+    " */",
+    "",
+  ]
+  lines.push(...header)
+
+  const fontFaces: string[] = []
+  for (const font of tokens.typography.fonts) {
+    if (!font.files?.length) continue
+    const sources = font.files
+      .map((file) => `url('${file.path}') format('${file.format}')`)
+      .join(", ")
+    fontFaces.push(
+      "@font-face {",
+      `  font-family: '${font.family}';`,
+      `  src: ${sources};`,
+      font.weight ? `  font-weight: ${font.weight};` : "",
+      font.style ? `  font-style: ${font.style};` : "",
+      font.display ? `  font-display: ${font.display};` : "  font-display: swap;",
+      "}"
+    )
+  }
+  if (fontFaces.length) {
+    lines.push("/* Font declarations */")
+    for (const line of fontFaces) {
+      if (line === "" && lines[lines.length - 1] === "") {
+        continue
+      }
+      lines.push(line)
+    }
+    lines.push("")
+  }
+
+  lines.push("@layer base {")
+  lines.push("  :root {")
+
+  for (const font of tokens.typography.fonts) {
+    const valueParts = [
+      formatFontValue(font.family),
+      ...font.fallback.map(formatFontValue),
+    ]
+    lines.push(`    ${font.cssVar}: ${valueParts.join(", ")};`)
+  }
+  lines.push("")
+
+  lines.push("    /* Layout tokens */")
+  for (const token of Object.values(tokens.layout.radius)) {
+    if (token.cssVar) {
+      lines.push(`    ${token.cssVar}: ${token.value};`)
+    }
+  }
+  lines.push("")
+
+  lines.push("    /* Motion tokens */")
+  for (const token of Object.values(tokens.motion.transitions)) {
+    if (token.cssVar) {
+      lines.push(`    ${token.cssVar}: ${token.value};`)
+    }
+  }
+  lines.push("  }", "")
+
+  lines.push("  * {")
+  lines.push("    border-color: hsl(var(--border));")
+  lines.push("  }", "")
+
+  lines.push("  body {")
+  lines.push("    background-color: hsl(var(--background));")
+  lines.push("    color: hsl(var(--foreground));")
+  lines.push("    font-family: var(--font-family-body);")
+  lines.push(
+    `    line-height: ${tokens.typography.lineHeight.body ?? "1.6"};`
+  )
+  lines.push("    -webkit-font-smoothing: antialiased;")
+  lines.push("    -moz-osx-font-smoothing: grayscale;")
+  lines.push("  }", "")
+
+  const headingFontVar = "var(--font-family-heading)"
+  lines.push("  h1, h2, h3, h4, h5, h6 {")
+  lines.push(`    font-family: ${headingFontVar};`)
+  const headingLineHeight = tokens.typography.lineHeight.heading ?? "1.2"
+  lines.push(`    line-height: ${headingLineHeight};`)
+  const letterSpacing = tokens.typography.letterSpacing.heading ?? "-0.02em"
+  lines.push(`    letter-spacing: ${letterSpacing};`)
+  lines.push("    font-weight: 700;")
+  lines.push("  }", "")
+
+  const desktopSizes = tokens.typography.sizes.desktop
+  for (const [element, size] of Object.entries(desktopSizes)) {
+    const selector = element.toLowerCase()
+    if (!/^h[1-6]$/.test(selector)) continue
+    lines.push(`  ${selector} {`)
+    lines.push(`    font-size: ${size};`)
+    lines.push("  }", "")
+  }
+
+  const mobileSizes = tokens.typography.sizes.mobile ?? {}
+  lines.push(
+    `  @media (${tokens.breakpoints?.mobile ?? "max-width: 768px"}) {`
+  )
+  for (const [element, size] of Object.entries(mobileSizes)) {
+    const selector = element.toLowerCase()
+    lines.push(`    ${selector} {`)
+    lines.push(`      font-size: ${size};`)
+    lines.push("    }")
+  }
+  lines.push("  }")
+  lines.push("}", "")
+
+  lines.push("@layer utilities {")
+  lines.push("  /* Brand color utilities */")
+  for (const [name, token] of Object.entries(tokens.brand)) {
+    const suffix = name.replace(/[^a-z0-9]+/gi, "-")
+    lines.push(`  .text-mm-${suffix} { color: var(${token.cssVar}); }`)
+    lines.push(`  .bg-mm-${suffix} { background-color: var(${token.cssVar}); }`)
+    lines.push(`  .border-mm-${suffix} { border-color: var(${token.cssVar}); }`)
+  }
+  lines.push("")
+  lines.push("  /* Typography utilities */")
+  for (const font of tokens.typography.fonts) {
+    lines.push(
+      `  .font-${font.name} { font-family: var(${font.cssVar}); }`
+    )
+  }
+  lines.push("")
+  lines.push("  /* Border radius utilities */")
+  for (const [name, token] of Object.entries(tokens.layout.radius)) {
+    if (!token.cssVar) continue
+    lines.push(`  .rounded-${name} { border-radius: var(${token.cssVar}); }`)
+  }
+  lines.push("}", "")
+
+  const buttonPadding = tokens.spacing.padding.button ?? "0.75rem 1.5rem"
+  const transitionFast =
+    tokens.motion.transitions.fast?.value ?? "0.2s"
+
+  lines.push("@layer components {")
+  lines.push("  .btn-mm {")
+  lines.push("    @apply inline-flex items-center justify-center gap-2;")
+  lines.push("    @apply font-bold text-base;")
+  lines.push(`    padding: ${buttonPadding};`)
+  lines.push(`    transition: opacity ${transitionFast};`)
+  lines.push("    cursor: pointer;")
+  lines.push("    border: none;")
+  lines.push("    background-color: hsl(var(--primary));")
+  lines.push("    color: hsl(var(--primary-foreground));")
+  lines.push("    border-radius: var(--radius-mm);")
+  lines.push("  }", "")
+  lines.push("  .btn-mm:hover {")
+  lines.push("    opacity: 0.9;")
+  lines.push("  }", "")
+  lines.push("  .btn-mm:active {")
+  lines.push("    transform: translateY(1px);")
+  lines.push("  }", "")
+  lines.push("  .btn-mm:disabled {")
+  lines.push("    @apply opacity-50 cursor-not-allowed;")
+  lines.push("  }", "")
+
+  const secondaryPadding = tokens.spacing.padding.button ?? "0.75rem 1.5rem"
+  lines.push("  .btn-secondary {")
+  lines.push("    @apply inline-flex items-center justify-center gap-2;")
+  lines.push("    @apply font-bold text-base;")
+  lines.push(`    padding: ${secondaryPadding};`)
+  lines.push("    @apply bg-transparent border border-border;")
+  lines.push(`    transition: all ${transitionFast};`)
+  lines.push("    cursor: pointer;")
+  lines.push("    color: hsl(var(--foreground));")
+  lines.push("    border-radius: var(--radius-mm);")
+  lines.push("  }", "")
+  lines.push("  .btn-secondary:hover {")
+  lines.push("    border-color: hsl(var(--primary));")
+  lines.push("    color: hsl(var(--primary));")
+  lines.push("  }", "")
+
+  const inputPadding = tokens.spacing.padding.input ?? "0.75rem"
+  lines.push("  .input-mm {")
+  lines.push("    @apply w-full text-base rounded-input outline-none;")
+  lines.push(`    padding: ${inputPadding};`)
+  lines.push("    background-color: hsl(var(--background) / 0.5);")
+  lines.push("    border: 1px solid hsl(var(--input));")
+  lines.push("    color: hsl(var(--foreground));")
+  lines.push(
+    `    transition: border-color ${transitionFast}, box-shadow ${transitionFast};`
+  )
+  lines.push("  }", "")
+  lines.push("  .input-mm::placeholder {")
+  lines.push("    color: hsl(var(--muted-foreground));")
+  lines.push("  }", "")
+  lines.push("  .input-mm:focus {")
+  lines.push("    border-color: hsl(var(--ring));")
+  lines.push("    box-shadow: 0 0 0 2px hsl(var(--ring) / 0.2);")
+  lines.push("  }", "")
+  lines.push("  .input-mm:disabled {")
+  lines.push("    @apply opacity-50 cursor-not-allowed;")
+  lines.push("  }", "")
+  lines.push("  .dark .input-mm {")
+  lines.push(
+    "    background-color: color-mix(in srgb, var(--color-mm-dark) 50%, transparent);"
+  )
+  lines.push("  }", "")
+  lines.push("}")
+
+  return ensureTrailingNewline(lines.join("\n"))
+}
+
+function formatFontValue(name: string): string {
+  const trimmed = name.trim()
+  if (!trimmed) return trimmed
+  if (GENERIC_FONT_NAMES.has(trimmed)) {
+    return trimmed
+  }
+  if (/^['"].*['"]$/.test(trimmed) || /^["].*["]$/.test(trimmed)) {
+    return trimmed
+  }
+  return `'${trimmed}'`
+}
+
+function generateTailwindThemeModule(tokens: TokenSource): string {
+  const colors: Record<string, unknown> = {}
+  const semantic = tokens.semantic
+
+  const singleColorEntries: Record<string, string> = {
+    border: "border",
+    input: "input",
+    ring: "ring",
+    background: "background",
+    foreground: "foreground",
+  }
+  for (const [key, semanticKey] of Object.entries(singleColorEntries)) {
+    const token = semantic[semanticKey]
+    if (!token) continue
+    colors[key] = `hsl(var(${token.cssVar}))`
+  }
+
+  const pairedColorEntries: Record<
+    string,
+    { defaultKey: string; foregroundKey: string }
+  > = {
+    primary: { defaultKey: "primary", foregroundKey: "primaryForeground" },
+    secondary: { defaultKey: "secondary", foregroundKey: "secondaryForeground" },
+    destructive: {
+      defaultKey: "destructive",
+      foregroundKey: "destructiveForeground",
+    },
+    muted: { defaultKey: "muted", foregroundKey: "mutedForeground" },
+    accent: { defaultKey: "accent", foregroundKey: "accentForeground" },
+    popover: { defaultKey: "popover", foregroundKey: "popoverForeground" },
+    card: { defaultKey: "card", foregroundKey: "cardForeground" },
+  }
+  for (const [groupKey, { defaultKey, foregroundKey }] of Object.entries(
+    pairedColorEntries
+  )) {
+    const baseToken = semantic[defaultKey]
+    const foregroundToken = semantic[foregroundKey]
+    if (!baseToken || !foregroundToken) continue
+    colors[groupKey] = {
+      DEFAULT: `hsl(var(${baseToken.cssVar}))`,
+      foreground: `hsl(var(${foregroundToken.cssVar}))`,
+    }
+  }
+
+  const borderRadius: Record<string, string> = {}
+  const radiusBase = tokens.layout.radius.base?.cssVar ?? "--radius"
+  borderRadius.lg = `var(${radiusBase})`
+  borderRadius.md = `calc(var(${radiusBase}) - 2px)`
+  borderRadius.sm = `calc(var(${radiusBase}) - 4px)`
+  if (tokens.layout.radius.mm?.cssVar) {
+    borderRadius.mm = `var(${tokens.layout.radius.mm.cssVar})`
+  }
+
+  const fontFamily: Record<string, string[]> = {}
+  for (const font of tokens.typography.fonts) {
+    fontFamily[font.name] = [`var(${font.cssVar})`]
+  }
+
+  const extend = {
+    colors,
+    borderRadius,
+    fontFamily,
+  }
+
+  const extendLiteral = toTypeScriptObjectLiteral(extend, 2)
+  const lines: string[] = []
+  lines.push(
+    "/* Auto-generated Tailwind theme extension. Do not edit manually. */",
+    "export const mmTailwindTheme = " + extendLiteral + " as const;",
+    "",
+    "export default mmTailwindTheme;"
+  )
+
+  return ensureTrailingNewline(lines.join("\n"))
+}
+
+function generateTypeScriptExports(tokens: TokenSource): string {
+  const tokensLiteral = toTypeScriptObjectLiteral(tokens, 2)
+
+  const lines: string[] = []
+  lines.push(
+    "/* Auto-generated token exports. Do not edit manually. */",
+    "",
+    "export type TokenMode = \"light\" | \"dark\" | (string & {});",
+    "",
+    "export interface BrandToken {",
+    "  cssVar: string;",
+    "  value: string;",
+    "  description?: string;",
+    "}",
+    "",
+    "export interface SemanticToken {",
+    "  cssVar: string;",
+    "  values: Record<string, string>;",
+    "  format?: \"raw\" | \"hsl\" | \"hsl-channel\";",
+    "  aliases?: { name: string; format?: \"raw\" | \"hsl\"; description?: string }[];",
+    "  description?: string;",
+    "}",
+    "",
+    "export interface CssValueToken {",
+    "  cssVar?: string;",
+    "  value: string;",
+    "  description?: string;",
+    "}",
+    "",
+    "export interface FontFile {",
+    "  path: string;",
+    "  format: string;",
+    "}",
+    "",
+    "export interface FontToken {",
+    "  name: string;",
+    "  cssVar: string;",
+    "  family: string;",
+    "  fallback: string[];",
+    "  weight?: number | string;",
+    "  style?: string;",
+    "  display?: string;",
+    "  files?: FontFile[];",
+    "  usage?: string;",
+    "}",
+    "",
+    "export interface TypographyTokens {",
+    "  fonts: FontToken[];",
+    "  sizes: {",
+    "    desktop: Record<string, string>;",
+    "    mobile?: Record<string, string>;",
+    "  };",
+    "  lineHeight: Record<string, string>;",
+    "  letterSpacing: Record<string, string>;",
+    "}",
+    "",
+    "export interface LayoutTokens {",
+    "  radius: Record<string, CssValueToken>;",
+    "  containers?: Record<string, CssValueToken>;",
+    "}",
+    "",
+    "export interface MotionTokens {",
+    "  transitions: Record<string, CssValueToken>;",
+    "  easings: Record<string, string>;",
+    "  animations: Record<string, { duration: string; easing: string; className: string }>;",
+    "}",
+    "",
+    "export interface TokenDictionary {",
+    "  meta: { name: string; version: string; updated?: string; description?: string };",
+    "  brand: Record<string, BrandToken>;",
+    "  semantic: Record<string, SemanticToken>;",
+    "  dataViz?: { charts?: Record<string, SemanticToken> };",
+    "  typography: TypographyTokens;",
+    "  layout: LayoutTokens;",
+    "  spacing: { padding: Record<string, string>; margin: Record<string, string>; gap: Record<string, string> };",
+    "  motion: MotionTokens;",
+    "  breakpoints?: Record<string, string | boolean>;",
+    "  zIndex?: Record<string, number>;",
+    "}",
+    "",
+    "export const tokens = " + tokensLiteral + " as const;",
+    "",
+    "export type Tokens = typeof tokens;",
+    "",
+    "export function getSemanticTokenValue(",
+    "  name: keyof typeof tokens.semantic,",
+    "  mode: TokenMode = \"light\"",
+    "): string {",
+    "  const token = tokens.semantic[name];",
+    "  if (!token) {",
+    "    throw new Error(`Unknown semantic token: ${String(name)}`);",
+    "  }",
+    "  return token.values[mode] ?? token.values.light ?? Object.values(token.values)[0];",
+    "}",
+    "",
+    "export function getChartTokenValue(",
+    "  name: keyof NonNullable<typeof tokens.dataViz>[\"charts\"],",
+    "  mode: TokenMode = \"light\"",
+    "): string {",
+    "  const charts = tokens.dataViz?.charts;",
+    "  if (!charts) {",
+    "    throw new Error(\"No chart tokens configured.\");",
+    "  }",
+    "  const token = charts[name as string];",
+    "  if (!token) {",
+    "    throw new Error(`Unknown chart token: ${String(name)}`);",
+    "  }",
+    "  return token.values[mode] ?? token.values.light ?? Object.values(token.values)[0];",
+    "}",
+    ""
+  )
+  return ensureTrailingNewline(lines.join("\n"))
+}
+
+function toTypeScriptObjectLiteral(value: unknown, indentLevel = 0): string {
+  const indent = (level: number) => " ".repeat(level)
+
+  if (value === null) return "null"
+  if (typeof value === "string") return JSON.stringify(value)
+  if (typeof value === "number" || typeof value === "boolean") return String(value)
+  if (Array.isArray(value)) {
+    if (value.length === 0) return "[]"
+    const items = value.map((item) => toTypeScriptObjectLiteral(item, indentLevel + 2))
+    return `[\n${indent(indentLevel + 2)}${items.join(
+      `,\n${indent(indentLevel + 2)}`
+    )}\n${indent(indentLevel)}]`
+  }
+  if (typeof value === "object") {
+    const entries = Object.entries(value as Record<string, unknown>)
+    if (entries.length === 0) return "{}"
+    const lines = entries.map(([key, val]) => {
+      const safeKey = /^[a-zA-Z_][a-zA-Z0-9_]*$/.test(key)
+        ? key
+        : JSON.stringify(key)
+      const serializedValue = toTypeScriptObjectLiteral(val, indentLevel + 2)
+      return `${indent(indentLevel + 2)}${safeKey}: ${serializedValue}`
+    })
+    return `{\n${lines.join(`,\n`)}\n${indent(indentLevel)}}`
+  }
+  return JSON.stringify(value)
+}
+
+async function readFileIfExists(filePath: string): Promise<string | null> {
+  try {
+    return await fs.readFile(filePath, "utf-8")
+  } catch (error: unknown) {
+    if (
+      typeof error === "object" &&
+      error !== null &&
+      "code" in error &&
+      (error as { code: string }).code === "ENOENT"
+    ) {
+      return null
+    }
+    throw error
+  }
+}
+
+function ensureTrailingNewline(content: string): string {
+  return content.endsWith("\n") ? content : `${content}\n`
+}
+
+void main()

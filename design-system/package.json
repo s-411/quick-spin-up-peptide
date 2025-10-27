@@ -1,0 +1,60 @@
+{
+  "name": "mm-design-system",
+  "version": "2.0.0",
+  "description": "MM Design System - Production-ready styling system with Tailwind CSS 4, shadcn/ui support, and light/dark mode",
+  "private": true,
+  "scripts": {
+    "tokens:build": "tsc --project scripts/tsconfig.json && node scripts/dist/build-tokens.js",
+    "tokens:check": "tsc --project scripts/tsconfig.json && node scripts/dist/build-tokens.js --check"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  },
+  "keywords": [
+    "design-system",
+    "tailwindcss",
+    "shadcn-ui",
+    "css",
+    "components",
+    "styling",
+    "dark-mode",
+    "light-mode"
+  ],
+  "dependencies": {
+    "@tailwindcss/postcss": "^4.1.0",
+    "tailwindcss": "^4.1.0",
+    "postcss": "^8.4.41",
+    "tailwindcss-animate": "^1.0.7",
+    "next-themes": "^0.2.1",
+    "clsx": "^2.0.0",
+    "tailwind-merge": "^2.0.0",
+    "lucide-react": "^0.294.0"
+  },
+  "peerDependencies": {
+    "next": ">=14.0.0",
+    "react": ">=18.0.0",
+    "react-dom": ">=18.0.0"
+  },
+  "devDependencies": {
+    "@types/node": "^20.0.0",
+    "@types/react": "^18.0.0",
+    "@types/react-dom": "^18.0.0",
+    "typescript": "^5.0.0"
+  },
+  "files": [
+    "styles/",
+    "fonts/",
+    "config/",
+    "lib/",
+    "components.json",
+    "tailwind.config.ts",
+    "postcss.config.mjs",
+    "README.md"
+  ],
+  "main": "styles/globals.css",
+  "repository": {
+    "type": "git",
+    "url": "MM Design System v2.0 - Production ready with shadcn/ui support"
+  },
+  "license": "MIT"
+}

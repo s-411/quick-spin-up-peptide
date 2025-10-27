@@ -1,0 +1,76 @@
+{
+  "products": [
+    {
+      "name": "Basic",
+      "description": "Perfect for individuals and small projects",
+      "prices": [
+        {
+          "nickname": "Basic Monthly",
+          "amount": 999,
+          "currency": "usd",
+          "interval": "month"
+        },
+        {
+          "nickname": "Basic Yearly",
+          "amount": 9990,
+          "currency": "usd",
+          "interval": "year"
+        }
+      ],
+      "features": [
+        "Up to 10 documents",
+        "1,000 chat messages/month",
+        "Email support",
+        "Basic analytics"
+      ]
+    },
+    {
+      "name": "Pro",
+      "description": "For professionals and growing teams",
+      "prices": [
+        {
+          "nickname": "Pro Monthly",
+          "amount": 2999,
+          "currency": "usd",
+          "interval": "month"
+        },
+        {
+          "nickname": "Pro Yearly",
+          "amount": 29990,
+          "currency": "usd",
+          "interval": "year"
+        }
+      ],
+      "features": [
+        "Unlimited documents",
+        "10,000 chat messages/month",
+        "Priority email support",
+        "Advanced analytics",
+        "Custom integrations",
+        "Team collaboration"
+      ],
+      "popular": true
+    },
+    {
+      "name": "Enterprise",
+      "description": "For large organizations with custom needs",
+      "prices": [
+        {
+          "nickname": "Enterprise Monthly",
+          "amount": 9999,
+          "currency": "usd",
+          "interval": "month"
+        }
+      ],
+      "features": [
+        "Everything in Pro",
+        "Unlimited chat messages",
+        "Dedicated support",
+        "Custom deployment options",
+        "SLA guarantee",
+        "Advanced security",
+        "API access"
+      ]
+    }
+  ]
+}

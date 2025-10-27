@@ -1,0 +1,258 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "MM Design Tokens Schema",
+  "type": "object",
+  "required": ["meta", "brand", "semantic", "typography", "layout", "spacing", "motion"],
+  "additionalProperties": false,
+  "properties": {
+    "$schema": {
+      "type": "string"
+    },
+    "meta": {
+      "type": "object",
+      "required": ["name", "version", "description"],
+      "additionalProperties": false,
+      "properties": {
+        "name": { "type": "string" },
+        "version": { "type": "string" },
+        "updated": { "type": "string" },
+        "description": { "type": "string" }
+      }
+    },
+    "brand": {
+      "type": "object",
+      "minProperties": 1,
+      "additionalProperties": {
+        "$ref": "#/$defs/brandToken"
+      }
+    },
+    "semantic": {
+      "type": "object",
+      "minProperties": 1,
+      "additionalProperties": {
+        "$ref": "#/$defs/semanticToken"
+      }
+    },
+    "dataViz": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "charts": {
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/$defs/semanticToken"
+          }
+        }
+      }
+    },
+    "typography": {
+      "type": "object",
+      "required": ["fonts", "sizes", "lineHeight", "letterSpacing"],
+      "additionalProperties": false,
+      "properties": {
+        "fonts": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/fontToken"
+          }
+        },
+        "sizes": {
+          "type": "object",
+          "required": ["desktop"],
+          "additionalProperties": false,
+          "properties": {
+            "desktop": {
+              "type": "object",
+              "additionalProperties": { "type": "string" }
+            },
+            "mobile": {
+              "type": "object",
+              "additionalProperties": { "type": "string" }
+            }
+          }
+        },
+        "lineHeight": {
+          "type": "object",
+          "additionalProperties": { "type": "string" }
+        },
+        "letterSpacing": {
+          "type": "object",
+          "additionalProperties": { "type": "string" }
+        }
+      }
+    },
+    "layout": {
+      "type": "object",
+      "required": ["radius"],
+      "additionalProperties": false,
+      "properties": {
+        "radius": {
+          "type": "object",
+          "minProperties": 1,
+          "additionalProperties": {
+            "$ref": "#/$defs/cssValueToken"
+          }
+        },
+        "containers": {
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/$defs/cssValueToken"
+          }
+        }
+      }
+    },
+    "spacing": {
+      "type": "object",
+      "required": ["padding", "margin", "gap"],
+      "additionalProperties": false,
+      "properties": {
+        "padding": {
+          "type": "object",
+          "additionalProperties": { "type": "string" }
+        },
+        "margin": {
+          "type": "object",
+          "additionalProperties": { "type": "string" }
+        },
+        "gap": {
+          "type": "object",
+          "additionalProperties": { "type": "string" }
+        }
+      }
+    },
+    "motion": {
+      "type": "object",
+      "required": ["transitions", "easings", "animations"],
+      "additionalProperties": false,
+      "properties": {
+        "transitions": {
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/$defs/cssValueToken"
+          }
+        },
+        "easings": {
+          "type": "object",
+          "additionalProperties": { "type": "string" }
+        },
+        "animations": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "object",
+            "required": ["duration", "easing", "className"],
+            "additionalProperties": false,
+            "properties": {
+              "duration": { "type": "string" },
+              "easing": { "type": "string" },
+              "className": { "type": "string" }
+            }
+          }
+        }
+      }
+    },
+    "breakpoints": {
+      "type": "object",
+      "additionalProperties": {
+        "oneOf": [
+          { "type": "string" },
+          { "type": "boolean" }
+        ]
+      }
+    },
+    "zIndex": {
+      "type": "object",
+      "additionalProperties": { "type": "integer" }
+    }
+  },
+  "$defs": {
+    "brandToken": {
+      "type": "object",
+      "required": ["cssVar", "value"],
+      "additionalProperties": false,
+      "properties": {
+        "cssVar": { "type": "string" },
+        "value": { "type": "string" },
+        "description": { "type": "string" }
+      }
+    },
+    "semanticToken": {
+      "type": "object",
+      "required": ["cssVar", "values"],
+      "additionalProperties": false,
+      "properties": {
+        "cssVar": { "type": "string" },
+        "values": {
+          "type": "object",
+          "minProperties": 1,
+          "additionalProperties": { "type": "string" }
+        },
+        "format": {
+          "type": "string",
+          "enum": ["raw", "hsl", "hsl-channel"]
+        },
+        "aliases": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": ["name"],
+            "additionalProperties": false,
+            "properties": {
+              "name": { "type": "string" },
+              "format": {
+                "type": "string",
+                "enum": ["raw", "hsl"]
+              },
+              "description": { "type": "string" }
+            }
+          }
+        },
+        "description": { "type": "string" }
+      }
+    },
+    "fontToken": {
+      "type": "object",
+      "required": ["name", "cssVar", "family", "fallback"],
+      "additionalProperties": false,
+      "properties": {
+        "name": { "type": "string" },
+        "cssVar": { "type": "string" },
+        "family": { "type": "string" },
+        "fallback": {
+          "type": "array",
+          "items": { "type": "string" }
+        },
+        "weight": {
+          "oneOf": [
+            { "type": "integer" },
+            { "type": "string" }
+          ]
+        },
+        "style": { "type": "string" },
+        "display": { "type": "string" },
+        "files": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": ["path", "format"],
+            "additionalProperties": false,
+            "properties": {
+              "path": { "type": "string" },
+              "format": { "type": "string" }
+            }
+          }
+        },
+        "usage": { "type": "string" }
+      }
+    },
+    "cssValueToken": {
+      "type": "object",
+      "required": ["value"],
+      "additionalProperties": false,
+      "properties": {
+        "cssVar": { "type": "string" },
+        "value": { "type": "string" },
+        "description": { "type": "string" }
+      }
+    }
+  }
+}

@@ -1,0 +1,299 @@
+# **🧪 Peptide & Injection Tracker – AI Coach Edition**
+
+**Version:** 1.0 – MVP (Day 1 PRD)
+
+**Author:** Steven Harris
+
+**Objective:** Build the foundational version of a cross-platform health tracking app that logs, schedules, and analyzes hormone, peptide, and injection routines, while preparing the data model for AI-driven contextual insights (RAG-ready).
+
+---
+
+## **1. Vision**
+
+The app empowers users managing self-administered protocols — TRT, peptides, GLP-1s, or similar injections — to track, schedule, and visualize their regimen with clinical precision.
+
+The core value proposition:
+
+> “Never miss a dose, never miscalculate a vial, and always know exactly what’s next.”
+> 
+
+By combining accurate tracking, advanced calculators, flexible scheduling, and local+cloud data integrity, the product becomes the single source of truth for injection management. In later phases, it gains an AI Coach that interprets the user’s data conversationally.
+
+---
+
+## **2. Goals**
+
+| **Category** | **Goal** |
+| --- | --- |
+| Core Functionality | Allow users to add medications, create vials, define protocols, and log injections. |
+| Precision | Automate conversion between mg/mL ↔ IU ↔ syringe units with built-in calculator. |
+| Reliability | Guarantee no data loss through hybrid local-cloud storage with manual export. |
+| UX | Enable fast one-tap logging and clear progress visualization. |
+| AI Readiness | Structure all entities for RAG retrieval; each event and record must be time-stamped and user-scoped. |
+| Scalability | Architecture supports multi-protocol and white-label theming without schema changes. |
+
+---
+
+## **3. Success Criteria**
+
+**MVP (Day-1 measurable outcomes):**
+
+- User can:
+    - Create a medication and its vial record.
+    - Define a protocol (frequency, cycle, off-weeks).
+    - Receive reminders for next injection.
+    - Log injections with dose, site, and notes.
+    - View adherence and timeline charts.
+    - Export history as CSV or PDF.
+    - Restore data successfully from backup.
+
+**User perception benchmarks:**
+
+- Setup < 3 minutes.
+- Logging flow < 3 taps.
+- Backup/restore tested by default.
+- No crashes or data loss in offline mode.
+
+---
+
+## **4. Core Entities (Schema Overview)**
+
+| **Entity** | **Key Fields** | **Relationships** | **Notes** |
+| --- | --- | --- | --- |
+| **User** | id, name, email, subscription_tier, theme | 1-many → Medications | Private partition for all child tables. |
+| **Medication** | id, user_id, name, type (peptide/TRT/GLP-1), units (mg/IU), notes | 1-many → Vials, Protocols | User-defined, flexible. |
+| **Vial** | id, medication_id, concentration, total_volume, remaining_volume, exp_date | belongs_to → Medication | Updated automatically after log. |
+| **Protocol** | id, medication_id, schedule_type (every X days / weekly / custom JSON), cycle_length, off_weeks, start_date | 1-many → Reminders | Core of scheduling logic. |
+| **Injection** | id, protocol_id, date_time, dose, units, site (enum), notes | belongs_to → Protocol | Base event for analytics. |
+| **Reminder** | id, injection_id (optional), next_due_date, recurrence_rule, status | belongs_to → Protocol | Triggers notifications. |
+| **Symptom** | id, date_time, severity (1-5), notes | belongs_to → User | Optional daily logging. |
+| **Measurement** | id, type (weight, waist, BP), value, unit, date_time | belongs_to → User | For charts. |
+| **Backup** | id, user_id, timestamp, json_snapshot | – | For export/restore. |
+| **AI_Context_View** | virtual view | joins User’s last 90d of logs, reminders, labs | For RAG summarization. |
+
+---
+
+## **5. User Flows**
+
+### **5.1 Onboarding**
+
+1. **Welcome screen:** choose dark/light theme → continue.
+2. **Create first medication:**
+    - Enter name (e.g., “BPC-157”), type, notes.
+    - Proceed to calculator flow.
+
+### **5.2 Add Medication + Vial (Calculator Flow)**
+
+1. Enter: vial concentration (e.g., 5 mg/5 mL).
+2. Enter: desired dose per injection (mg/IU/units).
+3. App computes:
+    - Dose volume (mL or units).
+    - Remaining doses per vial.
+    - Auto-creates vial record.
+4. Option: “Create protocol from this” → moves into schedule builder.
+
+### **5.3 Protocol Builder**
+
+1. Choose frequency pattern:
+    - **Every X days**
+    - **Weekly on specific days**
+    - **Custom JSON** (for complex cycles).
+2. Optional: define cycle/off-weeks and start date.
+3. Generate preview of next 4 weeks.
+4. Save protocol → auto-generate reminders.
+
+### **5.4 Logging Flow**
+
+1. Tap reminder notification or “Log Injection.”
+2. Pre-filled with protocol, dose, site rotation (auto-selected).
+3. User can adjust dose/site.
+4. Save → decreases vial remaining volume.
+5. Update adherence stats and next reminder.
+
+### **5.5 Charts / Analytics**
+
+- **Adherence Timeline:** completed vs. scheduled.
+- **Injections Calendar:** visual month grid.
+- **Measurements Graph:** weight/BP/labs over time.
+- **Remaining Doses Chart:** progress bar per vial.
+- Export button: CSV/PDF of all above.
+
+### **5.6 Backup & Restore**
+
+- Auto-backup to local encrypted file every 24h.
+- Cloud backup (optional toggle).
+- One-tap restore from backup screen.
+- Confirmation modal before overwrite.
+
+### **5.7 Settings**
+
+- Manage notifications, theme, data export, disclaimer.
+- Subscription status.
+- “Creator Branding” (logo, accent color, referral link).
+- Legal: “Informational only – not medical advice.”
+
+---
+
+## **6. Data Integrity Rules**
+
+- All records timestamped UTC.
+- Foreign key enforcement between Medications → Vials → Protocols → Injections.
+- Deleting a medication cascades safely (soft delete).
+- Local cache first, background sync second.
+- On write failure (offline), queue sync with exponential retry.
+- Versioning for Protocols: editing a protocol spawns new revision with supersedes_id.
+
+---
+
+## **7. AI Context Design (RAG Readiness)**
+
+Although not implemented Day-1, the schema must allow future embedding.
+
+**Design principles:**
+
+- Summaries derived nightly: last injection, adherence %, active protocols, upcoming doses, recent measurements, recent symptoms.
+- Stored in AI_Context_View as JSON object with user_id, summary_text, vector_embedding.
+- Read-only to the AI agent.
+- Prompts restricted to educational context (“Explain my schedule,” “Summarize last week’s adherence,” “Show my trends”).
+- Explicit system disclaimer: *“This chat does not give medical advice or modify schedules.”*
+
+---
+
+## **8. UX Principles**
+
+| **Guideline** | **Description** |
+| --- | --- |
+| **Fast Entry** | Logging should never exceed three taps. |
+| **Glanceable Data** | Dashboard shows “Next Dose,” “Last Dose,” “Adherence %,” “Remaining Vials.” |
+| **Safety First** | No automated dose suggestions; user always confirms manually. |
+| **Offline First** | Core features work without connectivity. |
+| **Theming** | All UI colors/branding abstracted in a theme layer for white-label. |
+| **Accessibility** | Large hit areas, dark/light themes, high-contrast mode. |
+
+---
+
+## **9. Privacy & Legal**
+
+- Data stored under user scope only.
+- Clear disclaimers: “For informational tracking only, not for diagnosis or treatment.”
+- Explicit opt-in for cloud sync and backups.
+- Delete account → purge all user data immediately.
+- Terms of Service and Privacy Policy accessible in-app.
+
+---
+
+## **10. Monetization Framework (Configurable)**
+
+**Free tier:**
+
+- 1 medication, simple reminders, manual logs, CSV export.
+
+**Pro tier:**
+
+- Unlimited meds, advanced calculators, flexible protocols, charts, cloud sync.
+
+**AI Coach tier (future):**
+
+- AI chat insights, auto summaries, doctor reports.
+
+Pricing tiers stored in config file for later integration.
+
+---
+
+## **11. White-Label Architecture**
+
+Each app instance may be parameterized by creator metadata:
+
+- creator_name
+- branding_colors
+- logo_url
+- referral_code
+- app_subtitle
+
+These parameters determine theming, App Store listing metadata, and affiliate attribution in analytics.
+
+---
+
+## **12. Analytics & Telemetry**
+
+- Anonymous events only (no PHI):
+    - app_open, add_med, log_injection, view_chart, export_csv, backup_success.
+- Used to track feature engagement and retention.
+
+---
+
+## **13. Future Expansion (outside Day-1 scope)**
+
+- AI Coach Chat interface (RAG).
+- Doctor Pack generator (PDF with trends).
+- Protocol template marketplace.
+- Health API sync (Apple/Google).
+- Community leaderboard / adherence badges.
+- B2B dashboard for creators.
+
+---
+
+## **14. Acceptance Criteria Summary**
+
+| **Function** | **Requirement** | **Status** |
+| --- | --- | --- |
+| Create medication/vial | Works end-to-end with calculator | ✅ |
+| Build protocol | Supports every X days / weekly | ✅ |
+| Log injection | Decrements vial + updates stats | ✅ |
+| Reminder notifications | Trigger on schedule | ✅ |
+| Charts | Display last 30d adherence + weight trend | ✅ |
+| Backup/restore | Reliable across sessions | ✅ |
+| Export | CSV generated successfully | ✅ |
+| UI theming | Switchable via config | ✅ |
+| Disclaimers | Shown before first protocol creation | ✅ |
+
+---
+
+## **15. Constraints & Dependencies**
+
+- No external medical APIs at MVP.
+- App-store safe content (no dosing guidance, no claims).
+- Offline persistence mandatory.
+- Modular enough to white-label multiple creators without code duplication.
+
+---
+
+## **16. Risks & Mitigations**
+
+| **Risk** | **Mitigation** |
+| --- | --- |
+| App store rejection (medical claims) | Keep language informational only; disclaimers; avoid dosage recommendations. |
+| Data loss | Triple-layer backup; local-first writes; restore validation. |
+| Complex protocol UX | Offer basic templates first, advanced JSON later. |
+| Performance under large logs | Paginated queries; summarized analytics. |
+
+---
+
+## **17. Narrative Example (User Story)**
+
+**User:** Alex, 37, on TRT and BPC-157.
+
+He adds both medications, sets TRT to “every 3.5 days,” BPC-157 “daily.”
+
+The app computes volumes, logs sites (L/R glute alternating).
+
+At day 15, Alex opens “Analytics” → sees adherence 93%.
+
+A reminder pops up: “Next injection due tomorrow 7:00 am.”
+
+Later, the AI Coach (v1.1) summarizes:
+
+> “You’ve completed 13 of 14 injections this month. Adherence steady at 93%. Your next due is in 22 hours. No data loss since last sync.”
+> 
+
+---
+
+## **18. Deliverables (Day-1 End State)**
+
+- Working mobile app (UI + local persistence + sync skeleton).
+- All core entities functional.
+- Functional calculator & schedule builder.
+- Reliable logging + reminder + charts.
+- Backup/restore + export validated.
+- White-label theming verified with sample config.
+- Disclaimers visible.

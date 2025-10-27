@@ -1,0 +1,17 @@
+{
+  "name": "mm-design-system-monorepo",
+  "private": true,
+  "workspaces": [
+    "design-system",
+    "demo-app",
+    "starter-app"
+  ],
+  "scripts": {
+    "tokens:build": "npm run tokens:build --workspace design-system",
+    "tokens:check": "npm run tokens:check --workspace design-system",
+    "lint": "npm run lint --workspace demo-app && npm run lint --workspace starter-app",
+    "lint:demo": "npm run lint --workspace demo-app",
+    "lint:starter": "npm run lint --workspace starter-app",
+    "dev:starter": "npm run dev --workspace starter-app"
+  }
+}

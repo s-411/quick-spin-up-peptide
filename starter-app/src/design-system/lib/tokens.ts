@@ -1,0 +1,661 @@
+/* Auto-generated token exports. Do not edit manually. */
+
+export type TokenMode = "light" | "dark" | (string & {});
+
+export interface BrandToken {
+  cssVar: string;
+  value: string;
+  description?: string;
+}
+
+export interface SemanticToken {
+  cssVar: string;
+  values: Record<string, string>;
+  format?: "raw" | "hsl" | "hsl-channel";
+  aliases?: { name: string; format?: "raw" | "hsl"; description?: string }[];
+  description?: string;
+}
+
+export interface CssValueToken {
+  cssVar?: string;
+  value: string;
+  description?: string;
+}
+
+export interface FontFile {
+  path: string;
+  format: string;
+}
+
+export interface FontToken {
+  name: string;
+  cssVar: string;
+  family: string;
+  fallback: string[];
+  weight?: number | string;
+  style?: string;
+  display?: string;
+  files?: FontFile[];
+  usage?: string;
+}
+
+export interface TypographyTokens {
+  fonts: FontToken[];
+  sizes: {
+    desktop: Record<string, string>;
+    mobile?: Record<string, string>;
+  };
+  lineHeight: Record<string, string>;
+  letterSpacing: Record<string, string>;
+}
+
+export interface LayoutTokens {
+  radius: Record<string, CssValueToken>;
+  containers?: Record<string, CssValueToken>;
+}
+
+export interface MotionTokens {
+  transitions: Record<string, CssValueToken>;
+  easings: Record<string, string>;
+  animations: Record<string, { duration: string; easing: string; className: string }>;
+}
+
+export interface TokenDictionary {
+  meta: { name: string; version: string; updated?: string; description?: string };
+  brand: Record<string, BrandToken>;
+  semantic: Record<string, SemanticToken>;
+  dataViz?: { charts?: Record<string, SemanticToken> };
+  typography: TypographyTokens;
+  layout: LayoutTokens;
+  spacing: { padding: Record<string, string>; margin: Record<string, string>; gap: Record<string, string> };
+  motion: MotionTokens;
+  breakpoints?: Record<string, string | boolean>;
+  zIndex?: Record<string, number>;
+}
+
+export const tokens = {
+    meta: {
+      name: "MM Design System Tokens",
+      version: "2.0.0",
+      updated: "2024-11-20",
+      description: "Canonical definition for the MM design system tokens. All generated CSS/TS artifacts are derived from this file."
+    },
+    brand: {
+      primary: {
+        cssVar: "--color-mm-primary",
+        value: "#337def",
+        description: "Primary brand blue used for CTAs and key highlights."
+      },
+      secondary: {
+        cssVar: "--color-mm-secondary",
+        value: "#fcc729",
+        description: "Secondary accent yellow used for supporting highlights."
+      },
+      dark: {
+        cssVar: "--color-mm-dark",
+        value: "#1f1f1f",
+        description: "Primary dark background."
+      },
+      dark2: {
+        cssVar: "--color-mm-dark2",
+        value: "#2a2a2a",
+        description: "Dark background variant for layers."
+      },
+      white: {
+        cssVar: "--color-mm-white",
+        value: "#ffffff",
+        description: "Pure white for text and backgrounds."
+      },
+      gray: {
+        cssVar: "--color-mm-gray",
+        value: "#ababab",
+        description: "Neutral gray for borders and text."
+      }
+    },
+    semantic: {
+      background: {
+        cssVar: "--background",
+        format: "hsl-channel",
+        aliases: [
+          {
+            name: "--color-background",
+            format: "hsl"
+          }
+        ],
+        values: {
+          light: "0 0% 100%",
+          dark: "0 0% 12%"
+        },
+        description: "Base page background."
+      },
+      foreground: {
+        cssVar: "--foreground",
+        format: "hsl-channel",
+        aliases: [
+          {
+            name: "--color-foreground",
+            format: "hsl"
+          }
+        ],
+        values: {
+          light: "0 0% 3.9%",
+          dark: "0 0% 100%"
+        },
+        description: "Primary text color."
+      },
+      card: {
+        cssVar: "--card",
+        format: "hsl-channel",
+        aliases: [
+          {
+            name: "--color-card",
+            format: "hsl"
+          }
+        ],
+        values: {
+          light: "0 0% 100%",
+          dark: "0 0% 16%"
+        },
+        description: "Card and surface backgrounds."
+      },
+      cardForeground: {
+        cssVar: "--card-foreground",
+        format: "hsl-channel",
+        aliases: [
+          {
+            name: "--color-card-foreground",
+            format: "hsl"
+          }
+        ],
+        values: {
+          light: "0 0% 3.9%",
+          dark: "0 0% 100%"
+        },
+        description: "Text on card surfaces."
+      },
+      popover: {
+        cssVar: "--popover",
+        format: "hsl-channel",
+        aliases: [
+          {
+            name: "--color-popover",
+            format: "hsl"
+          }
+        ],
+        values: {
+          light: "0 0% 100%",
+          dark: "0 0% 16%"
+        },
+        description: "Popover and tooltip background."
+      },
+      popoverForeground: {
+        cssVar: "--popover-foreground",
+        format: "hsl-channel",
+        aliases: [
+          {
+            name: "--color-popover-foreground",
+            format: "hsl"
+          }
+        ],
+        values: {
+          light: "0 0% 3.9%",
+          dark: "0 0% 100%"
+        },
+        description: "Text inside popovers and tooltips."
+      },
+      primary: {
+        cssVar: "--primary",
+        format: "hsl-channel",
+        aliases: [
+          {
+            name: "--color-primary",
+            format: "hsl"
+          }
+        ],
+        values: {
+          light: "213 85% 56%",
+          dark: "213 85% 56%"
+        },
+        description: "Primary interactive color derived from brand blue."
+      },
+      primaryForeground: {
+        cssVar: "--primary-foreground",
+        format: "hsl-channel",
+        aliases: [
+          {
+            name: "--color-primary-foreground",
+            format: "hsl"
+          }
+        ],
+        values: {
+          light: "0 0% 100%",
+          dark: "0 0% 100%"
+        },
+        description: "Text on primary surfaces."
+      },
+      secondary: {
+        cssVar: "--secondary",
+        format: "hsl-channel",
+        aliases: [
+          {
+            name: "--color-secondary",
+            format: "hsl"
+          }
+        ],
+        values: {
+          light: "46 97% 58%",
+          dark: "46 97% 58%"
+        },
+        description: "Secondary interactive color derived from brand yellow."
+      },
+      secondaryForeground: {
+        cssVar: "--secondary-foreground",
+        format: "hsl-channel",
+        aliases: [
+          {
+            name: "--color-secondary-foreground",
+            format: "hsl"
+          }
+        ],
+        values: {
+          light: "0 0% 12%",
+          dark: "0 0% 100%"
+        },
+        description: "Text on secondary surfaces."
+      },
+      muted: {
+        cssVar: "--muted",
+        format: "hsl-channel",
+        aliases: [
+          {
+            name: "--color-muted",
+            format: "hsl"
+          }
+        ],
+        values: {
+          light: "0 0% 96.1%",
+          dark: "0 0% 18%"
+        },
+        description: "Muted background color for subtle UI."
+      },
+      mutedForeground: {
+        cssVar: "--muted-foreground",
+        format: "hsl-channel",
+        aliases: [
+          {
+            name: "--color-muted-foreground",
+            format: "hsl"
+          }
+        ],
+        values: {
+          light: "0 0% 45.1%",
+          dark: "0 0% 67%"
+        },
+        description: "Text on muted surfaces."
+      },
+      accent: {
+        cssVar: "--accent",
+        format: "hsl-channel",
+        aliases: [
+          {
+            name: "--color-accent",
+            format: "hsl"
+          }
+        ],
+        values: {
+          light: "0 0% 96.1%",
+          dark: "0 0% 18%"
+        },
+        description: "Accent and hover states."
+      },
+      accentForeground: {
+        cssVar: "--accent-foreground",
+        format: "hsl-channel",
+        aliases: [
+          {
+            name: "--color-accent-foreground",
+            format: "hsl"
+          }
+        ],
+        values: {
+          light: "0 0% 9%",
+          dark: "0 0% 100%"
+        },
+        description: "Text on accent surfaces."
+      },
+      destructive: {
+        cssVar: "--destructive",
+        format: "hsl-channel",
+        aliases: [
+          {
+            name: "--color-destructive",
+            format: "hsl"
+          }
+        ],
+        values: {
+          light: "0 84.2% 60.2%",
+          dark: "0 100% 71%"
+        },
+        description: "Error/destructive background."
+      },
+      destructiveForeground: {
+        cssVar: "--destructive-foreground",
+        format: "hsl-channel",
+        aliases: [
+          {
+            name: "--color-destructive-foreground",
+            format: "hsl"
+          }
+        ],
+        values: {
+          light: "0 0% 98%",
+          dark: "0 0% 100%"
+        },
+        description: "Text on destructive surfaces."
+      },
+      border: {
+        cssVar: "--border",
+        format: "hsl-channel",
+        aliases: [
+          {
+            name: "--color-border",
+            format: "hsl"
+          }
+        ],
+        values: {
+          light: "0 0% 89.8%",
+          dark: "0 0% 20%"
+        },
+        description: "Default border color."
+      },
+      input: {
+        cssVar: "--input",
+        format: "hsl-channel",
+        aliases: [
+          {
+            name: "--color-input",
+            format: "hsl"
+          }
+        ],
+        values: {
+          light: "0 0% 89.8%",
+          dark: "0 0% 20%"
+        },
+        description: "Input border/background color."
+      },
+      ring: {
+        cssVar: "--ring",
+        format: "hsl-channel",
+        aliases: [
+          {
+            name: "--color-ring",
+            format: "hsl"
+          }
+        ],
+        values: {
+          light: "213 85% 56%",
+          dark: "213 85% 56%"
+        },
+        description: "Focus ring color."
+      }
+    },
+    dataViz: {
+      charts: {
+        chart1: {
+          cssVar: "--chart-1",
+          format: "hsl-channel",
+          values: {
+            light: "12 76% 61%",
+            dark: "220 70% 50%"
+          },
+          description: "Primary chart color."
+        },
+        chart2: {
+          cssVar: "--chart-2",
+          format: "hsl-channel",
+          values: {
+            light: "173 58% 39%",
+            dark: "160 60% 45%"
+          },
+          description: "Secondary chart color."
+        },
+        chart3: {
+          cssVar: "--chart-3",
+          format: "hsl-channel",
+          values: {
+            light: "197 37% 24%",
+            dark: "30 80% 55%"
+          },
+          description: "Tertiary chart color."
+        },
+        chart4: {
+          cssVar: "--chart-4",
+          format: "hsl-channel",
+          values: {
+            light: "43 74% 66%",
+            dark: "280 65% 60%"
+          },
+          description: "Quaternary chart color."
+        },
+        chart5: {
+          cssVar: "--chart-5",
+          format: "hsl-channel",
+          values: {
+            light: "27 87% 67%",
+            dark: "340 75% 55%"
+          },
+          description: "Quinary chart color."
+        }
+      }
+    },
+    typography: {
+      fonts: [
+        {
+          name: "heading",
+          cssVar: "--font-family-heading",
+          family: "National2Condensed",
+          fallback: [
+            "'Arial Black'",
+            "sans-serif"
+          ],
+          weight: 700,
+          style: "normal",
+          display: "swap",
+          files: [
+            {
+              path: "/fonts/National-2-Condensed-Bold.ttf",
+              format: "truetype"
+            }
+          ],
+          usage: "All headings (h1-h6), marquee text, strong emphasis."
+        },
+        {
+          name: "body",
+          cssVar: "--font-family-body",
+          family: "ESKlarheit",
+          fallback: [
+            "'Inter'",
+            "system-ui",
+            "sans-serif"
+          ],
+          weight: 400,
+          style: "normal",
+          display: "swap",
+          files: [
+            {
+              path: "/fonts/ESKlarheitGrotesk-Rg.otf",
+              format: "opentype"
+            }
+          ],
+          usage: "Body copy, UI components, long-form text."
+        }
+      ],
+      sizes: {
+        desktop: {
+          h1: "2.5rem",
+          h2: "2rem",
+          h3: "1.5rem",
+          h4: "1.25rem",
+          h5: "1rem",
+          h6: "0.875rem",
+          body: "1rem",
+          small: "0.875rem",
+          xs: "0.75rem"
+        },
+        mobile: {
+          h1: "2rem",
+          h2: "1.5rem",
+          h3: "1.25rem"
+        }
+      },
+      lineHeight: {
+        heading: "1.2",
+        body: "1.6"
+      },
+      letterSpacing: {
+        heading: "-0.02em",
+        body: "0",
+        uppercase: "0.05em"
+      }
+    },
+    layout: {
+      radius: {
+        mm: {
+          cssVar: "--radius-mm",
+          value: "100px",
+          description: "Signature pill radius used for primary buttons."
+        },
+        card: {
+          cssVar: "--radius-card",
+          value: "0.5rem",
+          description: "Default card/modal radius."
+        },
+        input: {
+          cssVar: "--radius-input",
+          value: "0.5rem",
+          description: "Form element radius aligned with cards."
+        },
+        base: {
+          cssVar: "--radius",
+          value: "0.5rem",
+          description: "General purpose radius used by shadcn/ui utilities."
+        }
+      },
+      containers: {
+        "max-w-6xl": {
+          value: "72rem",
+          description: "Main content width (1152px)."
+        },
+        "max-w-lg": {
+          value: "32rem",
+          description: "Forms and modal width (512px)."
+        }
+      }
+    },
+    spacing: {
+      padding: {
+        button: "0.75rem 1.5rem",
+        input: "0.75rem",
+        card: "1.5rem",
+        modal: "2rem",
+        section: "2rem 0"
+      },
+      margin: {
+        component: "1rem 0",
+        section: "2rem 0",
+        element: "0.5rem 0"
+      },
+      gap: {
+        tight: "0.25rem",
+        normal: "0.5rem",
+        comfortable: "0.75rem",
+        loose: "1rem",
+        spacious: "1.5rem"
+      }
+    },
+    motion: {
+      transitions: {
+        fast: {
+          cssVar: "--transition-fast",
+          value: "0.2s"
+        },
+        medium: {
+          cssVar: "--transition-medium",
+          value: "0.3s"
+        },
+        slow: {
+          cssVar: "--transition-slow",
+          value: "0.5s"
+        }
+      },
+      easings: {
+        default: "ease",
+        inOut: "ease-in-out",
+        out: "ease-out",
+        cubic: "cubic-bezier(0.4, 0, 0.6, 1)"
+      },
+      animations: {
+        fadeIn: {
+          duration: "0.5s",
+          easing: "ease-in-out",
+          className: "animate-fade-in"
+        },
+        slideUp: {
+          duration: "0.3s",
+          easing: "ease-out",
+          className: "animate-slide-up"
+        },
+        slideIn: {
+          duration: "0.3s",
+          easing: "ease-out",
+          className: "animate-slide-in"
+        },
+        pulse: {
+          duration: "2s",
+          easing: "cubic-bezier(0.4, 0, 0.6, 1)",
+          className: "animate-pulse-custom"
+        }
+      }
+    },
+    breakpoints: {
+      mobile: "max-width: 768px",
+      tablet: "769px to 1024px",
+      desktop: "min-width: 1025px",
+      mobileFirst: true
+    },
+    zIndex: {
+      modal: 50,
+      backdrop: 40,
+      navigation: 30,
+      dropdown: 20,
+      tooltip: 10
+    }
+  } as const;
+
+export type Tokens = typeof tokens;
+
+export function getSemanticTokenValue(
+  name: keyof typeof tokens.semantic,
+  mode: TokenMode = "light"
+): string {
+  const token = tokens.semantic[name];
+  if (!token) {
+    throw new Error(`Unknown semantic token: ${String(name)}`);
+  }
+  return token.values[mode] ?? token.values.light ?? Object.values(token.values)[0];
+}
+
+export function getChartTokenValue(
+  name: keyof NonNullable<typeof tokens.dataViz>["charts"],
+  mode: TokenMode = "light"
+): string {
+  const charts = tokens.dataViz?.charts;
+  if (!charts) {
+    throw new Error("No chart tokens configured.");
+  }
+  const token = charts[name as string];
+  if (!token) {
+    throw new Error(`Unknown chart token: ${String(name)}`);
+  }
+  return token.values[mode] ?? token.values.light ?? Object.values(token.values)[0];
+}

@@ -1,0 +1,460 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Design System Showcase</title>
+  <link rel="stylesheet" href="styles/globals.css">
+</head>
+<body>
+  <!-- Theme Toggle (positioned absolutely) -->
+  <div style="position: fixed; top: 1rem; right: 1rem; z-index: 100;">
+    <button class="btn-secondary" id="theme-toggle">
+      <span id="theme-icon">🌙</span> Toggle Theme
+    </button>
+  </div>
+
+  <!-- Main Container -->
+  <div style="max-width: 1400px; margin: 0 auto; padding: 2rem;">
+
+    <!-- Hero Section -->
+    <header style="margin-bottom: 4rem;">
+      <h1 class="animate-fade-in">Design System Showcase</h1>
+      <p style="font-size: 1.25rem; color: var(--color-mm-gray); margin-top: 1rem;">
+        A comprehensive showcase of all design elements, components, and styles.
+      </p>
+    </header>
+
+    <!-- Typography Section -->
+    <section style="margin-bottom: 4rem;">
+      <h2 class="text-mm-blue">Typography</h2>
+      <div class="divider"></div>
+
+      <div style="display: grid; gap: 2rem;">
+        <div>
+          <h1>Heading 1 - National2Condensed Bold</h1>
+          <h2>Heading 2 - National2Condensed Bold</h2>
+          <h3>Heading 3 - National2Condensed Bold</h3>
+          <h4>Heading 4 - National2Condensed Bold</h4>
+          <h5>Heading 5 - National2Condensed Bold</h5>
+          <h6>Heading 6 - National2Condensed Bold</h6>
+        </div>
+
+        <div>
+          <p class="font-body" style="font-size: 1.125rem;">
+            Large body text - ESKlarheit Regular. This is the primary body font used throughout the design system.
+          </p>
+          <p class="font-body">
+            Regular body text - ESKlarheit Regular. Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+            Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+          </p>
+          <p class="font-body" style="font-size: 0.875rem;">
+            Small body text - ESKlarheit Regular. Used for captions, labels, and secondary information.
+          </p>
+        </div>
+
+        <div style="display: flex; gap: 1rem; flex-wrap: wrap;">
+          <span class="text-mm-blue">Blue Text</span>
+          <span class="text-mm-white">White Text</span>
+          <span class="text-mm-gray">Gray Text</span>
+          <span class="text-error">Error Text</span>
+          <span class="text-success">Success Text</span>
+          <span class="text-warning">Warning Text</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- Buttons Section -->
+    <section style="margin-bottom: 4rem;">
+      <h2 class="text-mm-blue">Buttons</h2>
+      <div class="divider"></div>
+
+      <div style="display: flex; gap: 1rem; flex-wrap: wrap; align-items: center;">
+        <button class="btn-mm">Primary Button</button>
+        <button class="btn-mm" disabled>Disabled Primary</button>
+        <button class="btn-secondary">Secondary Button</button>
+        <button class="btn-mm" style="font-size: 0.875rem; padding: 0.5rem 1rem;">Small Primary</button>
+        <button class="btn-mm" style="font-size: 1.25rem; padding: 1rem 2rem;">Large Primary</button>
+      </div>
+    </section>
+
+    <!-- Cards Section -->
+    <section style="margin-bottom: 4rem;">
+      <h2 class="text-mm-blue">Cards & Containers</h2>
+      <div class="divider"></div>
+
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 1.5rem;">
+        <div class="card-mm">
+          <h3>Standard Card</h3>
+          <p style="color: var(--color-mm-gray); margin-top: 0.5rem;">
+            This is a standard card component with hover effects. Border color changes on hover.
+          </p>
+          <button class="btn-mm" style="margin-top: 1rem;">Card Action</button>
+        </div>
+
+        <div class="glass-card">
+          <h3>Glass Card</h3>
+          <p style="color: var(--color-mm-gray); margin-top: 0.5rem;">
+            This card has a glass-morphism effect with backdrop blur and transparency.
+          </p>
+          <button class="btn-secondary" style="margin-top: 1rem;">Learn More</button>
+        </div>
+
+        <div class="card-mm animate-slide-up">
+          <h3>Animated Card</h3>
+          <p style="color: var(--color-mm-gray); margin-top: 0.5rem;">
+            This card slides up on page load with the animate-slide-up class.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Form Elements Section -->
+    <section style="margin-bottom: 4rem;">
+      <h2 class="text-mm-blue">Form Elements</h2>
+      <div class="divider"></div>
+
+      <div class="card-mm" style="max-width: 600px;">
+        <form style="display: grid; gap: 1.5rem;">
+          <div>
+            <label style="display: block; margin-bottom: 0.5rem; font-weight: 500;">Text Input</label>
+            <input type="text" class="input-mm" placeholder="Enter your name...">
+          </div>
+
+          <div>
+            <label style="display: block; margin-bottom: 0.5rem; font-weight: 500;">Email Input</label>
+            <input type="email" class="input-mm" placeholder="your@email.com">
+          </div>
+
+          <div>
+            <label style="display: block; margin-bottom: 0.5rem; font-weight: 500;">Select Dropdown</label>
+            <select class="select-mm">
+              <option>Option 1</option>
+              <option>Option 2</option>
+              <option>Option 3</option>
+            </select>
+          </div>
+
+          <div>
+            <label style="display: block; margin-bottom: 0.5rem; font-weight: 500;">Disabled Input</label>
+            <input type="text" class="input-mm" placeholder="Disabled..." disabled>
+          </div>
+
+          <div>
+            <label style="display: block; margin-bottom: 0.5rem; font-weight: 500;">Textarea</label>
+            <textarea class="input-mm" rows="4" placeholder="Enter your message..."></textarea>
+          </div>
+
+          <div style="display: flex; gap: 1rem;">
+            <button type="submit" class="btn-mm">Submit Form</button>
+            <button type="reset" class="btn-secondary">Reset</button>
+          </div>
+        </form>
+      </div>
+    </section>
+
+    <!-- Rating Tiles Section -->
+    <section style="margin-bottom: 4rem;">
+      <h2 class="text-mm-blue">Rating Tiles</h2>
+      <div class="divider"></div>
+
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(120px, 1fr)); gap: 1rem; max-width: 800px;">
+        <button class="rating-tile">⭐ 1 Star</button>
+        <button class="rating-tile">⭐⭐ 2 Stars</button>
+        <button class="rating-tile selected">⭐⭐⭐ 3 Stars</button>
+        <button class="rating-tile">⭐⭐⭐⭐ 4 Stars</button>
+        <button class="rating-tile">⭐⭐⭐⭐⭐ 5 Stars</button>
+      </div>
+    </section>
+
+    <!-- Navigation Section -->
+    <section style="margin-bottom: 4rem;">
+      <h2 class="text-mm-blue">Navigation Components</h2>
+      <div class="divider"></div>
+
+      <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 2rem;">
+        <!-- Sidebar Navigation -->
+        <div class="card-mm">
+          <h4 style="margin-bottom: 1rem;">Sidebar Navigation</h4>
+          <nav style="display: flex; flex-direction: column; gap: 0.5rem;">
+            <a href="#" class="sidebar-item active">
+              <span>🏠</span>
+              <span>Dashboard</span>
+            </a>
+            <a href="#" class="sidebar-item">
+              <span>📊</span>
+              <span>Analytics</span>
+            </a>
+            <a href="#" class="sidebar-item">
+              <span>⚙️</span>
+              <span>Settings</span>
+            </a>
+            <a href="#" class="sidebar-item">
+              <span>👤</span>
+              <span>Profile</span>
+            </a>
+          </nav>
+        </div>
+
+        <!-- Mobile Navigation -->
+        <div class="card-mm">
+          <h4 style="margin-bottom: 1rem;">Mobile Navigation</h4>
+          <nav style="display: flex; justify-content: space-around; background: var(--color-mm-dark2); padding: 1rem; border-radius: var(--radius-card);">
+            <a href="#" class="mobile-nav-item active">
+              <span style="font-size: 1.5rem;">🏠</span>
+              <span>Home</span>
+            </a>
+            <a href="#" class="mobile-nav-item">
+              <span style="font-size: 1.5rem;">🔍</span>
+              <span>Search</span>
+            </a>
+            <a href="#" class="mobile-nav-item">
+              <span style="font-size: 1.5rem;">➕</span>
+              <span>Add</span>
+            </a>
+            <a href="#" class="mobile-nav-item">
+              <span style="font-size: 1.5rem;">👤</span>
+              <span>Profile</span>
+            </a>
+          </nav>
+        </div>
+      </div>
+    </section>
+
+    <!-- Table Section -->
+    <section style="margin-bottom: 4rem;">
+      <h2 class="text-mm-blue">Tables</h2>
+      <div class="divider"></div>
+
+      <div class="card-mm" style="overflow-x: auto;">
+        <table class="table-mm">
+          <thead>
+            <tr>
+              <th>Name</th>
+              <th>Email</th>
+              <th>Status</th>
+              <th>Role</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>John Doe</td>
+              <td>john@example.com</td>
+              <td><span class="text-success">Active</span></td>
+              <td>Admin</td>
+            </tr>
+            <tr>
+              <td>Jane Smith</td>
+              <td>jane@example.com</td>
+              <td><span class="text-success">Active</span></td>
+              <td>User</td>
+            </tr>
+            <tr>
+              <td>Bob Johnson</td>
+              <td>bob@example.com</td>
+              <td><span class="text-error">Inactive</span></td>
+              <td>User</td>
+            </tr>
+            <tr>
+              <td>Alice Williams</td>
+              <td>alice@example.com</td>
+              <td><span class="text-warning">Pending</span></td>
+              <td>Moderator</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- Animations Section -->
+    <section style="margin-bottom: 4rem;">
+      <h2 class="text-mm-blue">Animations</h2>
+      <div class="divider"></div>
+
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem;">
+        <div class="card-mm animate-fade-in">
+          <h4>Fade In</h4>
+          <p style="color: var(--color-mm-gray); font-size: 0.875rem;">animate-fade-in</p>
+        </div>
+        <div class="card-mm animate-slide-up">
+          <h4>Slide Up</h4>
+          <p style="color: var(--color-mm-gray); font-size: 0.875rem;">animate-slide-up</p>
+        </div>
+        <div class="card-mm animate-slide-in">
+          <h4>Slide In</h4>
+          <p style="color: var(--color-mm-gray); font-size: 0.875rem;">animate-slide-in</p>
+        </div>
+        <div class="card-mm">
+          <div class="animate-pulse" style="height: 60px; background: var(--color-mm-blue); border-radius: var(--radius-card);"></div>
+          <p style="color: var(--color-mm-gray); font-size: 0.875rem; margin-top: 0.5rem;">animate-pulse</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Skeleton Loaders Section -->
+    <section style="margin-bottom: 4rem;">
+      <h2 class="text-mm-blue">Loading States</h2>
+      <div class="divider"></div>
+
+      <div class="card-mm">
+        <h4 style="margin-bottom: 1rem;">Skeleton Loaders</h4>
+        <div style="display: grid; gap: 1rem;">
+          <div class="skeleton" style="height: 24px; width: 60%; border-radius: 4px;"></div>
+          <div class="skeleton" style="height: 16px; width: 100%; border-radius: 4px;"></div>
+          <div class="skeleton" style="height: 16px; width: 90%; border-radius: 4px;"></div>
+          <div class="skeleton" style="height: 16px; width: 80%; border-radius: 4px;"></div>
+          <div style="display: flex; gap: 1rem; margin-top: 1rem;">
+            <div class="skeleton" style="height: 100px; width: 100px; border-radius: var(--radius-card);"></div>
+            <div style="flex: 1; display: grid; gap: 0.5rem;">
+              <div class="skeleton" style="height: 20px; width: 70%; border-radius: 4px;"></div>
+              <div class="skeleton" style="height: 16px; width: 100%; border-radius: 4px;"></div>
+              <div class="skeleton" style="height: 16px; width: 85%; border-radius: 4px;"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Color Palette Section -->
+    <section style="margin-bottom: 4rem;">
+      <h2 class="text-mm-blue">Color Palette</h2>
+      <div class="divider"></div>
+
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 1rem;">
+        <div class="card-mm">
+          <div class="bg-mm-blue" style="height: 80px; border-radius: var(--radius-card); margin-bottom: 0.5rem;"></div>
+          <p style="font-weight: 500;">MM Blue</p>
+          <code style="font-size: 0.75rem; color: var(--color-mm-gray);">#00A1FE</code>
+        </div>
+        <div class="card-mm">
+          <div class="bg-mm-dark" style="height: 80px; border-radius: var(--radius-card); margin-bottom: 0.5rem; border: 1px solid var(--color-mm-gray);"></div>
+          <p style="font-weight: 500;">MM Dark</p>
+          <code style="font-size: 0.75rem; color: var(--color-mm-gray);">#1f1f1f</code>
+        </div>
+        <div class="card-mm">
+          <div class="bg-mm-dark2" style="height: 80px; border-radius: var(--radius-card); margin-bottom: 0.5rem; border: 1px solid var(--color-mm-gray);"></div>
+          <p style="font-weight: 500;">MM Dark 2</p>
+          <code style="font-size: 0.75rem; color: var(--color-mm-gray);">#2a2a2a</code>
+        </div>
+        <div class="card-mm">
+          <div class="bg-mm-white" style="height: 80px; border-radius: var(--radius-card); margin-bottom: 0.5rem;"></div>
+          <p style="font-weight: 500;">MM White</p>
+          <code style="font-size: 0.75rem; color: var(--color-mm-gray);">#ffffff</code>
+        </div>
+        <div class="card-mm">
+          <div class="bg-mm-gray" style="height: 80px; border-radius: var(--radius-card); margin-bottom: 0.5rem;"></div>
+          <p style="font-weight: 500;">MM Gray</p>
+          <code style="font-size: 0.75rem; color: var(--color-mm-gray);">#ababab</code>
+        </div>
+      </div>
+    </section>
+
+    <!-- Spacing & Layout Section -->
+    <section style="margin-bottom: 4rem;">
+      <h2 class="text-mm-blue">Spacing & Layout</h2>
+      <div class="divider"></div>
+
+      <div class="card-mm">
+        <h4 style="margin-bottom: 1rem;">Border Radius Variants</h4>
+        <div style="display: flex; gap: 1rem; flex-wrap: wrap; align-items: center;">
+          <div class="rounded-mm bg-mm-blue" style="width: 120px; height: 60px; display: flex; align-items: center; justify-content: center; color: var(--color-mm-dark); font-weight: 500;">
+            Rounded MM
+          </div>
+          <div class="rounded-card bg-mm-blue" style="width: 120px; height: 60px; display: flex; align-items: center; justify-content: center; color: var(--color-mm-dark); font-weight: 500;">
+            Card
+          </div>
+          <div class="rounded-input bg-mm-blue" style="width: 120px; height: 60px; display: flex; align-items: center; justify-content: center; color: var(--color-mm-dark); font-weight: 500;">
+            Input
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Modal Trigger Section -->
+    <section style="margin-bottom: 4rem;">
+      <h2 class="text-mm-blue">Modal Example</h2>
+      <div class="divider"></div>
+
+      <button class="btn-mm" id="open-modal">Open Modal</button>
+    </section>
+
+    <!-- Footer -->
+    <footer style="margin-top: 6rem; padding-top: 2rem; border-top: 1px solid color-mix(in srgb, var(--color-mm-gray) 20%, transparent); text-align: center;">
+      <p style="color: var(--color-mm-gray);">Design System Showcase • All styles from globals.css</p>
+    </footer>
+
+  </div>
+
+  <!-- Modal (hidden by default) -->
+  <div id="modal" style="display: none;">
+    <div class="modal-backdrop" id="modal-backdrop"></div>
+    <div class="modal-content">
+      <div class="modal-header">
+        <h3>Example Modal</h3>
+        <button class="modal-close" id="close-modal">✕</button>
+      </div>
+      <div>
+        <p style="color: var(--color-mm-gray); margin-bottom: 1rem;">
+          This is an example modal using the modal styles from globals.css. It includes a backdrop with blur effect and smooth animations.
+        </p>
+        <div style="display: grid; gap: 1rem;">
+          <input type="text" class="input-mm" placeholder="Example input in modal...">
+          <div style="display: flex; gap: 1rem; justify-content: flex-end;">
+            <button class="btn-secondary" id="close-modal-btn">Cancel</button>
+            <button class="btn-mm">Confirm</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- JavaScript for interactive elements -->
+  <script>
+    // Theme Toggle
+    const themeToggle = document.getElementById('theme-toggle');
+    const themeIcon = document.getElementById('theme-icon');
+    let isDark = true;
+
+    themeToggle.addEventListener('click', () => {
+      isDark = !isDark;
+      if (isDark) {
+        document.body.style.backgroundColor = 'var(--color-mm-dark)';
+        document.body.style.color = 'var(--color-mm-white)';
+        themeIcon.textContent = '🌙';
+      } else {
+        document.body.style.backgroundColor = 'var(--color-mm-white)';
+        document.body.style.color = 'var(--color-mm-dark)';
+        themeIcon.textContent = '☀️';
+      }
+    });
+
+    // Modal functionality
+    const modal = document.getElementById('modal');
+    const openModalBtn = document.getElementById('open-modal');
+    const closeModalBtn = document.getElementById('close-modal');
+    const closeModalBtnAlt = document.getElementById('close-modal-btn');
+    const modalBackdrop = document.getElementById('modal-backdrop');
+
+    openModalBtn.addEventListener('click', () => {
+      modal.style.display = 'block';
+    });
+
+    const closeModal = () => {
+      modal.style.display = 'none';
+    };
+
+    closeModalBtn.addEventListener('click', closeModal);
+    closeModalBtnAlt.addEventListener('click', closeModal);
+    modalBackdrop.addEventListener('click', closeModal);
+
+    // Rating tile interactivity
+    const ratingTiles = document.querySelectorAll('.rating-tile');
+    ratingTiles.forEach(tile => {
+      tile.addEventListener('click', () => {
+        ratingTiles.forEach(t => t.classList.remove('selected'));
+        tile.classList.add('selected');
+      });
+    });
+  </script>
+</body>
+</html>

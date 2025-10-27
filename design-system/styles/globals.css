@@ -1,0 +1,212 @@
+@import "tailwindcss";
+@import "./color-tokens.css";
+
+/*
+ * Auto-generated global styles. Do not edit manually.
+ * Update design-tokens.json and re-run `npm run tokens:build`.
+ */
+
+/* Font declarations */
+@font-face {
+  font-family: 'National2Condensed';
+  src: url('/fonts/National-2-Condensed-Bold.ttf') format('truetype');
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'ESKlarheit';
+  src: url('/fonts/ESKlarheitGrotesk-Rg.otf') format('opentype');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@layer base {
+  :root {
+    --font-family-heading: 'National2Condensed', 'Arial Black', sans-serif;
+    --font-family-body: 'ESKlarheit', 'Inter', system-ui, sans-serif;
+
+    /* Layout tokens */
+    --radius-mm: 100px;
+    --radius-card: 0.5rem;
+    --radius-input: 0.5rem;
+    --radius: 0.5rem;
+
+    /* Motion tokens */
+    --transition-fast: 0.2s;
+    --transition-medium: 0.3s;
+    --transition-slow: 0.5s;
+  }
+
+  * {
+    border-color: hsl(var(--border));
+  }
+
+  body {
+    background-color: hsl(var(--background));
+    color: hsl(var(--foreground));
+    font-family: var(--font-family-body);
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-family-heading);
+    line-height: 1.2;
+    letter-spacing: -0.02em;
+    font-weight: 700;
+  }
+
+  h1 {
+    font-size: 2.5rem;
+  }
+
+  h2 {
+    font-size: 2rem;
+  }
+
+  h3 {
+    font-size: 1.5rem;
+  }
+
+  h4 {
+    font-size: 1.25rem;
+  }
+
+  h5 {
+    font-size: 1rem;
+  }
+
+  h6 {
+    font-size: 0.875rem;
+  }
+
+  @media (max-width: 768px) {
+    h1 {
+      font-size: 2rem;
+    }
+    h2 {
+      font-size: 1.5rem;
+    }
+    h3 {
+      font-size: 1.25rem;
+    }
+  }
+}
+
+@layer utilities {
+  /* Brand color utilities */
+  .text-mm-primary { color: var(--color-mm-primary); }
+  .bg-mm-primary { background-color: var(--color-mm-primary); }
+  .border-mm-primary { border-color: var(--color-mm-primary); }
+  .text-mm-secondary { color: var(--color-mm-secondary); }
+  .bg-mm-secondary { background-color: var(--color-mm-secondary); }
+  .border-mm-secondary { border-color: var(--color-mm-secondary); }
+  .text-mm-dark { color: var(--color-mm-dark); }
+  .bg-mm-dark { background-color: var(--color-mm-dark); }
+  .border-mm-dark { border-color: var(--color-mm-dark); }
+  .text-mm-dark2 { color: var(--color-mm-dark2); }
+  .bg-mm-dark2 { background-color: var(--color-mm-dark2); }
+  .border-mm-dark2 { border-color: var(--color-mm-dark2); }
+  .text-mm-white { color: var(--color-mm-white); }
+  .bg-mm-white { background-color: var(--color-mm-white); }
+  .border-mm-white { border-color: var(--color-mm-white); }
+  .text-mm-gray { color: var(--color-mm-gray); }
+  .bg-mm-gray { background-color: var(--color-mm-gray); }
+  .border-mm-gray { border-color: var(--color-mm-gray); }
+
+  /* Typography utilities */
+  .font-heading { font-family: var(--font-family-heading); }
+  .font-body { font-family: var(--font-family-body); }
+
+  /* Border radius utilities */
+  .rounded-mm { border-radius: var(--radius-mm); }
+  .rounded-card { border-radius: var(--radius-card); }
+  .rounded-input { border-radius: var(--radius-input); }
+  .rounded-base { border-radius: var(--radius); }
+}
+
+@layer components {
+  .btn-mm {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    font-weight: 700;
+    font-size: 1rem;
+    padding: 0.75rem 1.5rem;
+    transition: opacity 0.2s;
+    cursor: pointer;
+    border: none;
+    background-color: hsl(var(--primary));
+    color: hsl(var(--primary-foreground));
+    border-radius: var(--radius-mm);
+  }
+
+  .btn-mm:hover {
+    opacity: 0.9;
+  }
+
+  .btn-mm:active {
+    transform: translateY(1px);
+  }
+
+  .btn-mm:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+
+  .btn-secondary {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    font-weight: 700;
+    font-size: 1rem;
+    padding: 0.75rem 1.5rem;
+    background-color: transparent;
+    border: 1px solid hsl(var(--border));
+    transition: all 0.2s;
+    cursor: pointer;
+    color: hsl(var(--foreground));
+    border-radius: var(--radius-mm);
+  }
+
+  .btn-secondary:hover {
+    border-color: hsl(var(--primary));
+    color: hsl(var(--primary));
+  }
+
+  .input-mm {
+    width: 100%;
+    font-size: 1rem;
+    border-radius: var(--radius-input);
+    outline: none;
+    padding: 0.75rem;
+    background-color: hsl(var(--background) / 0.5);
+    border: 1px solid hsl(var(--input));
+    color: hsl(var(--foreground));
+    transition: border-color 0.2s, box-shadow 0.2s;
+  }
+
+  .input-mm::placeholder {
+    color: hsl(var(--muted-foreground));
+  }
+
+  .input-mm:focus {
+    border-color: hsl(var(--ring));
+    box-shadow: 0 0 0 2px hsl(var(--ring) / 0.2);
+  }
+
+  .input-mm:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+
+  .dark .input-mm {
+    background-color: color-mix(in srgb, var(--color-mm-dark) 50%, transparent);
+  }
+
+}

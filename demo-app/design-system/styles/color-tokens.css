@@ -1,0 +1,185 @@
+/* ================================================================
+   COLOR TOKENS - SINGLE SOURCE OF TRUTH
+
+   TO UPDATE COLORS SITE-WIDE:
+   1. Update the 2 hex codes below (lines 12-13)
+   2. Convert hex to HSL using a color picker
+   3. Update the HSL values in 3 sections (clearly marked)
+   4. Save and refresh - colors cascade automatically!
+   ================================================================ */
+
+/* ========================================
+   STEP 1: UPDATE HEX COLORS HERE
+   ======================================== */
+@theme {
+  /* Brand Colors (Hex Format - Easy to Update) */
+  --color-mm-primary: #00a1fe;      /* ← UPDATE THIS: Primary brand color */
+  --color-mm-secondary: #f2f661;    /* ← UPDATE THIS: Secondary brand color */
+  --color-mm-dark: #1f1f1f;
+  --color-mm-dark2: #2a2a2a;
+  --color-mm-white: #ffffff;
+  --color-mm-gray: #ababab;
+
+  /* ========================================
+     STEP 2: UPDATE HSL EQUIVALENTS HERE
+
+     Primary (#00a1fe) = HSL(202, 100%, 50%)
+     Secondary (#f2f661) = HSL(62, 90%, 67%)
+
+     Use format: hsl(H S% L%)
+     ======================================== */
+
+  /* Primary Color */
+  --color-primary: hsl(202 100% 50%);          /* ← UPDATE THIS (primary in HSL) */
+  --color-primary-foreground: hsl(0 0% 100%); /* White text on primary */
+
+  /* Secondary Color */
+  --color-secondary: hsl(62 90% 67%);         /* ← UPDATE THIS (secondary in HSL) */
+  --color-secondary-foreground: hsl(0 0% 12%); /* Dark text on secondary */
+
+  /* Focus Ring (uses primary color) */
+  --color-ring: hsl(202 100% 50%);             /* ← UPDATE THIS (same as primary) */
+
+  /* Semantic UI colors - Static defaults, text utilities will be overridden via @layer utilities for dark mode support */
+  --color-background: hsl(0 0% 100%);
+  --color-foreground: hsl(0 0% 3.9%);
+  --color-card: hsl(0 0% 100%);
+  --color-card-foreground: hsl(0 0% 3.9%);
+  --color-popover: hsl(0 0% 100%);
+  --color-popover-foreground: hsl(0 0% 3.9%);
+  --color-muted: hsl(0 0% 96.1%);
+  --color-muted-foreground: hsl(0 0% 45.1%);
+  --color-accent: hsl(0 0% 96.1%);
+  --color-accent-foreground: hsl(0 0% 9%);
+  --color-destructive: hsl(0 84.2% 60.2%);
+  --color-destructive-foreground: hsl(0 0% 98%);
+  --color-border: hsl(0 0% 89.8%);
+  --color-input: hsl(0 0% 89.8%);
+}
+
+/* ========================================
+   STEP 3: UPDATE HSL CHANNEL VALUES FOR THEME SYSTEM
+
+   IMPORTANT: Remove "hsl()" wrapper - just the numbers!
+   Format: H S% L% (space-separated, no commas)
+
+   Example: hsl(213 85% 56%) becomes → 213 85% 56%
+
+   Note: UI colors (background, foreground, card, etc.) are
+   defined here and automatically support light/dark mode.
+   ======================================== */
+@layer base {
+  :root {
+    /* Light Mode Colors */
+    --background: 0 0% 100%;
+    --foreground: 0 0% 3.9%;
+    --card: 0 0% 100%;
+    --card-foreground: 0 0% 3.9%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 0 0% 3.9%;
+
+    /* PRIMARY - Update these 2 lines */
+    --primary: 202 100% 50%;              /* ← UPDATE THIS (HSL channels only) */
+    --primary-foreground: 0 0% 100%;     /* White text */
+
+    /* SECONDARY - Update these 2 lines */
+    --secondary: 62 90% 67%;             /* ← UPDATE THIS (HSL channels only) */
+    --secondary-foreground: 0 0% 12%;    /* Dark text */
+
+    /* Other UI colors */
+    --muted: 0 0% 96.1%;
+    --muted-foreground: 0 0% 45.1%;
+    --accent: 0 0% 96.1%;
+    --accent-foreground: 0 0% 9%;
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 0 0% 98%;
+    --border: 0 0% 89.8%;
+    --input: 0 0% 89.8%;
+
+    /* FOCUS RING - Update this line (same as primary) */
+    --ring: 202 100% 50%;                 /* ← UPDATE THIS (same as primary) */
+
+    /* Utility colors */
+    --success: 142 76% 36%;
+    --warning: 38 92% 50%;
+    --error: 0 84.2% 60.2%;
+    --info: 202 100% 50%;
+
+    --chart-1: 12 76% 61%;
+    --chart-2: 173 58% 39%;
+    --chart-3: 197 37% 24%;
+    --chart-4: 43 74% 66%;
+    --chart-5: 27 87% 67%;
+  }
+
+  .dark {
+    /* Dark Mode Colors */
+    --background: 0 0% 12%;
+    --foreground: 0 0% 100%;
+    --card: 0 0% 16%;
+    --card-foreground: 0 0% 100%;
+    --popover: 0 0% 16%;
+    --popover-foreground: 0 0% 100%;
+
+    /* PRIMARY - Update these 2 lines (usually same as light mode) */
+    --primary: 202 100% 50%;              /* ← UPDATE THIS (same as light mode) */
+    --primary-foreground: 0 0% 100%;     /* White text */
+
+    /* SECONDARY - Update these 2 lines (usually same as light mode) */
+    --secondary: 62 90% 67%;             /* ← UPDATE THIS (same as light mode) */
+    --secondary-foreground: 0 0% 12%;    /* Dark text */
+
+    /* Other UI colors */
+    --muted: 0 0% 18%;
+    --muted-foreground: 0 0% 67%;
+    --accent: 0 0% 18%;
+    --accent-foreground: 0 0% 100%;
+    --destructive: 0 100% 71%;
+    --destructive-foreground: 0 0% 100%;
+    --border: 0 0% 20%;
+    --input: 0 0% 20%;
+
+    /* FOCUS RING - Update this line (same as primary) */
+    --ring: 202 100% 50%;                 /* ← UPDATE THIS (same as primary) */
+
+    /* Utility colors */
+    --success: 142 76% 36%;
+    --warning: 38 92% 50%;
+    --error: 0 100% 71%;
+    --info: 202 100% 50%;
+
+    --chart-1: 220 70% 50%;
+    --chart-2: 160 60% 45%;
+    --chart-3: 30 80% 55%;
+    --chart-4: 280 65% 60%;
+    --chart-5: 340 75% 55%;
+  }
+}
+
+/* ========================================
+   SUMMARY: What to Update
+
+   To change brand colors, update these values:
+
+   HEX (2 lines):
+   - Line 16: --color-mm-primary
+   - Line 17: --color-mm-secondary
+
+   HSL with hsl() wrapper (3 lines):
+   - Line 33: --color-primary
+   - Line 37: --color-secondary
+   - Line 41: --color-ring
+
+   HSL channels only (6 lines):
+   - Line 63: --primary (light mode)
+   - Line 67: --secondary (light mode)
+   - Line 79: --ring (light mode)
+   - Line 98: --primary (dark mode)
+   - Line 102: --secondary (dark mode)
+   - Line 116: --ring (dark mode)
+
+   Total: 11 lines to update
+
+   Note: UI colors (background, foreground, card, border, etc.)
+   automatically adapt between light/dark mode. No manual updates needed.
+   ======================================== */

@@ -1,0 +1,40 @@
+name: CI
+
+on:
+  pull_request:
+  push:
+    branches:
+      - main
+
+jobs:
+  tokens-and-lint:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Use Node.js 20
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: "npm"
+          cache-dependency-path: |
+            design-system/package-lock.json
+            demo-app/package-lock.json
+
+      - name: Install dependencies (design-system)
+        working-directory: design-system
+        run: npm install --legacy-peer-deps
+
+      - name: Validate design tokens
+        working-directory: design-system
+        run: npm run tokens:check
+
+      - name: Install dependencies (demo-app)
+        working-directory: demo-app
+        run: npm install
+
+      - name: Lint demo app
+        working-directory: demo-app
+        run: npm run lint

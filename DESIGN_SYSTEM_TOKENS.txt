@@ -1,0 +1,1021 @@
+================================================================================
+MM DESIGN SYSTEM - COMPLETE DESIGN TOKEN REFERENCE
+================================================================================
+Version: 2.0.0
+Last Updated: 2024-11-20
+Purpose: Complete reference for refactoring apps to match the MM design system
+
+This document contains ALL design tokens used across the MM Design System.
+Use this as the single source of truth when refactoring UI components.
+
+================================================================================
+1. TYPOGRAPHY TOKENS
+================================================================================
+
+1.1 FONT FAMILIES
+--------------------------------------------------------------------------------
+HEADING FONT
+  - Family Name: National2Condensed
+  - CSS Variable: --font-family-heading
+  - Full Stack: 'National2Condensed', 'Arial Black', sans-serif
+  - Font File: /fonts/National-2-Condensed-Bold.ttf (TrueType format)
+  - Font Weight: 700 (bold)
+  - Font Style: normal
+  - Font Display: swap
+  - Usage: All headings (h1-h6), strong emphasis, marquee text
+
+BODY FONT
+  - Family Name: ESKlarheit
+  - CSS Variable: --font-family-body
+  - Full Stack: 'ESKlarheit', 'Inter', system-ui, sans-serif
+  - Font File: /fonts/ESKlarheitGrotesk-Rg.otf (OpenType format)
+  - Font Weight: 400 (regular/normal)
+  - Font Style: normal
+  - Font Display: swap
+  - Usage: Body copy, UI components, long-form text
+
+
+1.2 FONT SIZES
+--------------------------------------------------------------------------------
+DESKTOP SIZES:
+  h1: 2.5rem (40px)
+  h2: 2rem (32px)
+  h3: 1.5rem (24px)
+  h4: 1.25rem (20px)
+  h5: 1rem (16px)
+  h6: 0.875rem (14px)
+  body: 1rem (16px)
+  small: 0.875rem (14px)
+  xs: 0.75rem (12px)
+
+MOBILE SIZES (max-width: 768px):
+  h1: 2rem (32px)
+  h2: 1.5rem (24px)
+  h3: 1.25rem (20px)
+  h4: 1.25rem (same as desktop)
+  h5: 1rem (same as desktop)
+  h6: 0.875rem (same as desktop)
+
+
+1.3 LINE HEIGHT
+--------------------------------------------------------------------------------
+  Headings: 1.2
+  Body: 1.6
+
+
+1.4 LETTER SPACING
+--------------------------------------------------------------------------------
+  Headings: -0.02em (tighter)
+  Body: 0 (normal)
+  Uppercase text: 0.05em (wider)
+
+
+================================================================================
+2. COLOR TOKENS
+================================================================================
+
+2.1 BRAND COLORS (FIXED ACROSS LIGHT/DARK MODES)
+--------------------------------------------------------------------------------
+These colors remain constant regardless of theme mode.
+
+PRIMARY BLUE
+  - CSS Variable: --color-mm-primary
+  - Hex Value: #337def
+  - RGB: 51, 125, 239
+  - HSL: hsl(213, 85%, 56%)
+  - Usage: CTAs, primary actions, focus states, links
+
+SECONDARY YELLOW
+  - CSS Variable: --color-mm-secondary
+  - Hex Value: #fcc729
+  - RGB: 252, 199, 41
+  - HSL: hsl(46, 97%, 58%)
+  - Usage: Supporting highlights, accent elements, warnings
+
+DARK (Primary)
+  - CSS Variable: --color-mm-dark
+  - Hex Value: #1f1f1f
+  - RGB: 31, 31, 31
+  - HSL: hsl(0, 0%, 12%)
+  - Usage: Primary dark background
+
+DARK2 (Secondary)
+  - CSS Variable: --color-mm-dark2
+  - Hex Value: #2a2a2a
+  - RGB: 42, 42, 42
+  - HSL: hsl(0, 0%, 16%)
+  - Usage: Dark background variant for layering
+
+WHITE
+  - CSS Variable: --color-mm-white
+  - Hex Value: #ffffff
+  - RGB: 255, 255, 255
+  - HSL: hsl(0, 0%, 100%)
+  - Usage: Pure white for text and backgrounds
+
+GRAY
+  - CSS Variable: --color-mm-gray
+  - Hex Value: #ababab
+  - RGB: 171, 171, 171
+  - HSL: hsl(0, 0%, 67%)
+  - Usage: Neutral gray for borders, muted text
+
+
+2.2 SEMANTIC COLORS - LIGHT MODE
+--------------------------------------------------------------------------------
+These colors adapt based on the theme (light or dark mode).
+
+BACKGROUND
+  - CSS Variable: --background (HSL channels) or --color-background (full HSL)
+  - Light Mode: hsl(0 0% 100%) - Pure white
+  - Usage: Page background, main canvas
+
+FOREGROUND
+  - CSS Variable: --foreground or --color-foreground
+  - Light Mode: hsl(0 0% 3.9%) - Nearly black (#0a0a0a)
+  - Usage: Primary text color
+
+CARD
+  - CSS Variable: --card or --color-card
+  - Light Mode: hsl(0 0% 100%) - Pure white
+  - Usage: Card backgrounds, elevated surfaces
+
+CARD FOREGROUND
+  - CSS Variable: --card-foreground or --color-card-foreground
+  - Light Mode: hsl(0 0% 3.9%) - Nearly black
+  - Usage: Text on card surfaces
+
+POPOVER
+  - CSS Variable: --popover or --color-popover
+  - Light Mode: hsl(0 0% 100%) - Pure white
+  - Usage: Popover and tooltip backgrounds
+
+POPOVER FOREGROUND
+  - CSS Variable: --popover-foreground or --color-popover-foreground
+  - Light Mode: hsl(0 0% 3.9%) - Nearly black
+  - Usage: Text inside popovers and tooltips
+
+PRIMARY
+  - CSS Variable: --primary or --color-primary
+  - Light Mode: hsl(213 85% 56%) - Brand blue #337def
+  - Usage: Primary interactive elements (same as brand primary)
+
+PRIMARY FOREGROUND
+  - CSS Variable: --primary-foreground or --color-primary-foreground
+  - Light Mode: hsl(0 0% 100%) - White
+  - Usage: Text on primary colored surfaces
+
+SECONDARY
+  - CSS Variable: --secondary or --color-secondary
+  - Light Mode: hsl(46 97% 58%) - Brand yellow #fcc729
+  - Usage: Secondary interactive elements (same as brand secondary)
+
+SECONDARY FOREGROUND
+  - CSS Variable: --secondary-foreground or --color-secondary-foreground
+  - Light Mode: hsl(0 0% 12%) - Dark gray (#1f1f1f)
+  - Usage: Text on secondary colored surfaces
+
+MUTED
+  - CSS Variable: --muted or --color-muted
+  - Light Mode: hsl(0 0% 96.1%) - Very light gray (#f5f5f5)
+  - Usage: Subtle backgrounds, disabled states
+
+MUTED FOREGROUND
+  - CSS Variable: --muted-foreground or --color-muted-foreground
+  - Light Mode: hsl(0 0% 45.1%) - Medium gray (#737373)
+  - Usage: Muted text, placeholders, secondary information
+
+ACCENT
+  - CSS Variable: --accent or --color-accent
+  - Light Mode: hsl(0 0% 96.1%) - Very light gray
+  - Usage: Hover states, subtle highlights
+
+ACCENT FOREGROUND
+  - CSS Variable: --accent-foreground or --color-accent-foreground
+  - Light Mode: hsl(0 0% 9%) - Very dark gray (#171717)
+  - Usage: Text on accent surfaces
+
+DESTRUCTIVE
+  - CSS Variable: --destructive or --color-destructive
+  - Light Mode: hsl(0 84.2% 60.2%) - Red (#ef4444)
+  - Usage: Error states, destructive actions, alerts
+
+DESTRUCTIVE FOREGROUND
+  - CSS Variable: --destructive-foreground or --color-destructive-foreground
+  - Light Mode: hsl(0 0% 98%) - Off-white (#fafafa)
+  - Usage: Text on destructive/error surfaces
+
+BORDER
+  - CSS Variable: --border or --color-border
+  - Light Mode: hsl(0 0% 89.8%) - Light gray (#e5e5e5)
+  - Usage: Default borders on cards, inputs, dividers
+
+INPUT
+  - CSS Variable: --input or --color-input
+  - Light Mode: hsl(0 0% 89.8%) - Light gray
+  - Usage: Input borders, form element outlines
+
+RING
+  - CSS Variable: --ring or --color-ring
+  - Light Mode: hsl(213 85% 56%) - Brand blue
+  - Usage: Focus ring color for accessibility
+
+
+2.3 SEMANTIC COLORS - DARK MODE
+--------------------------------------------------------------------------------
+
+BACKGROUND
+  - Dark Mode: hsl(0 0% 12%) - #1f1f1f (same as brand dark)
+
+FOREGROUND
+  - Dark Mode: hsl(0 0% 100%) - Pure white
+
+CARD
+  - Dark Mode: hsl(0 0% 16%) - #292929 (slightly lighter than background)
+
+CARD FOREGROUND
+  - Dark Mode: hsl(0 0% 100%) - Pure white
+
+POPOVER
+  - Dark Mode: hsl(0 0% 16%) - #292929
+
+POPOVER FOREGROUND
+  - Dark Mode: hsl(0 0% 100%) - Pure white
+
+PRIMARY
+  - Dark Mode: hsl(213 85% 56%) - #337def (SAME as light mode)
+
+PRIMARY FOREGROUND
+  - Dark Mode: hsl(0 0% 100%) - White
+
+SECONDARY
+  - Dark Mode: hsl(46 97% 58%) - #fcc729 (SAME as light mode)
+
+SECONDARY FOREGROUND
+  - Dark Mode: hsl(0 0% 100%) - White (DIFFERENT from light mode)
+
+MUTED
+  - Dark Mode: hsl(0 0% 18%) - #2e2e2e
+
+MUTED FOREGROUND
+  - Dark Mode: hsl(0 0% 67%) - #ababab (same as brand gray)
+
+ACCENT
+  - Dark Mode: hsl(0 0% 18%) - #2e2e2e
+
+ACCENT FOREGROUND
+  - Dark Mode: hsl(0 0% 100%) - White
+
+DESTRUCTIVE
+  - Dark Mode: hsl(0 100% 71%) - Lighter red #ff5757
+
+DESTRUCTIVE FOREGROUND
+  - Dark Mode: hsl(0 0% 100%) - White
+
+BORDER
+  - Dark Mode: hsl(0 0% 20%) - #333333
+
+INPUT
+  - Dark Mode: hsl(0 0% 20%) - #333333
+
+RING
+  - Dark Mode: hsl(213 85% 56%) - #337def (SAME as light mode)
+
+
+2.4 DATA VISUALIZATION COLORS (CHARTS)
+--------------------------------------------------------------------------------
+LIGHT MODE CHART COLORS:
+  chart-1: hsl(12 76% 61%) - Coral/orange
+  chart-2: hsl(173 58% 39%) - Teal
+  chart-3: hsl(197 37% 24%) - Dark blue
+  chart-4: hsl(43 74% 66%) - Yellow
+  chart-5: hsl(27 87% 67%) - Orange
+
+DARK MODE CHART COLORS:
+  chart-1: hsl(220 70% 50%) - Blue
+  chart-2: hsl(160 60% 45%) - Teal/green
+  chart-3: hsl(30 80% 55%) - Orange
+  chart-4: hsl(280 65% 60%) - Purple
+  chart-5: hsl(340 75% 55%) - Pink/red
+
+
+================================================================================
+3. SPACING & LAYOUT TOKENS
+================================================================================
+
+3.1 BORDER RADIUS
+--------------------------------------------------------------------------------
+PILL/BUTTON RADIUS (SIGNATURE)
+  - CSS Variable: --radius-mm
+  - Value: 100px
+  - Usage: Primary buttons (.btn-mm), pill-shaped elements
+  - Description: The signature rounded pill design
+
+CARD RADIUS
+  - CSS Variable: --radius-card
+  - Value: 0.5rem (8px)
+  - Usage: Cards, modals, panels
+
+INPUT RADIUS
+  - CSS Variable: --radius-input
+  - Value: 0.5rem (8px)
+  - Usage: Form inputs, selects, textareas
+
+BASE RADIUS
+  - CSS Variable: --radius
+  - Value: 0.5rem (8px)
+  - Usage: General purpose radius for shadcn/ui components
+
+
+3.2 PADDING
+--------------------------------------------------------------------------------
+  Button: 0.75rem 1.5rem (12px vertical, 24px horizontal)
+  Input: 0.75rem (12px)
+  Card: 1.5rem (24px)
+  Modal: 2rem (32px)
+  Section: 2rem 0 (32px vertical, 0 horizontal)
+
+
+3.3 MARGIN
+--------------------------------------------------------------------------------
+  Component: 1rem 0 (16px vertical)
+  Section: 2rem 0 (32px vertical)
+  Element: 0.5rem 0 (8px vertical)
+
+
+3.4 GAP (Flexbox/Grid)
+--------------------------------------------------------------------------------
+  Tight: 0.25rem (4px)
+  Normal: 0.5rem (8px)
+  Comfortable: 0.75rem (12px)
+  Loose: 1rem (16px)
+  Spacious: 1.5rem (24px)
+
+
+3.5 CONTAINER WIDTHS
+--------------------------------------------------------------------------------
+  Main content: max-w-6xl (72rem / 1152px)
+  Forms/Modals: max-w-lg (32rem / 512px)
+
+
+3.6 BREAKPOINTS
+--------------------------------------------------------------------------------
+  Mobile: max-width: 768px
+  Tablet: 769px to 1024px
+  Desktop: min-width: 1025px
+
+
+3.7 Z-INDEX
+--------------------------------------------------------------------------------
+  Modal: 50
+  Backdrop: 40
+  Navigation: 30
+  Dropdown: 20
+  Tooltip: 10
+
+
+================================================================================
+4. MOTION & ANIMATION TOKENS
+================================================================================
+
+4.1 TRANSITION DURATIONS
+--------------------------------------------------------------------------------
+FAST
+  - CSS Variable: --transition-fast
+  - Value: 0.2s
+  - Usage: Button hovers, color changes, quick interactions
+
+MEDIUM
+  - CSS Variable: --transition-medium
+  - Value: 0.3s
+  - Usage: Slide animations, modal appearance, general transitions
+
+SLOW
+  - CSS Variable: --transition-slow
+  - Value: 0.5s
+  - Usage: Fade-ins, page transitions, slower effects
+
+
+4.2 EASING FUNCTIONS
+--------------------------------------------------------------------------------
+  Default: ease
+  In-Out: ease-in-out
+  Out: ease-out
+  Cubic: cubic-bezier(0.4, 0, 0.6, 1)
+
+
+4.3 ANIMATIONS
+--------------------------------------------------------------------------------
+FADE IN
+  - Class: .animate-fade-in
+  - Duration: 0.5s (slow)
+  - Easing: ease-in-out
+  - Effect: Opacity 0 → 1
+
+SLIDE UP
+  - Class: .animate-slide-up
+  - Duration: 0.3s (medium)
+  - Easing: ease-out
+  - Effect: Slides element up with fade-in
+
+SLIDE IN
+  - Class: .animate-slide-in
+  - Duration: 0.3s (medium)
+  - Easing: ease-out
+  - Effect: Slides element in from left
+
+PULSE
+  - Class: .animate-pulse-custom
+  - Duration: 2s
+  - Easing: cubic-bezier(0.4, 0, 0.6, 1)
+  - Effect: Pulsing opacity animation
+
+SHAKE
+  - Class: .animate-shake
+  - Duration: 0.4s
+  - Easing: ease-in-out
+  - Effect: Horizontal shake (for errors)
+
+SHIMMER
+  - Keyframe: @keyframes shimmer
+  - Effect: Background position animation for loading states
+
+RIPPLE
+  - Keyframe: @keyframes ripple
+  - Effect: Expanding circle effect for click feedback
+
+
+================================================================================
+5. COMPONENT-SPECIFIC STYLING
+================================================================================
+
+5.1 BUTTONS
+--------------------------------------------------------------------------------
+
+PRIMARY BUTTON (.btn-mm)
+  Display: inline-flex
+  Align Items: center
+  Justify Content: center
+  Gap: 0.5rem (8px)
+  Font Weight: 700 (bold)
+  Font Size: 1rem (16px)
+  Padding: 0.75rem 1.5rem (12px 24px)
+  Border: none
+  Border Radius: var(--radius-mm) - 100px
+  Background: hsl(var(--primary)) - Brand blue #337def
+  Color: hsl(var(--primary-foreground)) - White
+  Transition: filter 0.2s, transform 0.2s
+  Cursor: pointer
+
+  HOVER STATE:
+    Filter: brightness(1.1)
+    Transform: translateY(-1px)
+
+  ACTIVE STATE:
+    Transform: translateY(1px)
+
+  DISABLED STATE:
+    Opacity: 0.5
+    Cursor: not-allowed
+
+SECONDARY BUTTON (.btn-secondary)
+  Display: inline-flex
+  Align Items: center
+  Justify Content: center
+  Gap: 0.5rem (8px)
+  Font Weight: 700 (bold)
+  Font Size: 1rem (16px)
+  Padding: 0.75rem 1.5rem
+  Border: 1px solid hsl(var(--border))
+  Border Radius: var(--radius-mm) - 100px
+  Background: transparent
+  Color: hsl(var(--foreground))
+  Transition: all 0.2s
+  Cursor: pointer
+
+  HOVER STATE:
+    Border Color: hsl(var(--primary))
+    Color: hsl(var(--primary))
+
+
+5.2 FORM INPUTS
+--------------------------------------------------------------------------------
+
+TEXT INPUT (.input-mm)
+  Width: 100%
+  Font Size: 1rem (16px)
+  Padding: 0.75rem (12px)
+  Border: 1px solid hsl(var(--input))
+  Border Radius: var(--radius-input) - 0.5rem (8px)
+  Background: hsl(var(--background) / 0.5) - Semi-transparent
+  Color: hsl(var(--foreground))
+  Outline: none
+  Transition: border-color 0.2s, box-shadow 0.2s
+
+  DARK MODE BACKGROUND:
+    background-color: color-mix(in srgb, var(--color-mm-dark) 50%, transparent)
+
+  PLACEHOLDER:
+    Color: hsl(var(--muted-foreground))
+
+  FOCUS STATE:
+    Border Color: hsl(var(--ring)) - Brand blue
+    Box Shadow: 0 0 0 2px hsl(var(--ring) / 0.2)
+
+  DISABLED STATE:
+    Opacity: 0.5
+    Cursor: not-allowed
+
+SELECT DROPDOWN (.select-mm)
+  - Same styling as .input-mm
+  - Additional: cursor: pointer
+
+
+5.3 CARDS
+--------------------------------------------------------------------------------
+
+STANDARD CARD (.card-mm)
+  Padding: 1.5rem (24px)
+  Border Radius: var(--radius-card) - 0.5rem
+  Border: 1px solid hsl(var(--border))
+  Background: hsl(var(--card))
+  Color: hsl(var(--card-foreground))
+  Transition: all 0.2s
+
+  DARK MODE:
+    Border Color: color-mix(in oklab, var(--color-mm-gray) 20%, transparent)
+
+  HOVER STATE:
+    Border Color: hsl(var(--primary) / 0.3)
+
+GLASS CARD (.glass-card)
+  Padding: 1.5rem (24px)
+  Border Radius: var(--radius-card) - 0.5rem
+  Border: 1px solid hsl(var(--border))
+  Background: hsl(var(--card) / 0.8) - Semi-transparent
+  Backdrop Filter: blur(4px)
+  -webkit-backdrop-filter: blur(4px)
+  Transition: all 0.2s
+
+  DARK MODE:
+    Border Color: color-mix(in oklab, var(--color-mm-gray) 20%, transparent)
+
+
+5.4 NAVIGATION
+--------------------------------------------------------------------------------
+
+SIDEBAR ITEM (.sidebar-item)
+  Display: flex
+  Align Items: center
+  Gap: 0.75rem (12px)
+  Padding: 0.75rem 1rem (12px 16px)
+  Border Radius: var(--radius-input)
+  Color: hsl(var(--muted-foreground))
+  Text Decoration: none
+  Transition: all 0.2s
+  Cursor: pointer
+
+  HOVER STATE:
+    Background: hsl(var(--accent))
+    Color: hsl(var(--foreground))
+
+  ACTIVE STATE:
+    Background: hsl(var(--primary))
+    Color: hsl(var(--primary-foreground))
+    Font Weight: 500
+
+MOBILE NAV ITEM (.mobile-nav-item)
+  Display: flex
+  Flex Direction: column
+  Align Items: center
+  Justify Content: center
+  Padding: 0.5rem (8px)
+  Font Size: 0.75rem (12px)
+  Color: hsl(var(--muted-foreground))
+  Text Decoration: none
+  Transition: colors 0.2s
+  Cursor: pointer
+
+  HOVER STATE:
+    Color: hsl(var(--foreground))
+
+  ACTIVE STATE:
+    Color: hsl(var(--primary))
+
+
+5.5 TABLES
+--------------------------------------------------------------------------------
+
+TABLE (.table-mm)
+  Width: 100%
+  Border Collapse: collapse
+
+  TABLE HEADER (th):
+    Text Align: left
+    Padding: 1rem (16px)
+    Font Weight: 500 (medium)
+    Font Size: 0.875rem (14px)
+    Text Transform: uppercase
+    Letter Spacing: 0.05em (wider)
+    Border Bottom: 1px solid hsl(var(--border))
+    Color: hsl(var(--muted-foreground))
+
+  TABLE CELL (td):
+    Padding: 1rem (16px)
+    Border Bottom: 1px solid hsl(var(--border) / 0.5)
+    Color: hsl(var(--foreground))
+
+  TABLE ROW HOVER:
+    Background: hsl(var(--accent) / 0.5)
+    Transition: colors 0.2s
+
+
+5.6 MODALS
+--------------------------------------------------------------------------------
+
+MODAL BACKDROP (.modal-backdrop)
+  Position: fixed
+  Inset: 0
+  Z-Index: 40
+  Background: hsl(var(--background) / 0.8)
+  Backdrop Filter: blur(4px)
+  -webkit-backdrop-filter: blur(4px)
+  Animation: fadeIn var(--transition-medium) ease-out
+
+MODAL CONTENT (.modal-content)
+  Position: fixed
+  Left: 50%
+  Top: 50%
+  Transform: translate(-50%, -50%)
+  Width: 90%
+  Max Width: 32rem (512px)
+  Max Height: 90vh
+  Overflow Y: auto
+  Padding: 2rem (32px)
+  Border: 1px solid hsl(var(--border))
+  Border Radius: var(--radius-card)
+  Background: hsl(var(--card))
+  Z-Index: 50
+  Animation: slideUp var(--transition-medium) ease-out
+
+  MOBILE (max-width: 768px):
+    Width: 95%
+    Padding: 1.5rem (24px)
+
+MODAL HEADER (.modal-header)
+  Display: flex
+  Justify Content: space-between
+  Align Items: center
+  Margin Bottom: 1.5rem (24px)
+  Padding Bottom: 1rem (16px)
+  Border Bottom: 1px solid hsl(var(--border))
+
+MODAL CLOSE (.modal-close)
+  Padding: 0.25rem (4px)
+  Background: transparent
+  Border: none
+  Color: hsl(var(--muted-foreground))
+  Transition: colors 0.2s
+  Cursor: pointer
+
+  HOVER STATE:
+    Color: hsl(var(--foreground))
+
+
+5.7 OTHER COMPONENTS
+--------------------------------------------------------------------------------
+
+RATING TILE (.rating-tile)
+  Padding: 0.75rem 1rem
+  Border: 1px solid hsl(var(--input))
+  Border Radius: var(--radius-input)
+  Background: transparent
+  Color: hsl(var(--muted-foreground))
+  Font Weight: 500
+  Transition: all 0.2s
+  Cursor: pointer
+
+  HOVER STATE:
+    Border Color: hsl(var(--primary))
+    Color: hsl(var(--foreground))
+
+  SELECTED STATE:
+    Background: hsl(var(--primary))
+    Border Color: hsl(var(--primary))
+    Color: hsl(var(--primary-foreground))
+
+FAQ TOGGLE (.faq-toggle)
+  HOVER STATE (LIGHT MODE):
+    Background: hsl(var(--muted))
+
+  HOVER STATE (DARK MODE):
+    Background: hsl(var(--background))
+
+DIVIDER (.divider)
+  Height: 1px
+  Background: hsl(var(--border))
+  Margin: 1rem 0
+
+SKELETON (.skeleton)
+  Background: linear-gradient(90deg, transparent, hsl(var(--muted)), transparent)
+  Background Size: 200%
+  Animation: shimmer 1.5s infinite
+
+
+================================================================================
+6. UTILITY CLASSES
+================================================================================
+
+6.1 COLOR UTILITIES
+--------------------------------------------------------------------------------
+BRAND COLORS:
+  .text-mm-primary - Text: #337def
+  .text-mm-secondary - Text: #fcc729
+  .text-mm-dark - Text: #1f1f1f
+  .text-mm-white - Text: #ffffff
+  .text-mm-gray - Text: #ababab
+
+  .bg-mm-primary - Background: #337def
+  .bg-mm-secondary - Background: #fcc729
+  .bg-mm-dark - Background: #1f1f1f
+  .bg-mm-dark2 - Background: #2a2a2a
+  .bg-mm-white - Background: #ffffff
+  .bg-mm-gray - Background: #ababab
+
+  .border-mm-primary - Border: #337def
+  .border-mm-secondary - Border: #fcc729
+  .border-mm-gray - Border: #ababab
+
+SEMANTIC COLORS:
+  .text-foreground - Dynamic text color
+  .text-muted-foreground - Muted text
+  .text-card-foreground - Card text
+  .bg-background - Page background
+  .bg-card - Card background
+  .bg-muted - Muted background
+  .bg-accent - Accent background
+
+
+6.2 TYPOGRAPHY UTILITIES
+--------------------------------------------------------------------------------
+  .font-heading - National2Condensed font
+  .font-body - ESKlarheit font
+
+
+6.3 BORDER RADIUS UTILITIES
+--------------------------------------------------------------------------------
+  .rounded-mm - 100px pill radius
+  .rounded-card - 0.5rem card radius
+  .rounded-input - 0.5rem input radius
+  .rounded-base - 0.5rem general radius
+
+
+6.4 STATE UTILITIES
+--------------------------------------------------------------------------------
+  .text-error - Error text color
+  .text-success - Success text color
+  .opacity-50 - 50% opacity
+  .cursor-pointer - Pointer cursor
+  .cursor-not-allowed - Not allowed cursor
+
+
+================================================================================
+7. CSS VARIABLE USAGE PATTERNS
+================================================================================
+
+7.1 HOW TO USE HSL VARIABLES
+--------------------------------------------------------------------------------
+The design system uses HSL (Hue, Saturation, Lightness) for semantic colors.
+
+PATTERN 1: Channel values (for Tailwind utilities)
+  Variable: --primary
+  Value: "213 85% 56%" (just the HSL channels)
+  Usage: hsl(var(--primary))
+
+PATTERN 2: Full HSL values (for direct CSS use)
+  Variable: --color-primary
+  Value: "hsl(213 85% 56%)"
+  Usage: var(--color-primary)
+
+PATTERN 3: With opacity
+  Usage: hsl(var(--primary) / 0.5)
+  Result: Semi-transparent primary color at 50% opacity
+
+
+7.2 HOW TO USE BRAND COLORS
+--------------------------------------------------------------------------------
+Brand colors are HEX values, not HSL:
+  Variable: --color-mm-primary
+  Value: #337def
+  Usage: var(--color-mm-primary)
+
+
+7.3 COLOR MIXING (DARK MODE TECHNIQUE)
+--------------------------------------------------------------------------------
+For semi-transparent dark backgrounds:
+  background-color: color-mix(in srgb, var(--color-mm-dark) 50%, transparent)
+
+For modern browsers with better color mixing:
+  background-color: color-mix(in oklab, var(--color-mm-gray) 20%, transparent)
+
+
+================================================================================
+8. ACCESSIBILITY CONSIDERATIONS
+================================================================================
+
+8.1 FOCUS STATES
+--------------------------------------------------------------------------------
+All interactive elements should have focus states using:
+  - Border Color: hsl(var(--ring))
+  - Box Shadow: 0 0 0 2px hsl(var(--ring) / 0.2)
+  - Outline: 2px solid hsl(var(--ring)) offset 2px (alternative)
+
+
+8.2 COLOR CONTRAST
+--------------------------------------------------------------------------------
+The design system maintains WCAG AA contrast ratios:
+  - Foreground on Background: High contrast
+  - Primary on Primary Foreground: White on blue (#337def)
+  - Secondary on Secondary Foreground: Dark on yellow (#fcc729)
+  - Muted Foreground: Used for non-essential text (lower contrast acceptable)
+
+
+8.3 MOTION PREFERENCES
+--------------------------------------------------------------------------------
+Consider adding:
+  @media (prefers-reduced-motion: reduce) {
+    * {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+    }
+  }
+
+
+================================================================================
+9. REFACTORING CHECKLIST
+================================================================================
+
+When refactoring components to match this design system:
+
+TYPOGRAPHY:
+  ☐ Replace font families with var(--font-family-heading) or var(--font-family-body)
+  ☐ Update heading sizes to match h1-h6 scale
+  ☐ Set line-height to 1.2 for headings, 1.6 for body
+  ☐ Set letter-spacing to -0.02em for headings
+
+COLORS:
+  ☐ Replace hardcoded colors with CSS variables
+  ☐ Use hsl(var(--{color})) pattern for semantic colors
+  ☐ Use var(--color-mm-{color}) for brand colors
+  ☐ Ensure light/dark mode support using semantic tokens
+
+SPACING:
+  ☐ Use consistent padding values (button: 0.75rem 1.5rem, input: 0.75rem, etc.)
+  ☐ Use gap utilities for flex/grid spacing
+  ☐ Replace arbitrary margins with standard spacing scale
+
+BORDERS:
+  ☐ Apply var(--radius-mm) to primary buttons
+  ☐ Apply var(--radius-card) to cards and modals
+  ☐ Apply var(--radius-input) to form elements
+  ☐ Use hsl(var(--border)) for border colors
+
+BUTTONS:
+  ☐ Replace custom buttons with .btn-mm or .btn-secondary classes
+  ☐ Ensure 100px border radius on primary buttons
+  ☐ Add hover and active states
+  ☐ Include disabled states with opacity: 0.5
+
+INPUTS:
+  ☐ Apply .input-mm class or equivalent styles
+  ☐ Use focus ring with box-shadow
+  ☐ Include dark mode background override
+  ☐ Style placeholders with muted-foreground color
+
+CARDS:
+  ☐ Use .card-mm or .glass-card classes
+  ☐ Apply border: 1px solid hsl(var(--border))
+  ☐ Use 0.5rem border radius
+  ☐ Add hover state with border color change
+
+ANIMATIONS:
+  ☐ Use transition duration variables (--transition-fast/medium/slow)
+  ☐ Apply animation classes (.animate-fade-in, .animate-slide-up, etc.)
+  ☐ Use standard easing functions
+
+ACCESSIBILITY:
+  ☐ Add focus states with ring color
+  ☐ Ensure color contrast meets WCAG standards
+  ☐ Include cursor states (pointer, not-allowed)
+  ☐ Add aria-labels where appropriate
+
+
+================================================================================
+10. COMMON PATTERNS & EXAMPLES
+================================================================================
+
+10.1 PRIMARY BUTTON EXAMPLE
+--------------------------------------------------------------------------------
+<button class="btn-mm">
+  Click Me
+</button>
+
+OR in JSX/TSX with inline styles:
+<button
+  style={{
+    display: 'inline-flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+    gap: '0.5rem',
+    fontWeight: 700,
+    fontSize: '1rem',
+    padding: '0.75rem 1.5rem',
+    border: 'none',
+    borderRadius: 'var(--radius-mm)',
+    backgroundColor: 'hsl(var(--primary))',
+    color: 'hsl(var(--primary-foreground))',
+    transition: 'filter 0.2s, transform 0.2s',
+    cursor: 'pointer'
+  }}
+>
+  Click Me
+</button>
+
+
+10.2 INPUT EXAMPLE
+--------------------------------------------------------------------------------
+<input
+  type="text"
+  class="input-mm"
+  placeholder="Enter your email"
+/>
+
+OR in JSX/TSX with inline styles:
+<input
+  type="text"
+  placeholder="Enter your email"
+  style={{
+    width: '100%',
+    fontSize: '1rem',
+    padding: '0.75rem',
+    border: '1px solid hsl(var(--input))',
+    borderRadius: 'var(--radius-input)',
+    backgroundColor: 'hsl(var(--background) / 0.5)',
+    color: 'hsl(var(--foreground))',
+    outline: 'none',
+    transition: 'border-color 0.2s, box-shadow 0.2s'
+  }}
+  onFocus={(e) => {
+    e.target.style.borderColor = 'hsl(var(--ring))';
+    e.target.style.boxShadow = '0 0 0 2px hsl(var(--ring) / 0.2)';
+  }}
+/>
+
+
+10.3 CARD EXAMPLE
+--------------------------------------------------------------------------------
+<div class="card-mm">
+  <h3>Card Title</h3>
+  <p>Card content goes here</p>
+</div>
+
+OR in JSX/TSX with inline styles:
+<div
+  style={{
+    padding: '1.5rem',
+    borderRadius: 'var(--radius-card)',
+    border: '1px solid hsl(var(--border))',
+    backgroundColor: 'hsl(var(--card))',
+    color: 'hsl(var(--card-foreground))',
+    transition: 'all 0.2s'
+  }}
+>
+  <h3>Card Title</h3>
+  <p>Card content goes here</p>
+</div>
+
+
+10.4 HEADING EXAMPLE
+--------------------------------------------------------------------------------
+<h1 style={{
+  fontFamily: 'var(--font-family-heading)',
+  fontSize: '2.5rem',
+  fontWeight: 700,
+  lineHeight: 1.2,
+  letterSpacing: '-0.02em',
+  color: 'hsl(var(--foreground))'
+}}>
+  Page Title
+</h1>
+
+
+================================================================================
+END OF DESIGN SYSTEM TOKEN REFERENCE
+================================================================================
+
+For questions or updates, refer to:
+  - design-system/lib/tokens.ts (canonical TypeScript definitions)
+  - design-system/styles/color-tokens.css (color values)
+  - design-system/styles/globals.css (component styles)
+  - design-system/config/design-tokens.json (source of truth)
