@@ -1,127 +1,309 @@
-import Link from 'next/link'
-import { StatusDashboard } from '@/components/setup/status-dashboard'
+'use client'
+
+import * as React from 'react'
+import { useRouter } from 'next/navigation'
 import { Navbar } from '@/components/layout/navbar'
+import { HeroCentered } from '@/components/sections/heroes/hero-centered'
+import { TextImageSplit } from '@/components/sections/canvas/text-image-split'
+import { FeatureGrid } from '@/components/sections/features/feature-grid'
+import { FeatureAlternating } from '@/components/sections/features/feature-alternating'
+import { TestimonialGrid } from '@/components/sections/engagement/testimonial-grid'
+import { PricingToggle } from '@/components/sections/pricing/pricing-toggle'
+import { CtaCentered } from '@/components/sections/engagement/cta-centered'
+import {
+  Calendar,
+  Calculator,
+  Syringe,
+  LineChart,
+  Clock,
+  Database,
+  CheckCircle2,
+  Target,
+  TrendingUp,
+  Shield,
+  Sparkles,
+} from 'lucide-react'
 
 export default function Home() {
+  const router = useRouter()
+  const pricingRef = React.useRef<HTMLDivElement>(null)
+
+  const scrollToPricing = () => {
+    pricingRef.current?.scrollIntoView({ behavior: 'smooth' })
+  }
+
+  // Feature data for the grid
+  const features = [
+    {
+      icon: Target,
+      title: 'Smart Protocol Builder',
+      description:
+        'Create flexible injection schedules with cycle management, automatic reminders, and intelligent dose tracking.',
+    },
+    {
+      icon: Syringe,
+      title: 'One-Tap Logging',
+      description:
+        'Log injections instantly with automatic site rotation, vial tracking, and dose adjustments. Never forget which side you used.',
+    },
+    {
+      icon: Calculator,
+      title: 'Advanced Calculator',
+      description:
+        'Convert between mg/mL, IU, and syringe units. Calculate doses, volumes, and remaining vial capacity with precision.',
+    },
+    {
+      icon: LineChart,
+      title: 'Analytics Dashboard',
+      description:
+        'Visualize adherence timelines, track measurements, and monitor progress with beautiful charts and insights.',
+    },
+    {
+      icon: Database,
+      title: 'Backup & Export',
+      description:
+        'Local-first storage with cloud sync. Export to CSV/PDF for your records or doctor appointments. Your data, your control.',
+    },
+    {
+      icon: Sparkles,
+      title: 'AI Coach (Coming Soon)',
+      description:
+        'Get personalized insights, conversational guidance, and auto-generated doctor reports powered by AI.',
+    },
+  ]
+
+  // Alternating feature deep dives
+  const deepDiveFeatures = [
+    {
+      title: 'Medication & Vial Management Made Simple',
+      description:
+        'Add your medications with flexible unit systems (mg, IU, mcg), set concentrations, and let the app auto-calculate everything. Track expiration dates, monitor remaining doses, and never waste another vial.',
+      benefits: [
+        'Auto-calculate vial volumes and remaining doses',
+        'Track multiple medications and vials simultaneously',
+        'Expiration date reminders',
+        'Support for all unit types (mg, IU, mcg, units)',
+      ],
+      image: (
+        <div className="aspect-video rounded-card bg-gradient-to-br from-primary/20 via-primary/10 to-secondary/20 flex items-center justify-center border border-border p-8">
+          <div className="text-center space-y-4">
+            <Database className="w-16 h-16 mx-auto text-primary" />
+            <p className="text-sm text-muted-foreground">Medication Management UI</p>
+          </div>
+        </div>
+      ),
+    },
+    {
+      title: 'Calendar View & Smart Scheduling',
+      description:
+        'See your entire injection schedule at a glance. The calendar view shows completed doses, upcoming injections, and adherence patterns. Never miss a dose with automated reminders and next-dose previews.',
+      benefits: [
+        'Visual calendar with adherence tracking',
+        'Flexible scheduling (every X days, weekly, custom)',
+        'Cycle management with automatic off-weeks',
+        'Push notifications for upcoming doses',
+      ],
+      image: (
+        <div className="aspect-video rounded-card bg-gradient-to-br from-secondary/20 via-primary/10 to-primary/20 flex items-center justify-center border border-border p-8">
+          <div className="text-center space-y-4">
+            <Calendar className="w-16 h-16 mx-auto text-primary" />
+            <p className="text-sm text-muted-foreground">Calendar & Schedule UI</p>
+          </div>
+        </div>
+      ),
+    },
+    {
+      title: 'Analytics That Actually Help',
+      description:
+        'Track your progress with visual analytics. See adherence rates, monitor body measurements (weight, blood pressure), and identify trends over time. Export reports for your healthcare provider.',
+      benefits: [
+        'Adherence timeline (completed vs. scheduled)',
+        'Measurements graphs (weight, BP, custom metrics)',
+        'Remaining doses per vial calculations',
+        'CSV/PDF export for doctor visits',
+      ],
+      image: (
+        <div className="aspect-video rounded-card bg-gradient-to-br from-primary/20 via-secondary/10 to-primary/20 flex items-center justify-center border border-border p-8">
+          <div className="text-center space-y-4">
+            <TrendingUp className="w-16 h-16 mx-auto text-primary" />
+            <p className="text-sm text-muted-foreground">Analytics Dashboard UI</p>
+          </div>
+        </div>
+      ),
+    },
+  ]
+
+  // Testimonials
+  const testimonials = [
+    {
+      quote:
+        'I used to have a spreadsheet nightmare tracking my TRT protocol. This app calculated everything automatically and saved me hours every month.',
+      name: 'Michael Chen',
+      title: 'TRT Patient',
+      company: '2 Years',
+      rating: 5,
+    },
+    {
+      quote:
+        'The vial calculator alone is worth it. I was constantly overthinking my doses and wasting peptides. Now I just trust the math.',
+      name: 'Sarah Rodriguez',
+      title: 'Peptide User',
+      company: '18 Months',
+      rating: 5,
+    },
+    {
+      quote:
+        'As someone managing both GLP-1s and peptides, the multi-medication tracking is a game-changer. Everything in one place, always accurate.',
+      name: 'David Park',
+      title: 'Multi-Protocol',
+      company: '1 Year',
+      rating: 5,
+    },
+  ]
+
+  // Pricing plans
+  const pricingPlans = [
+    {
+      name: 'Free',
+      monthlyPrice: 0,
+      annualPrice: 0,
+      description: 'Perfect for getting started',
+      features: [
+        '1 medication tracking',
+        'Simple reminders',
+        'Manual injection logs',
+        'Basic calculator',
+        'CSV export',
+      ],
+      cta: 'Start Free',
+      onCTAClick: (_isAnnual: boolean) => router.push('/signup'),
+    },
+    {
+      name: 'Pro',
+      monthlyPrice: 9,
+      annualPrice: 84,
+      description: 'For serious trackers',
+      features: [
+        'Unlimited medications',
+        'Advanced calculators',
+        'Flexible protocols',
+        'Analytics & charts',
+        'Cloud backup & sync',
+        'PDF export',
+        'Priority support',
+      ],
+      cta: 'Upgrade to Pro',
+      onCTAClick: (_isAnnual: boolean) => router.push('/signup?plan=pro'),
+      popular: true,
+    },
+    {
+      name: 'AI Coach',
+      monthlyPrice: 19,
+      annualPrice: 180,
+      description: 'Coming soon',
+      features: [
+        'Everything in Pro',
+        'AI chat insights',
+        'Auto summaries',
+        'Doctor report generation',
+        'Personalized recommendations',
+        'Pattern detection',
+      ],
+      cta: 'Join Waitlist',
+      onCTAClick: (_isAnnual: boolean) => router.push('/waitlist'),
+    },
+  ]
+
   return (
-    <>
+    <div className="min-h-screen">
       <Navbar />
-      <main className="bg-background text-foreground">
-        {/* Hero Section */}
-        <section
-          data-testid="hero-section"
-          className="border-b border-border bg-gradient-to-br from-primary/10 via-background to-background"
-        >
-          <div className="mx-auto flex max-w-5xl flex-col gap-6 px-6 py-24 text-center md:py-32">
-            <span className="inline-flex items-center justify-center rounded-full border border-primary/40 bg-primary/10 px-4 py-1 text-sm font-semibold text-primary">
-              Production-Ready Starter Template
-            </span>
-            <h1 className="text-balance text-4xl font-heading md:text-6xl">Starter App Template</h1>
-            <p className="mx-auto max-w-2xl text-lg text-muted-foreground">
-              Launch your Next.js SaaS in under 15 minutes with pre-configured authentication,
-              payments, email, and AI-powered Q&A. Built with TypeScript, Supabase, Stripe, and
-              OpenAI.
-            </p>
-            <div className="flex flex-col items-center justify-center gap-4 sm:flex-row">
-              <Link href="/signup" data-testid="cta-button" className="btn-mm">
-                Get Started
-              </Link>
-              <Link href="/pricing" className="btn-secondary">
-                View Pricing
-              </Link>
+
+      {/* Hero Section */}
+      <HeroCentered
+        headline="Never miss a dose, never miscalculate a vial"
+        subheadline="Clinical-grade tracking for your injection protocols. Track TRT, peptides, GLP-1s, and hormones with precision. Always know exactly what's next."
+        primaryCTA="Start Free"
+        secondaryCTA="View Demo"
+        onPrimaryClick={() => router.push('/signup')}
+        onSecondaryClick={() => router.push('/dashboard')}
+        showDecorations={true}
+      />
+
+      {/* Problem/Solution Section */}
+      <TextImageSplit
+        heading="Stop guessing. Start tracking with confidence."
+        bodyCopy="Managing self-administered protocols shouldn't require a spreadsheet degree. Missed doses, manual calculations, and vial waste add up to confusion and lost progress. We built the tool we wished existed: simple, accurate, and always there when you need it."
+        buttonText="See How It Works"
+        onButtonClick={() => router.push('/dashboard')}
+        imagePosition="right"
+        imageElement={
+          <div className="relative aspect-video rounded-card bg-gradient-to-br from-primary/30 via-primary/20 to-secondary/30 border-2 border-border flex items-center justify-center p-12">
+            <div className="grid grid-cols-2 gap-4 w-full">
+              <div className="bg-card/80 backdrop-blur rounded-card p-4 space-y-2 border border-border">
+                <CheckCircle2 className="w-8 h-8 text-success" />
+                <p className="text-sm font-heading">Auto-Calculate</p>
+              </div>
+              <div className="bg-card/80 backdrop-blur rounded-card p-4 space-y-2 border border-border">
+                <Clock className="w-8 h-8 text-primary" />
+                <p className="text-sm font-heading">Smart Reminders</p>
+              </div>
+              <div className="bg-card/80 backdrop-blur rounded-card p-4 space-y-2 border border-border">
+                <Calendar className="w-8 h-8 text-secondary" />
+                <p className="text-sm font-heading">Visual Timeline</p>
+              </div>
+              <div className="bg-card/80 backdrop-blur rounded-card p-4 space-y-2 border border-border">
+                <Shield className="w-8 h-8 text-success" />
+                <p className="text-sm font-heading">Backup & Export</p>
+              </div>
             </div>
           </div>
-        </section>
+        }
+      />
 
-        {/* Features Section */}
-        <section className="mx-auto max-w-5xl px-6 py-16">
-          <div className="mb-12 text-center">
-            <h2 className="mb-4 text-3xl font-heading">Everything you need to launch fast</h2>
-            <p className="text-muted-foreground">
-              Pre-configured integrations and best practices out of the box
-            </p>
-          </div>
-          <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-            {[
-              {
-                title: 'Authentication',
-                body: 'Complete auth flow with Supabase: signup, signin, password reset, email verification, and protected routes.',
-                icon: '🔐',
-              },
-              {
-                title: 'Payments',
-                body: 'Stripe integration with subscriptions, webhooks, customer portal, and pre-built pricing pages.',
-                icon: '💳',
-              },
-              {
-                title: 'Email',
-                body: 'Transactional emails with Resend + marketing email adapter for ConvertKit, MailerLite, Brevo, and Sender.',
-                icon: '📧',
-              },
-              {
-                title: 'RAG Q&A Chatbot',
-                body: 'AI-powered document Q&A with OpenAI, vector search, and source citations using pgvector.',
-                icon: '🤖',
-              },
-              {
-                title: 'Theme System',
-                body: 'Dark/light/system modes with persistent preferences and design system token integration.',
-                icon: '🎨',
-              },
-              {
-                title: 'Type Safety',
-                body: 'Strict TypeScript configuration with comprehensive type definitions and environment validation.',
-                icon: '🛡️',
-              },
-            ].map(item => (
-              <article
-                key={item.title}
-                className="rounded-card border border-border bg-card p-6 shadow-sm transition-shadow hover:shadow-md"
-              >
-                <div className="mb-3 text-3xl">{item.icon}</div>
-                <h3 className="mb-2 font-heading text-xl">{item.title}</h3>
-                <p className="text-sm text-muted-foreground">{item.body}</p>
-              </article>
-            ))}
-          </div>
-        </section>
+      {/* Key Features Grid */}
+      <FeatureGrid
+        title="Everything you need to track smarter"
+        description="All the tools to manage your protocols with clinical precision"
+        features={features}
+        columns={3}
+      />
 
-        {/* Status Dashboard Section */}
-        <section className="border-t border-border bg-muted/30 py-16">
-          <div className="mx-auto max-w-5xl px-6">
-            <div className="mb-8 text-center">
-              <h2 className="mb-2 text-2xl font-heading">System Health</h2>
-              <p className="text-sm text-muted-foreground">
-                Real-time status of all integrated services
-              </p>
-            </div>
-            <StatusDashboard />
-          </div>
-        </section>
+      {/* Feature Deep Dive */}
+      <FeatureAlternating features={deepDiveFeatures} />
 
-        {/* CTA Section */}
-        <section className="border-t border-border py-16">
-          <div className="mx-auto max-w-3xl px-6 text-center">
-            <h2 className="mb-4 text-3xl font-heading">Ready to build your SaaS?</h2>
-            <p className="mb-8 text-muted-foreground">
-              Clone the template, add your environment variables, and start building in minutes.
-            </p>
-            <div className="flex flex-col items-center justify-center gap-4 sm:flex-row">
-              <Link href="/signup" className="btn-mm">
-                Start Building
-              </Link>
-              <a
-                href="https://github.com"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="btn-secondary"
-              >
-                View on GitHub
-              </a>
-            </div>
-          </div>
-        </section>
-      </main>
-    </>
+      {/* Testimonials */}
+      <TestimonialGrid
+        title="Trusted by thousands of users"
+        description="Real feedback from people managing their protocols"
+        testimonials={testimonials}
+        columns={3}
+      />
+
+      {/* Pricing */}
+      <div ref={pricingRef}>
+        <PricingToggle
+          title="Choose your plan"
+          description="Start free, upgrade when you need more power"
+          plans={pricingPlans}
+          annualDiscount={20}
+        />
+      </div>
+
+      {/* Final CTA */}
+      <CtaCentered
+        headline="Start tracking smarter today"
+        description="Join thousands of users who never miss a dose"
+        features={[
+          { icon: CheckCircle2, text: 'Free to start' },
+          { icon: Shield, text: 'Your data, your control' },
+          { icon: Sparkles, text: 'AI insights coming soon' },
+        ]}
+        primaryCta="Get Started Free"
+        secondaryCta="View Pricing"
+        onPrimaryClick={() => router.push('/signup')}
+        onSecondaryClick={scrollToPricing}
+        trustIndicators={['10,000+ active users', 'HIPAA-compliant storage', 'Export anytime']}
+      />
+    </div>
   )
 }
