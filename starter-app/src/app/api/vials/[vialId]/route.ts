@@ -190,7 +190,7 @@ export async function PATCH(request: NextRequest, { params }: RouteParams) {
 
     if (error instanceof z.ZodError) {
       return NextResponse.json(
-        { error: 'Invalid request data', details: error.errors },
+        { error: 'Invalid request data', details: error.issues },
         { status: 400 }
       )
     }
@@ -204,7 +204,7 @@ export async function PATCH(request: NextRequest, { params }: RouteParams) {
  *
  * Soft delete vial
  */
-export async function DELETE(request: NextRequest, { params }: RouteParams) {
+export async function DELETE(_request: NextRequest, { params }: RouteParams) {
   try {
     const { vialId } = params
     const supabase = createServerSupabaseClient()

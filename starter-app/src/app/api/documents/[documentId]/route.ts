@@ -73,7 +73,7 @@ export async function GET(request: NextRequest, { params }: RouteParams) {
  * DELETE /api/documents/[documentId]
  * Delete document and all associated chunks
  */
-export async function DELETE(request: NextRequest, { params }: RouteParams) {
+export async function DELETE(_request: NextRequest, { params }: RouteParams) {
   try {
     const supabase = createServerSupabaseClient()
     const { documentId } = params

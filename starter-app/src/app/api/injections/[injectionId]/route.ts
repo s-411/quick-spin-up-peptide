@@ -45,7 +45,7 @@ const updateInjectionSchema = z.object({
 /**
  * GET /api/injections/[injectionId]
  */
-export async function GET(request: NextRequest, { params }: RouteParams) {
+export async function GET(_request: NextRequest, { params }: RouteParams) {
   try {
     const { injectionId } = params
     const supabase = createServerSupabaseClient()
@@ -185,7 +185,7 @@ export async function PATCH(request: NextRequest, { params }: RouteParams) {
 
     if (error instanceof z.ZodError) {
       return NextResponse.json(
-        { error: 'Invalid request data', details: error.errors },
+        { error: 'Invalid request data', details: error.issues },
         { status: 400 }
       )
     }
@@ -199,7 +199,7 @@ export async function PATCH(request: NextRequest, { params }: RouteParams) {
  *
  * Delete injection - automatically restores vial volume via database trigger
  */
-export async function DELETE(request: NextRequest, { params }: RouteParams) {
+export async function DELETE(_request: NextRequest, { params }: RouteParams) {
   try {
     const { injectionId } = params
     const supabase = createServerSupabaseClient()

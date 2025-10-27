@@ -8,16 +8,13 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { z } from 'zod'
 import { createServerSupabaseClient } from '@/lib/supabase'
-import { calculateVialDosing } from '@/lib/services/calculator-service'
 import { getVialStatus } from '@/lib/services/vial-service'
 
 // Validation schema for creating a vial
 const createVialSchema = z.object({
   medicationId: z.string().uuid('Invalid medication ID'),
   concentrationValue: z.number().positive('Concentration must be positive'),
-  concentrationUnits: z.enum(['mg/mL', 'IU/mL', 'mcg/mL', 'units/mL'], {
-    errorMap: () => ({ message: 'Invalid concentration units' }),
-  }),
+  concentrationUnits: z.enum(['mg/mL', 'IU/mL', 'mcg/mL', 'units/mL']),
   totalVolume: z.number().positive('Total volume must be positive'),
   remainingVolume: z.number().nonnegative('Remaining volume cannot be negative').optional(),
   expirationDate: z.string().optional().nullable(),
@@ -106,7 +103,7 @@ export async function GET(request: NextRequest) {
 
     if (error instanceof z.ZodError) {
       return NextResponse.json(
-        { error: 'Invalid request data', details: error.errors },
+        { error: 'Invalid request data', details: error.issues },
         { status: 400 }
       )
     }
@@ -194,7 +191,7 @@ export async function POST(request: NextRequest) {
 
     if (error instanceof z.ZodError) {
       return NextResponse.json(
-        { error: 'Invalid request data', details: error.errors },
+        { error: 'Invalid request data', details: error.issues },
         { status: 400 }
       )
     }

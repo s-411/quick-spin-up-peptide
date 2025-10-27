@@ -23,7 +23,7 @@ const updateProtocolSchema = z.object({
   scheduleType: z.enum(['every_x_days', 'weekly', 'custom']).optional(),
   frequencyDays: z.number().positive().optional().nullable(),
   weeklyDays: z.array(z.number().min(0).max(6)).optional().nullable(),
-  customSchedule: z.record(z.unknown()).optional().nullable(),
+  customSchedule: z.record(z.string(), z.unknown()).optional().nullable(),
   cycleLengthWeeks: z.number().positive().optional().nullable(),
   offWeeks: z.number().nonnegative().optional().nullable(),
   doseValue: z.number().positive().optional(),
@@ -50,7 +50,7 @@ const updateProtocolSchema = z.object({
 /**
  * GET /api/protocols/[protocolId]
  */
-export async function GET(request: NextRequest, { params }: RouteParams) {
+export async function GET(_request: NextRequest, { params }: RouteParams) {
   try {
     const { protocolId } = params
     const supabase = createServerSupabaseClient()
@@ -226,7 +226,7 @@ export async function PATCH(request: NextRequest, { params }: RouteParams) {
 
     if (error instanceof z.ZodError) {
       return NextResponse.json(
-        { error: 'Invalid request data', details: error.errors },
+        { error: 'Invalid request data', details: error.issues },
         { status: 400 }
       )
     }
@@ -240,7 +240,7 @@ export async function PATCH(request: NextRequest, { params }: RouteParams) {
  *
  * Soft delete protocol
  */
-export async function DELETE(request: NextRequest, { params }: RouteParams) {
+export async function DELETE(_request: NextRequest, { params }: RouteParams) {
   try {
     const { protocolId } = params
     const supabase = createServerSupabaseClient()

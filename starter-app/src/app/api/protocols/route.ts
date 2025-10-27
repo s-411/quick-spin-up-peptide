@@ -14,18 +14,14 @@ import { validateProtocol, generateSchedulePreview } from '@/lib/services/protoc
 const createProtocolSchema = z.object({
   medicationId: z.string().uuid('Invalid medication ID'),
   name: z.string().min(1, 'Name is required').max(255, 'Name too long'),
-  scheduleType: z.enum(['every_x_days', 'weekly', 'custom'], {
-    errorMap: () => ({ message: 'Invalid schedule type' }),
-  }),
+  scheduleType: z.enum(['every_x_days', 'weekly', 'custom']),
   frequencyDays: z.number().positive().optional(),
   weeklyDays: z.array(z.number().min(0).max(6)).optional(),
-  customSchedule: z.record(z.unknown()).optional(),
+  customSchedule: z.record(z.string(), z.unknown()).optional(),
   cycleLengthWeeks: z.number().positive().optional(),
   offWeeks: z.number().nonnegative().optional(),
   doseValue: z.number().positive('Dose must be positive'),
-  doseUnits: z.enum(['mg', 'IU', 'mcg', 'units', 'mL'], {
-    errorMap: () => ({ message: 'Invalid dose units' }),
-  }),
+  doseUnits: z.enum(['mg', 'IU', 'mcg', 'units', 'mL']),
   startDate: z.string().regex(/^\d{4}-\d{2}-\d{2}$/, 'Invalid date format (YYYY-MM-DD)'),
   endDate: z
     .string()
@@ -218,7 +214,7 @@ export async function POST(request: NextRequest) {
 
     if (error instanceof z.ZodError) {
       return NextResponse.json(
-        { error: 'Invalid request data', details: error.errors },
+        { error: 'Invalid request data', details: error.issues },
         { status: 400 }
       )
     }

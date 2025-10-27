@@ -48,7 +48,7 @@ export async function GET() {
       const start = Date.now()
       const stripe = (await import('stripe')).default
       const stripeClient = new stripe(env.STRIPE_SECRET_KEY, {
-        apiVersion: '2024-11-20.acacia',
+        apiVersion: '2025-09-30.clover',
       })
       await stripeClient.products.list({ limit: 1 })
       const latency = Date.now() - start

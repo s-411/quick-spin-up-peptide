@@ -12,12 +12,8 @@ import { createServerSupabaseClient } from '@/lib/supabase'
 // Validation schema for creating a medication
 const createMedicationSchema = z.object({
   name: z.string().min(1, 'Name is required').max(255, 'Name too long'),
-  type: z.enum(['peptide', 'TRT', 'GLP-1', 'other'], {
-    errorMap: () => ({ message: 'Invalid medication type' }),
-  }),
-  units: z.enum(['mg', 'IU', 'mcg', 'units', 'mL'], {
-    errorMap: () => ({ message: 'Invalid units' }),
-  }),
+  type: z.enum(['peptide', 'TRT', 'GLP-1', 'other']),
+  units: z.enum(['mg', 'IU', 'mcg', 'units', 'mL']),
   notes: z.string().max(1000, 'Notes too long').optional(),
 })
 
@@ -109,7 +105,7 @@ export async function GET(request: NextRequest) {
 
     if (error instanceof z.ZodError) {
       return NextResponse.json(
-        { error: 'Invalid request data', details: error.errors },
+        { error: 'Invalid request data', details: error.issues },
         { status: 400 }
       )
     }
@@ -165,7 +161,7 @@ export async function POST(request: NextRequest) {
 
     if (error instanceof z.ZodError) {
       return NextResponse.json(
-        { error: 'Invalid request data', details: error.errors },
+        { error: 'Invalid request data', details: error.issues },
         { status: 400 }
       )
     }

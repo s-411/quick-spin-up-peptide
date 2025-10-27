@@ -16,29 +16,22 @@ const createInjectionSchema = z.object({
   vialId: z.string().uuid('Invalid vial ID').optional().nullable(),
   dateTime: z.string().datetime('Invalid datetime format'),
   doseValue: z.number().positive('Dose must be positive'),
-  doseUnits: z.enum(['mg', 'IU', 'mcg', 'units', 'mL'], {
-    errorMap: () => ({ message: 'Invalid dose units' }),
-  }),
+  doseUnits: z.enum(['mg', 'IU', 'mcg', 'units', 'mL']),
   volumeMl: z.number().positive().optional().nullable(),
-  site: z.enum(
-    [
-      'left_glute',
-      'right_glute',
-      'left_delt',
-      'right_delt',
-      'left_thigh',
-      'right_thigh',
-      'abdomen_upper_left',
-      'abdomen_upper_right',
-      'abdomen_lower_left',
-      'abdomen_lower_right',
-      'left_ventrogluteal',
-      'right_ventrogluteal',
-    ],
-    {
-      errorMap: () => ({ message: 'Invalid injection site' }),
-    }
-  ),
+  site: z.enum([
+    'left_glute',
+    'right_glute',
+    'left_delt',
+    'right_delt',
+    'left_thigh',
+    'right_thigh',
+    'abdomen_upper_left',
+    'abdomen_upper_right',
+    'abdomen_lower_left',
+    'abdomen_lower_right',
+    'left_ventrogluteal',
+    'right_ventrogluteal',
+  ]),
   notes: z.string().max(1000).optional().nullable(),
   sideEffects: z.string().max(1000).optional().nullable(),
 })
@@ -264,7 +257,7 @@ export async function POST(request: NextRequest) {
 
     if (error instanceof z.ZodError) {
       return NextResponse.json(
-        { error: 'Invalid request data', details: error.errors },
+        { error: 'Invalid request data', details: error.issues },
         { status: 400 }
       )
     }
