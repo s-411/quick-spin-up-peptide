@@ -67,7 +67,7 @@ export default function CalendarPage() {
 
   // Calculate starting day offset
   const startDayOfWeek = monthStart.getDay()
-  const previousMonthDays = Array.from({ length: startDayOfWeek }, (_, i) => null)
+  const previousMonthDays = Array.from({ length: startDayOfWeek }, () => null)
 
   const allCalendarDays = [...previousMonthDays, ...daysInMonth]
 
