@@ -89,7 +89,6 @@ export async function GET(request: NextRequest) {
     // Calculate trends for each type
     const trends = Object.entries(measurementsByType).map(([type, data]) => {
       const values = data.map(m => m.value)
-      const dates = data.map(m => m.date_time.split('T')[0])
 
       const firstValue = values[0]
       const lastValue = values[values.length - 1]
