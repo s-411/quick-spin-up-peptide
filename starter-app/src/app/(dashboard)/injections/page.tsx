@@ -136,16 +136,18 @@ export default function InjectionsPage() {
     if (!site) return 'Not specified'
 
     const labels: Record<InjectionSite, string> = {
-      abdomen_left: 'Left Abdomen',
-      abdomen_right: 'Right Abdomen',
-      thigh_left: 'Left Thigh',
-      thigh_right: 'Right Thigh',
-      glute_left: 'Left Glute',
-      glute_right: 'Right Glute',
-      shoulder_left: 'Left Shoulder',
-      shoulder_right: 'Right Shoulder',
-      arm_left: 'Left Arm',
-      arm_right: 'Right Arm',
+      left_glute: 'Left Glute',
+      right_glute: 'Right Glute',
+      left_delt: 'Left Deltoid',
+      right_delt: 'Right Deltoid',
+      left_thigh: 'Left Thigh',
+      right_thigh: 'Right Thigh',
+      abdomen_upper_left: 'Upper Left Abdomen',
+      abdomen_upper_right: 'Upper Right Abdomen',
+      abdomen_lower_left: 'Lower Left Abdomen',
+      abdomen_lower_right: 'Lower Right Abdomen',
+      left_ventrogluteal: 'Left Ventrogluteal',
+      right_ventrogluteal: 'Right Ventrogluteal',
     }
 
     return labels[site] || site
