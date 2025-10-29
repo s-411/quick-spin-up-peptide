@@ -130,17 +130,17 @@ function parseEnv() {
   // Check if we're in browser (client-side)
   const isBrowser = typeof window !== 'undefined'
 
+  // In browser, skip validation entirely - just return process.env cast to expected type
+  // Client-side env vars are baked in at build time, validation should happen server-side only
+  if (isBrowser) {
+    return process.env as unknown as z.infer<typeof envSchema>
+  }
+
+  // Server-side validation
   const parsed = envSchema.safeParse(process.env)
 
   if (!parsed.success) {
-    // In browser, always just log and return empty object
-    if (isBrowser) {
-      console.error('❌ Invalid environment variables:')
-      console.error(JSON.stringify(parsed.error.format(), null, 2))
-      return {} as z.infer<typeof envSchema>
-    }
-
-    // Server-side: only throw in production during page data collection
+    // Server-side: only throw in production during runtime
     const isProduction = process.env.NODE_ENV === 'production'
     const isBuildTime = process.env.NEXT_PHASE === 'phase-production-build'
 
