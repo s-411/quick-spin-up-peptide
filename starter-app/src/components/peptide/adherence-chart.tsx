@@ -95,7 +95,7 @@ export function AdherenceChart({ protocolId, days = 30 }: AdherenceChartProps) {
   }
 
   const { adherence } = data
-  const adherencePercent = adherence.percentageComplete
+  const adherencePercent = adherence.percentageComplete ?? 0
 
   const getTrendIcon = () => {
     if (adherencePercent >= 90) return <TrendingUp className="h-4 w-4 text-green-600" />
@@ -200,7 +200,7 @@ export function AdherenceChart({ protocolId, days = 30 }: AdherenceChartProps) {
                           : 'text-red-600 dark:text-red-400'
                     }`}
                   >
-                    {protocol.adherencePercent.toFixed(0)}%
+                    {(protocol.adherencePercent ?? 0).toFixed(0)}%
                   </div>
                 </div>
               ))}
