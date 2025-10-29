@@ -49,16 +49,25 @@ export default function SignupPage() {
         },
       })
 
-      if (signupError) throw signupError
+      if (signupError) {
+        console.error('Signup error:', signupError)
+        throw signupError
+      }
+
+      console.log('Signup response:', { user: data.user?.id, session: !!data.session })
 
       if (data.user) {
         // Check if email confirmation is required
         if (data.session) {
           // Email confirmation is disabled - user is already logged in
-          // Redirect to dashboard
+          console.log('Session created, redirecting to dashboard...')
+          // Wait a bit for cookies to be set properly
+          await new Promise(resolve => setTimeout(resolve, 1000))
           router.push('/dashboard')
+          router.refresh()
         } else {
           // Email confirmation is enabled - show message
+          console.log('No session - email confirmation required')
           setMessage(
             'Account created! Please check your email to verify your account before signing in.'
           )

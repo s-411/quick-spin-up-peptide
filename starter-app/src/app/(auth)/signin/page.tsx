@@ -27,13 +27,22 @@ function SigninForm() {
         password,
       })
 
-      if (signinError) throw signinError
+      if (signinError) {
+        console.error('Signin error:', signinError)
+        throw signinError
+      }
 
-      if (data.user) {
+      if (data.user && data.session) {
+        console.log('Sign in successful, redirecting...')
+        // Wait a bit for cookies to be set
+        await new Promise(resolve => setTimeout(resolve, 500))
         router.push(redirectTo)
         router.refresh()
+      } else {
+        throw new Error('Sign in failed - no session created')
       }
     } catch (err) {
+      console.error('Sign in error:', err)
       setError(err instanceof Error ? err.message : 'An error occurred during sign in')
     } finally {
       setLoading(false)
