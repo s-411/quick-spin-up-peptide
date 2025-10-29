@@ -2,9 +2,11 @@
 
 import { useState } from 'react'
 import Link from 'next/link'
+import { useRouter } from 'next/navigation'
 import { createBrowserClient } from '@/lib/supabase-client'
 
 export default function SignupPage() {
+  const router = useRouter()
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   const [confirmPassword, setConfirmPassword] = useState('')
@@ -50,15 +52,23 @@ export default function SignupPage() {
       if (signupError) throw signupError
 
       if (data.user) {
-        setMessage(
-          'Account created! Please check your email to verify your account before signing in.'
-        )
-        // Clear form
-        setEmail('')
-        setPassword('')
-        setConfirmPassword('')
-        setFirstName('')
-        setLastName('')
+        // Check if email confirmation is required
+        if (data.session) {
+          // Email confirmation is disabled - user is already logged in
+          // Redirect to dashboard
+          router.push('/dashboard')
+        } else {
+          // Email confirmation is enabled - show message
+          setMessage(
+            'Account created! Please check your email to verify your account before signing in.'
+          )
+          // Clear form
+          setEmail('')
+          setPassword('')
+          setConfirmPassword('')
+          setFirstName('')
+          setLastName('')
+        }
       }
     } catch (err) {
       setError(err instanceof Error ? err.message : 'An error occurred during signup')
