@@ -11,6 +11,7 @@ export function createBrowserClient() {
         const value = `; ${document.cookie}`
         const parts = value.split(`; ${name}=`)
         if (parts.length === 2) return parts.pop()?.split(';').shift()
+        return undefined
       },
       set(name: string, value: string, options: any) {
         // Set cookie with proper options
