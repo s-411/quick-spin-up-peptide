@@ -8,9 +8,7 @@ import { motion, AnimatePresence } from 'framer-motion'
 export function Navbar() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
 
-  const navLinks = [
-    { href: '/pricing', label: 'Pricing' },
-  ]
+  const navLinks = [{ href: '/pricing', label: 'Pricing' }]
 
   return (
     <header className="sticky top-0 z-50 w-full border-b border-border bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
