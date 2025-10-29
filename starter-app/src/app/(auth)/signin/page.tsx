@@ -34,10 +34,9 @@ function SigninForm() {
 
       if (data.user && data.session) {
         console.log('Sign in successful, redirecting...')
-        // Wait a bit for cookies to be set
+        // Wait a bit for cookies to be set, then do a full page reload
         await new Promise(resolve => setTimeout(resolve, 500))
-        router.push(redirectTo)
-        router.refresh()
+        window.location.href = redirectTo
       } else {
         throw new Error('Sign in failed - no session created')
       }

@@ -61,10 +61,10 @@ export default function SignupPage() {
         if (data.session) {
           // Email confirmation is disabled - user is already logged in
           console.log('Session created, redirecting to dashboard...')
-          // Wait a bit for cookies to be set properly
+          // Wait a bit for cookies to be set properly, then do a full page reload
+          // This ensures the server-side middleware picks up the session cookies
           await new Promise(resolve => setTimeout(resolve, 1000))
-          router.push('/dashboard')
-          router.refresh()
+          window.location.href = '/dashboard'
         } else {
           // Email confirmation is enabled - show message
           console.log('No session - email confirmation required')
