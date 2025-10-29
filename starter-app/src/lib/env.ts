@@ -130,10 +130,22 @@ function parseEnv() {
   // Check if we're in browser (client-side)
   const isBrowser = typeof window !== 'undefined'
 
-  // In browser, skip validation entirely - just return process.env cast to expected type
-  // Client-side env vars are baked in at build time, validation should happen server-side only
+  // In browser, skip validation entirely and access env vars directly
+  // Client-side env vars are baked in at build time by Next.js and available via process.env
   if (isBrowser) {
-    return process.env as unknown as z.infer<typeof envSchema>
+    return {
+      NODE_ENV: process.env.NODE_ENV || 'development',
+      NEXT_PUBLIC_APP_URL: process.env.NEXT_PUBLIC_APP_URL || '',
+      NEXT_PUBLIC_SUPABASE_URL: process.env.NEXT_PUBLIC_SUPABASE_URL || '',
+      NEXT_PUBLIC_SUPABASE_ANON_KEY: process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY || '',
+      NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY: process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY,
+      NEXT_PUBLIC_ENABLE_RAG: process.env.NEXT_PUBLIC_ENABLE_RAG || 'true',
+      NEXT_PUBLIC_ENABLE_PAYMENTS: process.env.NEXT_PUBLIC_ENABLE_PAYMENTS || 'true',
+      NEXT_PUBLIC_ENABLE_EMAIL_MARKETING: process.env.NEXT_PUBLIC_ENABLE_EMAIL_MARKETING || 'true',
+      NEXT_PUBLIC_VERCEL_ANALYTICS_ID: process.env.NEXT_PUBLIC_VERCEL_ANALYTICS_ID,
+      OPENAI_EMBEDDING_MODEL: 'text-embedding-3-small',
+      OPENAI_CHAT_MODEL: 'gpt-4-turbo-preview',
+    } as z.infer<typeof envSchema>
   }
 
   // Server-side validation
